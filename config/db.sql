@@ -47,20 +47,20 @@ CREATE TABLE electives(
 );
 
 CREATE TABLE messages(
-	id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     sdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	content VARCHAR(2000),
+    content VARCHAR(2000),
     sender VARCHAR(200),
-	reciver VARCHAR(200),
+    reciver VARCHAR(200),
     PRIMARY KEY (id),
     FOREIGN KEY(sender) REFERENCES users(userName),
     FOREIGN KEY(reciver) REFERENCES users(userName)
 );
 
 CREATE TABLE chElectives(
-	id INT AUTO_INCREMENT,
+    id INT AUTO_INCREMENT,
     name VARCHAR(200),
-	credits INT,
+    credits INT,
     fn INT,
     grade INT,
     PRIMARY KEY (id),
