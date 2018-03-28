@@ -18,7 +18,7 @@
             <nav>
                 <ul>
                     <li>
-                        <a href="index.html">Начало</a>
+                        <a href="../index.html">Начало</a>
                     </li>
                     <li>
                         <a href="php/electives.php?id=winter">Избираеми дисциплини Зимен семестър</a>
@@ -27,7 +27,7 @@
                         <a href="php/electives.php?id=summer">Избираеми дисциплини Летен семестър</a>
                     </li>
                     <li>
-                        <a href="html/login.html">Вход</a>
+                        <a href="../html/login.html">Вход</a>
                     </li>
                 </ul>
             </nav>
