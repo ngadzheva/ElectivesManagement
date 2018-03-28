@@ -37,7 +37,8 @@ CREATE TABLE student(
 CREATE TABLE electives(
     name VARCHAR(200),
     lecturer INT,
-    description VARCHAR(2000),
+    fullDescription VARCHAR(2000),
+    shortDescription VARCHAR(500),
     credits INT CHECK (credits >= 1),
     term VARCHAR(200) CHECK (term IN ('summer', 'winter')),
     cathegory VARCHAR(200),
