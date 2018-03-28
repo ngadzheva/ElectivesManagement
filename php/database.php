@@ -13,7 +13,7 @@
 
         public function executeQuery($query, $errorMessage){
             try{
-                $this->connection->prepare($query)->execute();
+                return $this->connection->query($query);
             } catch(PDOException $e){
                 echo $errorMessage . $e->getMessage();
                 $this->connection->rollBack();

@@ -35,19 +35,19 @@
 
         <main>
             <section>
-                <fieldset>
-                    <legend>Филтриране</legend>
-                    <form method="get" action="electives.php" class="filter">
+                <div class="filterField">
+                    <form class="filter" method="get" action="electives.php">
+                        <input class="search" type="text" name="input"></input>
                         <label>Категория</label> 
                         <select>
                             <option value="name">Име на дисциплина</option>
-                            <option value="lecturer">Име на лектор</option>                                <option value="cathegory">Категория</option>
+                            <option value="lecturer">Име на лектор</option>                                
+                            <option value="cathegory">Категория</option>
                             <option value="rating">Рейтинг на дисциплина</option>
                         </select>
-                        <input type="text" name="input"></input>
                         <input type="submit" value="Филтриране"></input>
                     </form>
-                </fieldset>
+                </div>
             </section>
             <?php
                 require "electivesList.php";

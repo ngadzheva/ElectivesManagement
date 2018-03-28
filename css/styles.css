@@ -128,6 +128,7 @@ label, input{
     margin-right: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+    height: 30px;
 }
 
 input[type=text]{
@@ -150,11 +151,77 @@ input[type=submit] {
     margin: 4px 2px;
     cursor: pointer;
     margin-top: 50px;
+    padding-top: 2px;
 }
 
 input[type=submit]:hover{
     background-color: #96BCE5;
     color: #2A3440;
+}
+
+.filter{
+    display: flex;
+    flex-direction: row;
+    width: 780px;
+    margin-left: auto;
+    margin-right: auto; 
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #2A3440;
+    padding-bottom: 0px;
+}
+
+.filter input, label, select{
+    margin-right: 20px;
+}
+
+.filter > input{
+    width: 300px;
+}
+
+.filter label{
+    font-size: 20px;
+    padding-top: 5px;
+}
+
+.filter select{
+    margin-top: 25px;
+}
+
+.filter input[type=submit]{
+    width: 150px;
+    margin-top: 25px;
+    padding-top: 2px;
+    padding-left: 15px;
+    font-size: 20px;
+}
+
+select{
+    height: 30px;
+}
+
+table{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+tr, th, td{
+    margin: 100px;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+th {
+    background: #53687F;
+    color: #FFFFFF;
+}
+
+td {
+    color: #2A3440;
+}
+
+tr{
+    border-bottom: 1px solid #53687F;
 }
 
 footer{
