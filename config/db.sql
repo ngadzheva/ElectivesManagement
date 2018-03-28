@@ -4,10 +4,10 @@ USE uxProj;
 
 CREATE TABLE users(
     userName VARCHAR(200),
-    passwd VARCHAR(200),
-    userType VARCHAR(200),
-    names VARCHAR(200),
-    email VARCHAR(200),
+    passwd VARCHAR(200) NOT NULL,
+    userType VARCHAR(200) NOT NULL CHECK (userType IN ('admin','lecturer','student')),
+    names VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL,
     PRIMARY KEY(userName)
 ); 
 
@@ -28,7 +28,7 @@ CREATE TABLE lecturer(
 CREATE TABLE student(
     fn INT NOT NULL,
     userName VARCHAR(200),
-    year INT,
+    year INT CHECK (year >= 1),
     bachelor_program VARCHAR(200),
     PRIMARY KEY (fn),
     FOREIGN KEY(userName) REFERENCES users(userName)
@@ -38,8 +38,8 @@ CREATE TABLE electives(
     name VARCHAR(200),
     lecturer INT,
     description VARCHAR(2000),
-    credits INT,
-    term VARCHAR(200),
+    credits INT CHECK (credits >= 1),
+    term VARCHAR(200) CHECK (term IN ('summer', 'winter')),
     cathegory VARCHAR(200),
     rating INT,
     PRIMARY KEY (name),
@@ -62,7 +62,7 @@ CREATE TABLE chElectives(
     name VARCHAR(200),
     credits INT,
     fn INT,
-    grade INT,
+    grade INT DEFAULT 0,
     PRIMARY KEY (id),
     FOREIGN KEY(name) REFERENCES electives(name),
     FOREIGN KEY(fn) REFERENCES student(fn)
