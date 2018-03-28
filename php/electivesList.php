@@ -4,13 +4,14 @@
     $database = new DataBase("localhost", "uxProj", "root", "asdf");
     $sql = "SELECT * FROM electives WHERE";
 
-    if($_GET['id'] === 'winter'){
+    $id = (int)(isset($_GET['id']) ? $GET['id'] : null);
+    if($id['id'] === 'winter'){
         $sql = $sql . "term = 'winter'";
-    } elseif($_GET['id'] === 'summer'){
+    } elseif($id['id'] === 'summer'){
         $sql = $sql . "term = 'summer'";
     }
 
-    $query = $database->executeQuery($query, "Failed finding electives!");
+    $query = $database->executeQuery($sql, "Failed finding electives!");
 
     $template = "               <table>" . 
                     "                   <tr>
