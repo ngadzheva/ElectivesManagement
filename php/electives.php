@@ -12,7 +12,7 @@
         <header>
             <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
             <figure>
-                <img id="header" src="img/border.png"/>
+                <img id="header" src="../img/border.png"/>
             </figure>
             
             <nav>
@@ -21,10 +21,10 @@
                         <a href="../index.html">Начало</a>
                     </li>
                     <li>
-                        <a href="php/electives.php?id=winter">Избираеми дисциплини Зимен семестър</a>
+                        <a href="electives.php?id=winter">Избираеми дисциплини Зимен семестър</a>
                     </li>
                     <li>
-                        <a href="php/electives.php?id=summer">Избираеми дисциплини Летен семестър</a>
+                        <a href="electives.php?id=summer">Избираеми дисциплини Летен семестър</a>
                     </li>
                     <li>
                         <a href="../html/login.html">Вход</a>
