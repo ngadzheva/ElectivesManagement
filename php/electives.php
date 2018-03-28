@@ -34,24 +34,23 @@
         </header>
 
         <main>
-            <section>
-                <div class="filterField">
-                    <form class="filter" method="get" action="electives.php">
-                        <input class="search" type="text" name="input"></input>
-                        <label>Категория</label> 
-                        <select>
-                            <option value="name">Име на дисциплина</option>
-                            <option value="lecturer">Име на лектор</option>                                
-                            <option value="cathegory">Категория</option>
-                            <option value="rating">Рейтинг на дисциплина</option>
-                        </select>
-                        <input type="submit" value="Филтриране"></input>
-                    </form>
-                </div>
+            <section class="filterSection">
+               <form class="filter" method="get" action="electives.php">
+                    <input class="search" type="text" name="input"></input>
+                    <label>Категория</label> 
+                    <select>
+                        <option value="name">Име на дисциплина</option>
+                        <option value="lecturer">Име на лектор</option>                                
+                        <option value="cathegory">Категория</option>
+                        <option value="rating">Рейтинг на дисциплина</option>
+                    </select>
+                    <input type="submit" value="Филтриране"></input>
+                </form>
+
+                <?php
+                    require "electivesList.php";
+                ?>
             </section>
-            <?php
-                require "electivesList.php";
-            ?>
         </main>
 
         <footer>

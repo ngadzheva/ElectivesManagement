@@ -159,6 +159,15 @@ input[type=submit]:hover{
     color: #2A3440;
 }
 
+.filterSection{
+    width: 900px;
+    min-height: 350px;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .filter{
     display: flex;
     flex-direction: row;
