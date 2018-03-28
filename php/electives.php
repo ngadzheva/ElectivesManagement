@@ -5,7 +5,7 @@
 
         <title>Система за управление на избираеми дисциплини</title>
 
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
     </head>
 
     <body>
@@ -21,10 +21,10 @@
                         <a href="index.html">Начало</a>
                     </li>
                     <li>
-                        <a href="php/electives.php">Избираеми дисциплини Зимен семестър</a>
+                        <a href="php/electives.php?id=winter">Избираеми дисциплини Зимен семестър</a>
                     </li>
                     <li>
-                        <a href="php/electives.php">Избираеми дисциплини Летен семестър</a>
+                        <a href="php/electives.php?id=summer">Избираеми дисциплини Летен семестър</a>
                     </li>
                     <li>
                         <a href="html/login.html">Вход</a>
@@ -34,8 +34,23 @@
         </header>
 
         <main>
+            <section>
+                <fieldset>
+                    <legend>Филтриране</legend>
+                    <form method="get" action="electives.php" class="filter">
+                        <label>Категория</label> 
+                        <select>
+                            <option value="name">Име на дисциплина</option>
+                            <option value="lecturer">Име на лектор</option>                                <option value="cathegory">Категория</option>
+                            <option value="rating">Рейтинг на дисциплина</option>
+                        </select>
+                        <input type="text" name="input"></input>
+                        <input type="submit" value="Филтриране"></input>
+                    </form>
+                </fieldset>
+            </section>
             <?php
-                require "electvesList.php";
+                require "electivesList.php";
             ?>
         </main>
 
