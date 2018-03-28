@@ -34,9 +34,9 @@
         </header>
 
         <main>
-            <figure>
-                <img id="main" src="img/uniLife.jpg"/>
-            </figure>
+            <?php
+                require "electvesList.php";
+            ?>
         </main>
 
         <footer>
