@@ -1,7 +1,7 @@
 <?php
     require "database.php";
 
-    $database = new DataBase("localhost", "root", " ", "uxProj");
+    $database = new DataBase("localhost", "uxProj", "root", "asdf");
     $sql = "SELECT * FROM electives WHERE";
 
     if($_GET['id'] === 'winter'){
