@@ -1,7 +1,7 @@
 <?php
     require "database.php";
 
-    $database = new DataBase("localhost", "uxproj", "root", "");
+    $database = new DataBase("localhost", "uxProj", "root", "asdf");
     $sql = "SELECT NAME, lecturer, cathegory, credits, rating FROM electives WHERE ";
 
     if($_SERVER['QUERY_STRING'] === 'id=winter'){
