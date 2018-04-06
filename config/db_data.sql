@@ -1,20 +1,20 @@
 USE uxProj;
 
-INSERT INTO `users` (userName, passwd, email, names, userType) 
-VALUES ('t1', '123456', 'a@abv.bg', 'a b c', 'student');
+INSERT INTO `users` (userName, passwd, email, userType) 
+VALUES ('t1', '123456', 'a@abv.bg', 'student');
 
-INSERT INTO `student` (fn, userName, year, bachelor_program)
-VALUES (61000, 't1', 1, 'SE');
+INSERT INTO `student` (fn, userName, names, year, bachelor_program)
+VALUES (61000, 't1', 'a b c', 1, 'SE');
 
-INSERT INTO `users` (userName, passwd, email, names, userType) 
-VALUES ('t2', '123456', 'b@abv.bg', 'd e f', 'lecturer');
+INSERT INTO `users` (userName, passwd, email, userType) 
+VALUES ('t2', '123456', 'b@abv.bg', 'lecturer');
 
-INSERT INTO `lecturer` (userName) VALUES ('t2');
+INSERT INTO `lecturer` (userName, names) VALUES ('t2', 'd e f');
 
-INSERT INTO `users` (userName, passwd, email, names, userType) 
-VALUES ('t3', '123456', 'c@abv.bg', 'g h i', 'admin');
+INSERT INTO `users` (userName, passwd, email, userType) 
+VALUES ('t3', '123456', 'c@abv.bg', 'admin');
 
-INSERT INTO `admin` (userName) VALUES ('t3');
+INSERT INTO `admin` (userName, names) VALUES ('t3', 'g h i');
 
 INSERT INTO `electives` (name, lecturer, cathegory, credits, shortDescription, fullDescription, term, rating)
 VALUES ('FP', 1, 'OKN', 4, 'FUNCTIONAL PROGRAMING', 'FUNCTIONAL PROGRAMING!!!!!', 'winter', 5);

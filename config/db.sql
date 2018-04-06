@@ -6,7 +6,6 @@ CREATE TABLE users(
     userName VARCHAR(200),
     passwd VARCHAR(200) NOT NULL,
     userType VARCHAR(200) NOT NULL,
-    names VARCHAR(200) NOT NULL,
     email VARCHAR(200) NOT NULL,
     PRIMARY KEY(userName)
 ); 
@@ -14,6 +13,7 @@ CREATE TABLE users(
 CREATE TABLE admin(
     id INT NOT NULL AUTO_INCREMENT,
     userName VARCHAR(200),
+    names VARCHAR(200) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY(userName) REFERENCES users(userName)
 );
@@ -21,6 +21,7 @@ CREATE TABLE admin(
 CREATE TABLE lecturer(
     id INT NOT NULL AUTO_INCREMENT,
     userName VARCHAR(200),
+    names VARCHAR(200) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY(userName) REFERENCES users(userName)
 );
@@ -28,6 +29,7 @@ CREATE TABLE lecturer(
 CREATE TABLE student(
     fn INT NOT NULL,
     userName VARCHAR(200),
+    names VARCHAR(200) NOT NULL,
     year INT,
     bachelor_program VARCHAR(200),
     PRIMARY KEY (fn),
