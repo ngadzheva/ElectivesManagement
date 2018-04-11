@@ -4,9 +4,9 @@
         <meta charset="utf-8"/>
 
         <title>Система за управление на избираеми дисциплини</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <script type="text/javascript" src="js/validation.js"></script>
     </head>
 
     <body>
@@ -24,11 +24,19 @@
             </nav>
         </header>
 
-        <main>
-            <picture>
-                <source srcset="img/uniLife.jpg" media="(max-width: 1100px)">
-                <img id="main" src="img/uniLife.jpg"/>
-            </picture>
+       <main>
+            <section id='background'>
+                <fieldset id='loginForm'>
+                    <legend class='login'>Вход</legend>
+                    <form name='login' method='post' onsubmit='return validate()' action>
+                        <label class='login'>Потребителско име</label>
+                        <input class='login' type='text' name='user'></input>
+                        <label class='login'>Парола</label>
+                        <input class='login' type='password' name='password'></input>
+                        <input class='login' type='submit' value='Вход'></input>
+                    </form>
+                </fieldset>
+            </section>
         </main>
 
         <footer>

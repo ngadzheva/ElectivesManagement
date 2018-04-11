@@ -4,12 +4,13 @@
         <meta charset="utf-8"/>
 
         <title>Система за управление на избираеми дисциплини</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <script type="text/javascript" src="js/electives.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
     </head>
 
-    <body>
+    <body onload='listElectives()'>
         <header>
             <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
             <figure>
@@ -25,10 +26,20 @@
         </header>
 
         <main>
-            <picture>
-                <source srcset="img/uniLife.jpg" media="(max-width: 1100px)">
-                <img id="main" src="img/uniLife.jpg"/>
-            </picture>
+            <form class='filter' method='get' action=''>
+                <input class='search' type='text' name='input'></input>
+                <select class='search'>
+                    <option value='name'>Име на дисциплина</option>
+                    <option value='lecturer'>Име на лектор</option>                                
+                    <option value='cathegory'>Категория</option>
+                    <option value='rating'>Рейтинг на дисциплина</option>
+                </select>
+                <input class='search' type='submit' value='Филтриране'></input>
+            </form>
+
+            <section id='electives'>
+
+            </section>
         </main>
 
         <footer>

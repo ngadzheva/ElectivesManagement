@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            function main(){
+                var p = document.createElement('p');
+                var text = document.createTextNode('Test');
+                p.appendChild(text);
+                var att = document.createAttribute('id');
+                att.value = '2';
+                p.setAttribute('id', '2');
+                document.getElementById('1').appendChild(p);
+            }
+
+            function hide(){
+                document.getElementById('2').style.display='none';
+            }
+</script>
+<body onload='main()'>
+    <div id='1' onclick='hide()'></div>
+</body>
+</html>
