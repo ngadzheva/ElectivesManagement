@@ -1,3 +1,5 @@
+var ajaxRequest;
+
 /*
  * Toggle the description row - initially it is hidden. When clicked on elective's row,
  * it's description row is shown. On next click, it's hidden again.
@@ -24,33 +26,66 @@ function showDescription(){
 	}
 }
 
+/*
+ * Connect to the server
+ */
+function connectToServer(element){
+    try{
+        // Opera, Firefox, Safari
+        ajaxRequest = new XMLHttpRequest();
+    } catch(e){
+        // Internet Explorer Browsers
+        try{
+            ajaxRequest = new ActiveXObject('Msxml2.XMLHTTP');
+        } catch(e){
+            try{
+                ajaxRequest = new ActiveXObject('Microsoft.XMLHTTP');
+            } catch(e){
+                alert('Something went wrong with your browser!');
+                return false;
+            }
+        }
+    }
+
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4){
+            var ajaxDisplay = document.getElementById(element);
+            ajaxDisplay.innerHTML = ajaxRequest.responseText;
+        }
+
+        if(element == 'electives'){
+                document.getElementsByClassName('Edit').style.display = 'none';
+            }
+    }
+}
+
+/*
+ * Show a table with the electives depending on the selected term
+ */
+function listElectives(element){
+    connectToServer(element);
+    var params = new URLSearchParams(window.location.search);
+    id = params.get('id').toString();
+    ajaxRequest.open("GET", "electives.php?id=" + id, true);
+    ajaxRequest.send(null);
+}
 
 /*
  * Show content of admin page. The content depends on the selected tab.
  */
 function changeAdminContent(event, tab){
-    var i, tabContent, tabLinks;
-
-    /*
-     * Get all elements with class='tabContent' and hide them
-     */
-    tabContent = document.getElementsByClassName('tabContent');
-    for(i = 0; i < tabContent.length; i++){
-        tabContent[i].style.display = "none";
+    if(tab == "Edit"){
+        
+    } else if(tab == "Winter"){
+        connectToServer("adminContent");
+        ajaxRequest.open("GET", "electives.php?id=winter", true);
+        ajaxRequest.send(null);
+    } else if(tab == "Summer"){
+        connectToServer("adminContent");
+        ajaxRequest.open("GET", "electives.php?id=summer", true);
+        ajaxRequest.send(null);
+    } else if(tab == "Profiles"){
+        
     }
-
-    /*
-     * Get all elements with class='tabLinks' and remove the class 'active'
-     */
-    tabLinks = document.getElementsByClassName('tabLinks');
-    for(i = 0; i < tabLinks.length; i++){
-        tabLinks[i].className = tabLinks[i].className.replace('active', '');
-    }
-
-    /*
-     * Show the current tab and add 'active' class to the link that opened the tab
-     */
-    document.getElementById(tab).style.display = "block";
-    event.currentTarget.classNAme += 'active';
 }
 

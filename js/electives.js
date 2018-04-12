@@ -1,4 +1,4 @@
-function listElectives(){
+function listElectives(element, id){
     var ajaxRequest;
 
     try{
@@ -20,13 +20,15 @@ function listElectives(){
 
     ajaxRequest.onreadystatechange = function(){
         if(ajaxRequest.readyState == 4){
-            var ajaxDisplay = document.getElementById('electives');
+            var ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = ajaxRequest.responseText;
         }
     }
 
     var params = new URLSearchParams(window.location.search);
-    var id = params.get('id').toString();
+    if(!id){
+        id = params.get('id').toString();
+    } 
     ajaxRequest.open("GET", "electives.php?id=" + id, true);
     ajaxRequest.send(null);
 }

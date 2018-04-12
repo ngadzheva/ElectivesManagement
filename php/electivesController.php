@@ -66,6 +66,7 @@
                 "                      <th>Кредити</th>\n" .
                 "                      <th>Категория</th>\n" .
                 "                      <th>Рейтинг</th>\n" .
+                "                      <th class='Edit'>Редактиране</th>\n" .
                 "                   </tr>\n";
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
@@ -86,6 +87,7 @@
                     }
                 }
 
+                $template = $template . "                      <td class='Edit'>" . '...' . "</td>\n";
                 $template = $template . "                   </tr>\n";
             }
 
