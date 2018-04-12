@@ -42,9 +42,15 @@
         /**
          * delete an elective from database
          **/
-        private function deleteElective( $id){
-            $sql = "DELETE FROM electives WHERE id = $id";
+        private function deleteElective($name){
+            $sql = "SELECT term FROM electives WHERE NAME = $name";
+            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+            $term = $query->fetch(PDO::FETCH_ASSOC)['term'];
+
+            $sql = "DELETE FROM electives WHERE NAME = $name";
             $query = $this->database->executeQuery($sql, "Failed deleting electives!");
+
+            $this->viewElectives($term);
         }
 
         /**
@@ -72,8 +78,11 @@
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $template = $template . "                   <tr class='elective'>\n";
                 $description = "";
+                $name = "";
                 foreach($row as $key => $value){
-                    if($key === "lecturer"){
+                    if($key === "NAME"){
+                        $name = $value;
+                    } elseif($key === "lecturer"){
                         $sql = "SELECT DISTINCT NAMES FROM lecturer, electives WHERE id = lecturer";
                         $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
                 
@@ -87,7 +96,10 @@
                     }
                 }
 
-                $template = $template . "                      <td class='Edit'>" . '...' . "</td>\n";
+                $template = $template . "                      <td class='Edit'>
+                    <img class='editIcon' onclick='editElective(" . $name . ")' src='img/edit.png'/>
+                    <img class='deleteIcon' onclick='deleteElective(" . $name . ")' src='img/delete.png'/>
+                </td>\n";
                 $template = $template . "                   </tr>\n";
             }
 

@@ -364,6 +364,11 @@ td {
     height: 300px;
 } 
 
+#addIcon{
+    float: right;
+    margin: 15px;
+}
+
 /* footer style */
 
 footer{

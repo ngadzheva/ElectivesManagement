@@ -54,8 +54,13 @@ function connectToServer(element){
         }
 
         if(element == 'electives'){
-                document.getElementsByClassName('Edit').style.display = 'none';
-            }
+            document.getElementsByClassName('Edit').style.display = 'none';
+        } else {
+            var img = document.createElement('img');
+            img.setAttribute('id', 'addIcon');
+            img.setAttribute('src', 'img/add.jpg');
+            document.getElementById(element).appendChild(img);
+        }
     }
 }
 
@@ -67,6 +72,16 @@ function listElectives(element){
     var params = new URLSearchParams(window.location.search);
     id = params.get('id').toString();
     ajaxRequest.open("GET", "electives.php?id=" + id, true);
+    ajaxRequest.send(null);
+}
+
+function editElective(elective){
+
+}
+
+function deleteElective(elective){
+    connectToServer(elective);
+    ajaxRequest.open("GET", "php/deleteElective.php?id=" + elective, true);
     ajaxRequest.send(null);
 }
 
