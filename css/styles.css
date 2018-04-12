@@ -114,11 +114,11 @@ main{
     min-width: 1100px;
 }
 
-#loginForm{
+#loginForm, #editForm{
     position: relative;
     display: block;
     width: 500px;
-    height: 400px;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
     background: #FFFFFF;
@@ -132,10 +132,20 @@ main{
     min-width: 500px;
 }
 
-legend[class=login]{
+#editForm{
+    margin: 20px auto;
+    width: 800px;;
+}
+
+legend[class=login], legend[class=editElective]{
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
+}
+
+legend[class=editElective]{
+    margin-top: 0px;
+    margin-bottom: 20px;
 }
 
 form{
@@ -147,7 +157,7 @@ form{
     font-size: 18px;
 }
 
-label[class=login], input[class=login]{
+label[class=login], input[class=login], label[class=editElective], input[class=editElective], textarea{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
@@ -182,9 +192,19 @@ input[type=submit] {
     padding-top: 10px;
 }
 
+.editElective[type=submit]{
+    display: inline;
+}
+
 input[type=submit]:hover{
     background-color: #96BCE5;
     color: #1D224C;
+}
+
+textarea{
+    position: relative;
+    width: 95%;
+    height: 2%;
 }
 
 /* electives.php styles */
@@ -220,6 +240,13 @@ input[type=submit]:hover{
     width: 500px;
     height: 20px;
     font-size: 16px;
+}
+
+input[class=search]{
+    background-image: url('../img/search.png');
+    background-size: 16px; 
+    background-repeat: no-repeat;
+    padding-left: 18px;
 }
 
 .filter input[type=submit]{
@@ -365,8 +392,14 @@ td {
 } 
 
 #addIcon{
+    position: relative;
     float: right;
-    margin: 15px;
+    margin: 20px;
+    margin-right: 180px;
+}
+
+.editIcon{
+    margin-right: 10px;
 }
 
 /* footer style */
@@ -374,7 +407,7 @@ td {
 footer{
     clear: both;
     bottom: 0px;
-    position: fixed;
+    position: relative;
     width: 100%;
     height: 50px;
     margin-top: 5px;
