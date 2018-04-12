@@ -29,7 +29,7 @@ function showDescription(){
 /*
  * Connect to the server
  */
-function connectToServer(element){
+function connectToServer(){
     try{
         // Opera, Firefox, Safari
         ajaxRequest = new XMLHttpRequest();
@@ -46,22 +46,6 @@ function connectToServer(element){
             }
         }
     }
-
-    ajaxRequest.onreadystatechange = function(){
-        if(ajaxRequest.readyState == 4){
-            var ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = ajaxRequest.responseText;
-        }
-
-        if(element == 'electives'){
-            document.getElementsByClassName('Edit').style.display = 'none';
-        } else {
-            var img = document.createElement('img');
-            img.setAttribute('id', 'addIcon');
-            img.setAttribute('src', 'img/add.jpg');
-            document.getElementById(element).appendChild(img);
-        }
-    }
 }
 
 /*
@@ -69,14 +53,31 @@ function connectToServer(element){
  */
 function listElectives(element){
     connectToServer(element);
+
+    connectToServer();
+
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4){
+            var ajaxDisplay = document.getElementById(element);
+            ajaxDisplay.innerHTML = ajaxRequest.responseText;
+        }
+
+        makeNewColumn("Преглед");
+
+    }
+
     var params = new URLSearchParams(window.location.search);
     id = params.get('id').toString();
     ajaxRequest.open("GET", "electives.php?id=" + id, true);
     ajaxRequest.send(null);
 }
 
-function editElective(elective){
+function addElective(){
+    document.getElementById('adminContent').innerHTML = makeEditForm();
+}
 
+function editElective(){
+    document.getElementById('adminContent').innerHTML = makeEditForm();
 }
 
 function deleteElective(elective){
@@ -92,15 +93,109 @@ function changeAdminContent(event, tab){
     if(tab == "Edit"){
         
     } else if(tab == "Winter"){
-        connectToServer("adminContent");
+        connectToServer();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                var ajaxDisplay = document.getElementById("adminContent");
+                ajaxDisplay.innerHTML = ajaxRequest.responseText;
+            }
+
+            makeNewColumn("Редактиране");
+
+            var img = document.createElement('img');
+            img.setAttribute('id', 'addIcon');
+            img.setAttribute('onclick', 'addElective()');
+            img.setAttribute('src', 'img/add.jpg');
+            document.getElementById('adminContent').appendChild(img);
+        }
+
         ajaxRequest.open("GET", "electives.php?id=winter", true);
         ajaxRequest.send(null);
     } else if(tab == "Summer"){
-        connectToServer("adminContent");
+        connectToServer();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                var ajaxDisplay = document.getElementById("adminContent");
+                ajaxDisplay.innerHTML = ajaxRequest.responseText;
+            }
+
+            makeNewColumn("Редактиране");
+
+            var img = document.createElement('img');
+            img.setAttribute('id', 'addIcon');
+            img.setAttribute('onclick', 'addElective()');
+            img.setAttribute('src', 'img/add.jpg');
+            document.getElementById('adminContent').appendChild(img);
+        }
+
         ajaxRequest.open("GET", "electives.php?id=summer", true);
         ajaxRequest.send(null);
     } else if(tab == "Profiles"){
         
     }
+}
+
+function viewDescription(){
+    window.location.replace("html/description.html");
+}
+
+function makeNewColumn(name){
+    var th = document.createElement('th');
+    var value = document.createTextNode(name);
+    th.appendChild(value);
+    document.getElementById('firstRow').appendChild(th);
+
+    var tr = document.getElementsByClassName('elective');
+    var td = document.createElement('td');
+    
+    if(name == "Преглед"){
+        var img = document.createElement('img');
+        img.setAttribute('class', 'viewIcon');
+        img.setAttribute('onclick', 'viewDescription()');
+        img.setAttribute('src', 'img/view.png');
+        td.appendChild(img);
+    } else if(name == "Редактиране"){
+        var img = document.createElement('img');
+        img.setAttribute('class', 'editIcon');
+        img.setAttribute('onclick', 'editElective()');
+        img.setAttribute('src', 'img/edit.png');
+        td.appendChild(img);
+
+        img = document.createElement('img');
+        img.setAttribute('class', 'deleteIcon');
+        img.setAttribute('onclick', 'deleteElective()');
+        img.setAttribute('src', 'img/delete.png');
+        td.appendChild(img);
+    }
+
+    for(var i = 0; i < tr.length; i++){
+        tr[i].appendChild(td);
+    }
+}
+
+function makeEditForm(){
+    var editForm = "<fieldset id='editForm'>\n" +
+    "<form name='edit' method='post' action='php/addElective.php'>\n" +
+        "<legend class='editElective'>Редактиране</legend>\n" + 
+        "<label class='editElective'>Избираема дисциплина</label>\n" +
+        "<input class='editElective' type='text' name='title'></input>\n" +
+        "<label class='editElective'>Лектор</label>\n" +
+        "<input class='editElective' type='text' name='lecturer'></input>\n" +
+        "<label class='editElective'>Описание</label>\n" +
+        "<textarea class='editElective' rows='10' name='description'></textarea>\n" +
+        "<label class='editElective'>Кредити</label>\n" +
+        "<input class='editElective' type='text' name='credits'></input>\n" +
+        "<label class='editElective'>Категория</label>\n" +
+        "<input class='editElective' type='text' name='cathegory'></input>\n" +
+        "<label class='editElective'>Семестър</label>\n" +
+        "<input class='editElective' type='text' name='term'></input>\n" +
+        "<input class='editElective' type='submit' value='Редактирай'></input>\n" +
+        "<input class='editElective' type='submit' value='Отказ'></input>\n" +
+    "</form>\n" +
+    "</fildset>\n";
+
+    return editForm;
 }
 
