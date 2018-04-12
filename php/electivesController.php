@@ -82,6 +82,7 @@
                 foreach($row as $key => $value){
                     if($key === "NAME"){
                         $name = $value;
+                        $template = $template . "                      <td>" . $name . "</td>\n";
                     } elseif($key === "lecturer"){
                         $sql = "SELECT DISTINCT NAMES FROM lecturer, electives WHERE id = lecturer";
                         $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
