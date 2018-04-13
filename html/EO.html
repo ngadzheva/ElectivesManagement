@@ -1,11 +1,11 @@
-<?DOCTYPE html?>
+<!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
 		<title>Електронно обучени</title>
 		<link href="../css/description.css" rel="stylesheet">
-		<script type="text/javascript" src="js/script.js"></script>
-	<head>
+		<script type="text/javascript" src="../js/script.js"></script>
+	</head>
 	<body>
 	<header>
 		<h1>Електронно обучение</h1>
@@ -13,9 +13,24 @@
 	<aside>
 		<img id="dislike" onclick="dislike('Електронно обучение')" src="../img/dislike.png"/>
 		<img id="like" onclick="like('Електронно обучение')" src="../img/like.png"/>
-		<a id="comment" href=".comments">Коментари</a>
+		<section id="comment" onclick="openComments()">Коментари</section>
 		<a id="back" href="../electives.html">Назад</a>
 	</aside>
+	<section id="commentsOverlay" class="comments">
+		<section class="closebtn" onclick="closeComments()" title="Затвори коментарите">x</section>
+		<section id="commentContent" class="commentsContent">
+			<textarea id="writeComment" rows="10" cols="40" placeholder="Напиши мнение..."></textarea>
+			<section id="post" onclick="postComment()">Публикувай</section>
+
+			<section class="userComments">
+				<h4>
+					Иван Иванов
+					<time>25.03.2018</time>
+				</h4>
+				<p>Избираемата дисциплина е много интересна и полезна. Заслужава си да се посещава. Силно препоръчвам.</p>
+			</section>
+		</section>
+	</section>
 	<div id="div1">
 		<ul>
 			<li>
@@ -144,17 +159,5 @@
 		<li>Smaldino, S. Lowther, D., Russell, J., (2012). Instructional Media and Technologies for Learning (10th Edition). Pearson Education, Inc. Boston, MA, USA.   </li>
 	</ul>
 	</div>
-	<section class='.comments'>
-		<form>
-			<label></label>
-			<textarea rows="5" cols="20" placeholder="Напиши мнение..."></textarea>
-			<input type="submit" value="Публикувай" onsubmit="post()"></input>
-		</form>
-
-		<section class='userComments'>
-			<p>Иван Иванов</p>
-			<p>Избираемата дисциплина е много интересна и полезна. Заслужава си да се посещава. Силно препоръчвам.</p>
-		</section>
-	</section>
 	</body>
 </html>

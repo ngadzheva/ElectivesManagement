@@ -79,7 +79,6 @@
                 "                      <th>Кредити</th>\n" .
                 "                      <th>Категория</th>\n" .
                 "                      <th>Рейтинг</th>\n" .
-                //"                      <th class='Edit'>Редактиране</th>\n" .
                 "                   </tr>\n";
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
@@ -104,10 +103,6 @@
                     }
                 }
 
-                /*$template = $template . "                      <td class='Edit'>
-                    <img class='editIcon' src='img/edit.png'/>
-                    <img class='deleteIcon' onclick='deleteElective(\"$name\")' src='img/delete.png'/>
-                </td>\n";*/
                 $template = $template . "                   </tr>\n";
             }
 
@@ -116,5 +111,25 @@
 
             return $template;
         }
+
+        /*
+         * get elective's rating
+         */
+         public function getRating($name): int{
+             $sql = "SELECT rating FROM electives WHERE NAME = $name";
+             $query = $this->database->executeQuery($sql, "Failed finding $name's rating!");
+
+             return $query->fetch(PDO::FETCH_ASSOC)['rating'];
+         }
+
+         /*
+         * change elective's rating
+         */
+         public function updateRating($rating, $name){
+            $sql = "UPDATE electives SET rating = $rating WHERE name = $name";
+            $query = $this->database->executeQuery($sql, "Failed updating $name's rating!");
+         }
     }
+
+    
 ?>

@@ -60,6 +60,7 @@ header{
     text-align: center;
     font-size: 20px;
     color: #FFFFFF;
+    cursor: pointer;
 }
 
 #mainNav a:link, #mainNav a:visited{
@@ -77,6 +78,7 @@ main{
     top: 300px;
     bottom: 50px;
     max-width: 100%;
+    min-height: 570px;
     margin-bottom: 15px;
 }
 
@@ -349,7 +351,6 @@ td {
     color: #53687F;
     width: 15%;
     height: 15%;
-    height: 350px;
     position: relative;
     float: left;
     margin: 15px;
@@ -396,10 +397,12 @@ td {
     float: right;
     margin: 20px;
     margin-right: 180px;
+    cursor: pointer;
 }
 
-.editIcon{
+.editIcon, .deleteIcon, .viewIcon{
     margin-right: 10px;
+    cursor: pointer;
 }
 
 /* footer style */
