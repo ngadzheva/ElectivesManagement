@@ -72,6 +72,14 @@ function listElectives(element){
     ajaxRequest.send(null);
 }
 
+function like(name){
+
+}
+
+function dislike(name){
+    
+}
+
 function addElective(){
     document.getElementById('adminContent').innerHTML = makeEditForm();
 }
@@ -106,7 +114,7 @@ function changeAdminContent(event, tab){
             var img = document.createElement('img');
             img.setAttribute('id', 'addIcon');
             img.setAttribute('onclick', 'addElective()');
-            img.setAttribute('src', 'img/add.jpg');
+            img.setAttribute('src', 'img/add.png');
             document.getElementById('adminContent').appendChild(img);
         }
 

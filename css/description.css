@@ -20,12 +20,51 @@ header h1{
    
 }
 
+#dislike{
+    float: left;
+    position: fixed;
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+#like{
+    float: left;
+    position: fixed;
+    margin-left: 5px;
+    margin-top: 100px;
+}
+
+#like:hover, #dislike:hover{
+    width: 55px;
+}
+
+#back, #comment{
+    display: block;
+    float: left;
+    position: fixed;
+    margin-right: 100px;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    padding-top: 15px;
+}
+
+#back{
+    background: #7D9DBF;
+    margin-top: 150px;
+}
+
+#comment{
+    background: #96BCE5;
+    margin-top: 250px;
+}
+
 #div1{
 	display:inline-block;
 	position:relative;
-	margin-left:30px;
+	margin-left:100px;
 	margin-top: 30px;
-	padding-top: 30px;
+    padding-top: 30px;
 }
 
 #div2{
@@ -39,7 +78,8 @@ header h1{
 
 a{
 	text-decoration:none;	
-	color: #1D224C;
+    color: #1D224C;
+    width: 100px;
 }
 
 	
@@ -50,6 +90,15 @@ a:hover {
 	padding-right: 10px;
 	padding-top: 10px;
 	color: #CCCCCC;
+}
+
+#comment:hover{
+    color: #777777;
+    font-size: 18px;    
+}
+
+#back:hover{
+    font-size: 18px;    
 }
 
 p{
