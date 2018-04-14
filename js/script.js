@@ -2,16 +2,6 @@
 var ajaxRequest;
 
 /*
- * Load elective's list page
- */
-function loadElectives(term){
-    document.getElementById('adminProfile').style.display = 'none';
-    var electives = document.getElementById('adminContent');
-    electives.load("electives.hmtl?id=" + term);
-    //electives.style.display = 'block';
-}
-
-/*
  * Connect to the server
  */
 function connectToServer(){
@@ -53,15 +43,11 @@ function listElectives(element, term, page){
 
     }
 
-    var id;
-    if(term){
+    if(page){
         document.getElementById('profile').style.display = 'none';
-        id = term;
-    } else {
-        var params = new URLSearchParams(window.location.search);
-        id = params.get('id').toString();
-    }
-    ajaxRequest.open("GET", "electives.php?id=" + id, true);
+    } 
+
+    ajaxRequest.open("GET", "electives.php?id=" + term, true);
     ajaxRequest.send(null);
 }
 
