@@ -5,7 +5,7 @@
         private $database; 
 
         function __construct(){
-            $this->database = new DataBase("localhost", "uxProj", "root", "");
+            $this->database = new DataBase("localhost", "uxProj", "root", "asdf");
         }
 
         /**
@@ -18,6 +18,25 @@
                 $sql = $sql . "term = 'winter'";
             } elseif($queryString === 'summer'){
                 $sql = $sql . "term = 'summer'";
+            }
+
+            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+
+            return $this->listElectives($query);
+        }
+
+        /**
+         * filters electives for winter or summer semester
+         **/
+        public function filterElectives($term, $filter, $value){
+            $sql = "SELECT name, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
+
+            if ($filter == "lecturer") {
+                
+                $sql = $sql . "term='$term'" . " AND " . "names='$value'";
+            }
+            else {
+                $sql = $sql . "term='$term'" . " AND " . "$filter='$value'";
             }
 
             $query = $this->database->executeQuery($sql, "Failed finding electives!");

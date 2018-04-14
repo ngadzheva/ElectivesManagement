@@ -126,6 +126,31 @@ function deleteElective(elective){
     ajaxRequest.send(null);
 }
 
+
+
+function filterElectives(event) {
+    connectToServer();
+
+    ajaxRequest.onreadystatechange = function(){
+        if(ajaxRequest.readyState == 4){
+            var ajaxDisplay = document.getElementById('electives');
+            ajaxDisplay.innerHTML = ajaxRequest.responseText;
+
+            makeNewColumn("Преглед", id); 
+        }
+    }
+
+    var form = new FormData(document.querySelector('form'));
+    var filter = form.get("filter");
+    
+    var params = new URLSearchParams(window.location.search);
+    var id = params.get('id').toString();
+    var value = 
+
+    ajaxRequest.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + form.get("value"), true);
+    ajaxRequest.send(null);
+}
+
 /*
  * Show content of admin page. The content depends on the selected tab.
  */

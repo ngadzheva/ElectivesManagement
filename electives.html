@@ -26,14 +26,14 @@
 
         <main>
             <form class='filter' method='get' action=''>
-                <input class='search' type='text' name='input'></input>
-                <select class='search'>
+                <input class='search' type='text' name='value'></input>
+                <select class='search' name='filter'>
                     <option value='name'>Име на дисциплина</option>
                     <option value='lecturer'>Име на лектор</option>                                
                     <option value='cathegory'>Категория</option>
                     <option value='rating'>Рейтинг на дисциплина</option>
                 </select>
-                <input type='submit' value='Филтриране'></input>
+                <input type='button' value='Филтриране' onclick="filterElectives()"></input>
             </form>
 
             <section id='electives'>

@@ -174,7 +174,7 @@ input[type=text]:focus {
     border: 3px solid #CCCCCC;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
     background-color: #1D224C;
     text-align: center;
     vertical-align: middle;
@@ -198,7 +198,7 @@ input[type=submit] {
     display: inline;
 }
 
-input[type=submit]:hover{
+input[type=submit]:hover input[type=button]:hover{
     background-color: #96BCE5;
     color: #1D224C;
 }
@@ -228,7 +228,7 @@ textarea{
     width: 1000px;
     margin-left: auto;
     margin-right: auto; 
-    margin-top: 15px;
+    margin-top: 30px;
     margin-bottom: 30px;
     border-bottom: 1px solid #2A3440;
     padding-bottom: 0px;
@@ -251,7 +251,7 @@ input[class=search]{
     padding-left: 18px;
 }
 
-.filter input[type=submit]{
+.filter input[type=submit], input[type=button]{
     margin-top: -4px;
     padding-top: 6px;
     padding-left: 15px;
