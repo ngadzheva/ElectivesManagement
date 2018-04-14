@@ -143,6 +143,8 @@ function filterElectives(event) {
 function changeAdminContent(event, tab){
     document.getElementById('profile').style.display = 'none';
     if(tab == "Edit"){
+        //TODO: Pass the current user to the function
+        editUserInfo("adminContent");
         
     } else if(tab == "Winter"){
         connectToServer();
@@ -354,6 +356,33 @@ function makeEditForm(type, title, lecturer, credits, cathegory, term){
 }
 
 /*
+ * Update the information about user
+ */
+function editUserInfo(typeId,user){
+    email = "temp@notfinished.com"
+    document.getElementById(typeId).innerHTML = makeProfileEditForm("Редактиране на профил", email);    
+}
+
+/*
+ * Template of a form for updating user profiles
+ */
+function makeProfileEditForm(type, email){
+
+    var editForm = "<fieldset id='editForm'>\n" +
+    "<form name='edit' method='post' action='php/updateProfile.php'>\n" +
+        "<legend class='editProfile'>" + type + "</legend>\n" + 
+        "<label class='editProfile'>E-mail:</label>\n" +
+        "<input class='editProfile' type='text' name='email' value='" + email + "'></input>\n" +
+        "<label class='editProfile'>Парола:</label>\n" +
+        "<input class='editProfile' type='text' name='passwd'></input>\n" +
+        "<input class='editProfile' type='submit' value='Запази'></input>\n" +
+    "</form>\n" +
+    "</fildset>\n";
+
+    return editForm;
+}
+
+/*
  * Close the comments section
  */
 function closeComments(){
@@ -487,7 +516,11 @@ function template_references(){
  * Show content of lecturer page. The content depends on the selected tab.
  */
 function changeLecturerContent(event, tab){
-    if(tab == "Student"){
+    if (tab == "Profile") {
+        //TODO: Pass the current user to the function
+        editUserInfo("lecturerContent");
+
+    } else if(tab == "Student"){
         
     } else if(tab == "Evaluation"){
       
@@ -500,8 +533,6 @@ function changeLecturerContent(event, tab){
     } else if(tab == "Editing"){
         
     } else if(tab == "New"){
-        
-    } else if(tab == "Profile"){
         
     }
 }
@@ -517,7 +548,11 @@ function template_messege(){
  * Show content of student page. The content depends on the selected tab.
  */
 function changeStudentContent(event, tab){
-    if(tab == "Student"){
+    if (tab == "Profile") {
+        //TODO: Pass the current user to the function
+        editUserInfo("studentContent");
+
+    } else if(tab == "Electives"){
 		
         document.getElementById('studentContent').innerHTML=template_messege();   
 		

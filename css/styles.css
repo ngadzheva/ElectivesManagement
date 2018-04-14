@@ -135,17 +135,17 @@ main{
 }
 
 #editForm{
-    margin: 20px auto;
+    margin: 30px auto;
     width: 800px;;
 }
 
-legend[class=login], legend[class=editElective]{
+legend[class=login], legend[class=editElective], legend[class=editProfile]{
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
 }
 
-legend[class=editElective]{
+legend[class=editElective], legend[class=editProfile]{
     margin-top: 0px;
     margin-bottom: 20px;
 }
@@ -159,7 +159,7 @@ form{
     font-size: 18px;
 }
 
-label[class=login], input[class=login], label[class=editElective], input[class=editElective], textarea, select[class=editElective]{
+label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], select[class=editProfile], label[class=editElective], input[class=editElective], textarea, select[class=editElective]{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
@@ -194,7 +194,7 @@ input[type=submit], input[type=button] {
     padding-top: 10px;
 }
 
-.editElective[type=submit]{
+.editElective[type=submit], .editProfile[type=submit]{
     display: inline;
 }
 
