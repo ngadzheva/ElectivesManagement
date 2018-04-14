@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+
+        <title>Система за управление на избираеми дисциплини</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <script type="text/javascript" src="js/script.js"></script>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
+            <figure>
+                <img id="header" src="img/border.png"/>
+            </figure>
+            
+            <nav id='mainNav'>
+                <a href="student.html">Начало</a>
+                <a href="#" onclick='listElectives("studentContent", "winter")'>Избираеми дисциплини Зимен семестър</a>
+                <a href="#" onclick='listElectives("studentContent", "summer")'>Избираеми дисциплини Летен семестър</a>
+                <a href="index.html">Изход</a>
+            </nav>
+        </header>
+
+        <main id='student'>
+			<aside id='studentTab'>
+                <button class='tabLinks' onclick='changeStudentContent(event, "Student")'>Записване/отписване на избираема дисциплина</button>
+                <button class='tabLinks' onclick='changeStudentContent(event, "Message")'>Изпращане на съобщение</button>
+                <button class='tabLinks' onclick='changeStudentContent(event, "References")'>Справки</button>
+				<button class='tabLinks' onclick='changeStudentContent(event, "Profile")'>Редактиране на личен профил</button>
+            </aside>
+
+            <section id='profile'>
+
+            </section>
+
+            <section id='studentContent' class='tabContent'></section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2018 KNRR</p>
+        </footer>
+    </body>
+</html>
