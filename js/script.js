@@ -306,3 +306,22 @@ function postComment(){
     document.getElementById('commentContent').appendChild(newComment);
     textarea.value = '';
 }
+
+/*
+ * Show content of lecturer page. The content depends on the selected tab.
+ */
+function changeLectureContent(event, tab){
+    if(tab == "Student"){
+        
+    } else if(tab == "Evaluation"){
+      
+    } else if(tab == "Message"){
+        
+    } else if(tab == "References"){
+        
+    } else if(tab == "Editing"){
+        
+    } else if(tab == "New"){
+        
+    }
+}
