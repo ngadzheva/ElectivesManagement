@@ -346,7 +346,7 @@ td {
 
 /* admin nav style */
 
-#adminTab, #lecturerTab {
+#adminTab, #lecturerTab, #studentTab {
     background: #1D224C;
     color: #53687F;
     width: 15%;
@@ -358,7 +358,7 @@ td {
     border: 1px solid #53687F;
 }
 
-#adminTab button, #lecturerTab button{
+#adminTab button, #lecturerTab button, #studentTab button{
     color: #CCCCCC;
     background: inherit;
     display: block;

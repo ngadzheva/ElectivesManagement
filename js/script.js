@@ -430,5 +430,36 @@ function changeLectureContent(event, tab){
         
     } else if(tab == "New"){
         
+    } else if(tab == "Profile"){
+        
     }
 }
+
+/*
+ * Show content of student page. The content depends on the selected tab.
+ */
+function changeStudentContent(event, tab){
+    if(tab == "Electives"){
+       
+    }  else if(tab == "Message"){
+        
+    } else if(tab == "References"){
+        connectToServer();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                var ajaxDisplay = document.getElementById("studentContent");
+                ajaxDisplay.innerHTML = ajaxRequest.responseText;
+            }
+        }
+        //this is temporary
+        var student = 61000;
+
+        ajaxRequest.open("GET", "php/creditsReferences.php?student=" + student, true);
+        ajaxRequest.send(null);
+        
+    } else if(tab == "Profile"){
+        
+    }
+}
+
