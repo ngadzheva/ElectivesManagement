@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+
+        <title>Система за управление на избираеми дисциплини</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+      
+    </head>
+
+    <body>
+
+        <header>
+            <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
+            <figure>
+                <img id="header" src="img/border.png"/>
+            </figure>
+            
+            <nav id='mainNav'>
+                <a href="lecturer.html">Начало</a>
+                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
+                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
+                <a href="login.html">Изход</a>
+            </nav>
+        </header>
+
+        <main id='lecturer'>
+			<aside id='lecturerTab'>
+                <button class='tabLinks' onclick='changeLecturerContent(event, "Student")'>Записване/отписване на студент</button>
+                <button class='tabLinks' onclick='changeLecturerContent(event, "Evaluation")'>Нанасяне на оценка на студент</button>
+                <button class='tabLinks' onclick='changeLecturerContent(event, "Message")'>Изпращане на съобщение до студент</button>
+                <button class='tabLinks' onclick='changeLecturerContent(event, "References")'>Справки</button>
+				<button class='tabLinks' onclick='changeLecturerContent(event, "Editing")'>Редактиране на избираема</button>
+				<button class='tabLinks' onclick='changeLecturerContent(event, "New")'>Предлагане на нова избираема</button>
+            </aside>
+            <section id='lecturerContent' class='tabContent'></section>
+
+        </main>
+
+        <footer>
+            <p>&copy; 2018 KNRR</p>
+        </footer>
+    </body>
+</html>
