@@ -516,6 +516,7 @@ function template_references(){
  * Show content of lecturer page. The content depends on the selected tab.
  */
 function changeLecturerContent(event, tab){
+    document.getElementById('profile').style.display = 'none';
     if (tab == "Profile") {
         //TODO: Pass the current user to the function
         editUserInfo("lecturerContent");
@@ -548,6 +549,8 @@ function template_messege(){
  * Show content of student page. The content depends on the selected tab.
  */
 function changeStudentContent(event, tab){
+
+    document.getElementById('profile').style.display = 'none';
     if (tab == "Profile") {
         //TODO: Pass the current user to the function
         editUserInfo("studentContent");
