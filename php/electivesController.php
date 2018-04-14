@@ -45,6 +45,17 @@
         }
 
         /**
+         * gets informations for the electives chosen by a student
+         **/
+        public function getReferences($student){
+            $sql = "SELECT name, credits, grade FROM chElectives WHERE fn=$student";
+
+            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+
+            return $this->listReferences($query);
+        }
+
+        /**
          * add new elective to database
          **/
         public function addNewElective($name, $lecturer, $shortDescription, $credits, $cathegory, $term){
@@ -108,6 +119,39 @@
 
                 $template = $template . "                   </tr>\n";
             }
+            $template = $template . "                </table>\n";
+
+            return $template;
+        }
+        /**
+         * make a table with the electives chosen by a student
+         **/
+        private function listReferences($query){
+            $template = "<table id='electivesReferences'>\n". 
+                "                   <tr id='firstRow'>\n" .
+                "                      <th>Избираема дисциплина</th>\n" .
+                "                      <th>Кредити</th>\n" .
+                "                      <th>Оценка</th>\n" .
+                "                   </tr>\n";
+            $totalCredits = 0;
+            while($row = $query->fetch(PDO::FETCH_ASSOC)){
+                $template = $template . "                   <tr class='elective'>\n";
+                foreach($row as $key => $value){
+                    if($key === "credits"){
+                        $totalCredits = $totalCredits + $value;
+                        $template = $template . "                      <td>" . $value . "</td>\n";
+                    } else {
+                        $template = $template . "                      <td>" . $value . "</td>\n";
+                    }
+                }
+
+                $template = $template . "                   </tr>\n";
+            }
+            $template = $template . "<tr>\n" .
+                "                      <td>Общ брой кредити:</td>\n" .
+                "                      <td></td>\n" .
+                "                      <td>" . $totalCredits . "</td>\n" .
+                "                   </tr>\n";
             $template = $template . "                </table>\n";
 
             return $template;

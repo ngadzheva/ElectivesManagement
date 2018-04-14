@@ -37,3 +37,5 @@ VALUES ('Управление на знанието', 2, 'ОКН', 5, '...', '..
 
 INSERT INTO `electives` (name, lecturer, cathegory, credits, shortDescription, fullDescription, term, rating)
 VALUES ('Електронно обучение', 3, 'ЯКН', 5, '...', '...', 'summer', 5);
+
+INSERT INTO `chElectives`(`name`, `credits`, `fn`, `grade`) VALUES ('Elixir', 5, 61000, 5)
