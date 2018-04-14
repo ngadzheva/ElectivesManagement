@@ -145,9 +145,9 @@ function filterElectives(event) {
     
     var params = new URLSearchParams(window.location.search);
     var id = params.get('id').toString();
-    var value = 
+    var value = form.get("value");
 
-    ajaxRequest.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + form.get("value"), true);
+    ajaxRequest.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
     ajaxRequest.send(null);
 }
 
