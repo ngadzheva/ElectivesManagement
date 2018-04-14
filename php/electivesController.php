@@ -5,7 +5,7 @@
         private $database; 
 
         function __construct(){
-            $this->database = new DataBase("localhost", "uxProj", "root", "asdf");
+            $this->database = new DataBase("localhost", "uxProj", "root", "");
         }
 
         /**
