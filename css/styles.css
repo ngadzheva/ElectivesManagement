@@ -495,3 +495,65 @@ footer p{
     margin-left: 10px;
     padding-top: 18px;
 }
+
+/* lecturer - references */
+#tem_ref_1 #tem_ref_2 #tem_ref_3 {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    padding: 5px;
+    font-size: 18px;
+     border-radius: 10px;
+    -moz-border-radius:10px; /* Mozilla Firefox */
+    -ms-border-radius:10px; /* Internet Explorer */
+    -o-border-radius:10px; /* Opera */
+    -webkit-border-radius:10px; /* Safari and Chrome */
+    border-collapse: collapse;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+#tem_ref_1 td, #tem_ref_1 th, #tem_ref_2 td, #tem_ref_2 th #tem_ref_3 td, #tem_ref_3 th{
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+#tem_ref_1 td, #tem_ref_2 td, #tem_ref_3 td{
+	background-color: #f2f2f2;
+	color: #1D224C;
+}
+
+
+#tem_ref_1 th, #tem_ref_2 th, #tem_ref_3 th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #1D224C;
+    color: white;
+}
+
+p{
+	margin-top: 40px;
+	margin-bottom: -20px;
+	color: #1D224C;
+	font-size: 25px;
+	text-align: center;	
+}
+
+#div1{
+	display:inline-block;
+	position:relative;
+	margin-left: 350px;
+	margin-top: 30px;
+
+}
+
+#div2{
+	
+	display:inline-block;
+	position:absolute;
+	margin-left: 30px;
+	margin-top: 30px;
+	margin-right: 30px;
+}
