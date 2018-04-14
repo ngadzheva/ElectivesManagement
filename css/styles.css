@@ -346,7 +346,7 @@ td {
 
 /* admin nav style */
 
-#adminTab {
+#adminTab, #lecturerTab, #studentTab {
     background: #1D224C;
     color: #53687F;
     width: 15%;
@@ -358,7 +358,7 @@ td {
     border: 1px solid #53687F;
 }
 
-#adminTab button{
+#adminTab button, #lecturerTab button, #studentTab button{
     color: #CCCCCC;
     background: inherit;
     display: block;
@@ -374,70 +374,18 @@ td {
     transition: 0.3s;
 }
 
-#adminTab button:hover{
+#adminTab button:hover, #lecturerTab button:hover, #studentTab button:hover{
     background: #53687F;
     color: #FFFFFF;
 }
 
-.adminTab button.active {
-    background-color: #ccc;
-}
-
-.tabcontent {
+.tabcontent, #profile {
+    color: #1D224C;
     float: left;
     padding: 0px 12px;
-    border: 1px solid #ccc;
     width: 70%;
     border-left: none;
-    height: 300px;
-} 
-
-/* lecturer nav style */
-
-#lecturerTab {
-    background: #1D224C;
-    color: #53687F;
-    width: 15%;
-    height: 15%;
-    position: relative;
-    float: left;
-    margin: 15px;
-    padding: 10px;
-    border: 1px solid #53687F;
-}
-
-#lecturerTab button{
-    color: #CCCCCC;
-    background: inherit;
-    display: block;
-    text-align: left;
-    font-size: 16px;
-    width: 100%;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-    padding: 22px 16px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#lecturerTab button:hover{
-    background: #53687F;
-    color: #FFFFFF;
-}
-
-.lecturerTab button.active {
-    background-color: #ccc;
-}
-
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
+    height: 360px;
 } 
 
 #profile h1{
