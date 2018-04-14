@@ -36,7 +36,7 @@ function connectToServer(){
 /*
  * Show a table with the electives depending on the selected term
  */
-function listElectives(element, term){
+function listElectives(element, term, page){
     connectToServer();
 
     ajaxRequest.onreadystatechange = function(){
@@ -45,7 +45,11 @@ function listElectives(element, term){
             ajaxDisplay.innerHTML = ajaxRequest.responseText;
         }
 
-        makeNewColumn("Преглед");
+        if(page){
+            makeNewColumn("Преглед", term, page);
+        } else{
+            makeNewColumn("Преглед", term);
+        }
 
     }
 
@@ -179,11 +183,8 @@ function changeAdminContent(event, tab){
 /*
  * Opem the page with the description of the elective
  */
-function viewDescription(){
-    var params = new URLSearchParams(window.location.search);
-    id = params.get('id').toString();
-
-    if(id == 'winter'){
+function viewDescription(term){
+    if(term == 'winter'){
         window.location.replace("html/UZ.html");
     } else{
         window.location.replace("html/EO.html");
@@ -193,7 +194,7 @@ function viewDescription(){
 /*
  * Add new column to the table with electives according to current location
  */
-function makeNewColumn(name, term){
+function makeNewColumn(name, term, page){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);
@@ -207,7 +208,7 @@ function makeNewColumn(name, term){
             var img = document.createElement('img');
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
-            img.setAttribute('onclick', 'viewDescription()');
+            img.setAttribute('onclick', 'viewDescription("' + term + '")');            
             img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
