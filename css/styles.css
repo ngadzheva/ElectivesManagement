@@ -346,11 +346,11 @@ td {
 
 /* admin nav style */
 
-#adminTab {
+#adminTab, #lecturerTab {
     background: #1D224C;
     color: #53687F;
     width: 15%;
-    height: 15%;
+    height: 25%;
     position: relative;
     float: left;
     margin: 15px;
@@ -358,7 +358,7 @@ td {
     border: 1px solid #53687F;
 }
 
-#adminTab button{
+#adminTab button, #lecturerTab button{
     color: #CCCCCC;
     background: inherit;
     display: block;
@@ -374,16 +374,12 @@ td {
     transition: 0.3s;
 }
 
-#adminTab button:hover{
+#adminTab button:hover, #lecturerTab button:hover{
     background: #53687F;
     color: #FFFFFF;
 }
 
-.adminTab button.active {
-    background-color: #ccc;
-}
-
-.tabcontent, #adminProfile {
+.tabcontent, #profile {
     color: #1D224C;
     float: left;
     padding: 0px 12px;
@@ -392,21 +388,21 @@ td {
     height: 360px;
 } 
 
-#adminProfile h1{
+#profile h1{
     font-size: 32px;
     margin-top: 25px;
     margin-left: 25px;
     font-weight: bold;
 }
 
-#adminProfile ul{
+#profile ul{
     list-style: none;
     font-size: 24px;
     margin-top: 25px;
     margin-left: 25px;
 }
 
-#adminProfile ul li{
+#profile ul li{
     margin-top: 15px;
     margin-left: 25px;
 }

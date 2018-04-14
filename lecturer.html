@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-      
+        <script type="text/javascript" src="js/script.js"></script>
     </head>
 
     <body>
@@ -20,9 +20,9 @@
             
             <nav id='mainNav'>
                 <a href="lecturer.html">Начало</a>
-                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
-                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
-                <a href="login.html">Изход</a>
+                <a href="#" onclick='listElectives("lecturerContent", "winter")'>Избираеми дисциплини Зимен семестър</a>
+                <a href="#" onclick='listElectives("lecturerContent", "summer")'>Избираеми дисциплини Летен семестър</a>
+                <a href="index.html">Изход</a>
             </nav>
         </header>
 
@@ -35,6 +35,11 @@
 				<button class='tabLinks' onclick='changeLecturerContent(event, "Editing")'>Редактиране на избираема</button>
 				<button class='tabLinks' onclick='changeLecturerContent(event, "New")'>Предлагане на нова избираема</button>
             </aside>
+
+            <section id='profile'>
+
+            </section>
+            
             <section id='lecturerContent' class='tabContent'></section>
 
         </main>

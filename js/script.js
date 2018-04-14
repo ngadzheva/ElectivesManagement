@@ -6,7 +6,9 @@ var ajaxRequest;
  */
 function loadElectives(term){
     document.getElementById('adminProfile').style.display = 'none';
-    document.getElementById('adminContent').innerHTML = '<iframe width="100%" height="100%" src="electives.hmtl"></iframe>';
+    var electives = document.getElementById('adminContent');
+    electives.load("electives.hmtl?id=" + term);
+    //electives.style.display = 'block';
 }
 
 /*
@@ -34,7 +36,7 @@ function connectToServer(){
 /*
  * Show a table with the electives depending on the selected term
  */
-function listElectives(element){
+function listElectives(element, term){
     connectToServer();
 
     ajaxRequest.onreadystatechange = function(){
@@ -47,8 +49,14 @@ function listElectives(element){
 
     }
 
-    var params = new URLSearchParams(window.location.search);
-    id = params.get('id').toString();
+    var id;
+    if(term){
+        document.getElementById('profile').style.display = 'none';
+        id = term;
+    } else {
+        var params = new URLSearchParams(window.location.search);
+        id = params.get('id').toString();
+    }
     ajaxRequest.open("GET", "electives.php?id=" + id, true);
     ajaxRequest.send(null);
 }
@@ -118,7 +126,7 @@ function deleteElective(elective){
  * Show content of admin page. The content depends on the selected tab.
  */
 function changeAdminContent(event, tab){
-    document.getElementById('adminProfile').style.display = 'none';
+    document.getElementById('profile').style.display = 'none';
     if(tab == "Edit"){
         
     } else if(tab == "Winter"){
