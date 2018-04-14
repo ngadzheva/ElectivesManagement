@@ -3,7 +3,7 @@
 
     $electives = new electivesController();
 
-    $queryString = (isset($_GET['id']) ? $_GET['id'] : null);
+    $queryString = (isset($_POST['id']) ? $_POST['id'] : null);
     
-    echo $electives->deleteElectives($queryString);
+    //echo $electives->deleteElectives($queryString);
 ?>

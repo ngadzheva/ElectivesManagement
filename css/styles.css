@@ -159,7 +159,7 @@ form{
     font-size: 18px;
 }
 
-label[class=login], input[class=login], label[class=editElective], input[class=editElective], textarea{
+label[class=login], input[class=login], label[class=editElective], input[class=editElective], textarea, select[class=editElective]{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
@@ -383,20 +383,47 @@ td {
     background-color: #ccc;
 }
 
-.tabcontent {
+.tabcontent, #adminProfile {
+    color: #1D224C;
     float: left;
     padding: 0px 12px;
-    border: 1px solid #ccc;
     width: 70%;
     border-left: none;
-    height: 300px;
+    height: 360px;
 } 
+
+#adminProfile h1{
+    font-size: 32px;
+    margin-top: 25px;
+    margin-left: 25px;
+    font-weight: bold;
+}
+
+#adminProfile ul{
+    list-style: none;
+    font-size: 24px;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+#adminProfile ul li{
+    margin-top: 15px;
+    margin-left: 25px;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.value{
+    font-style: italic;
+}
 
 #addIcon{
     position: relative;
     float: right;
     margin: 20px;
-    margin-right: 180px;
+    margin-right: 220px;
     cursor: pointer;
 }
 

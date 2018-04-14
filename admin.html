@@ -18,10 +18,10 @@
             </figure>
             
             <nav id='mainNav'>
-                <a href="admin.html">Начало</a>
-                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
-                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
-                <a href="index.html">Изход</a>
+                <a href='admin.html'>Начало</a>
+                <a  onclick='loadElectives("winter")'>Избираеми дисциплини Зимен семестър</a>
+                <a  onclick='loadElectives("summer")'>Избираеми дисциплини Летен семестър</a>
+                <a href='index.html'>Изход</a>
             </nav>
         </header>
 
@@ -32,6 +32,16 @@
                 <button class='tabLinks' onclick='changeAdminContent(event, "Summer")'>Редактиране на избираеми за летен семестър</button>
                 <button class='tabLinks' onclick='changeAdminContent(event, "Profiles")'>Редактиране на потребители</button>
             </aside>
+
+            <section id='adminProfile'>
+                <h1>Администратор</h1>
+                <ul>
+                    <li class='name'>Име</li>
+                    <li class='value'>Георги Георгиев</li>
+                    <li class='name'>Пoтребителско име</li>
+                    <li class='value'>admin</li>
+                </ul>
+            </section>
 
             <section id='adminContent' class='tabContent'></section>
         </main>

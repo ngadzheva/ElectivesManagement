@@ -12,13 +12,7 @@
          * list all electives for winter or summer semester
          **/
         public function viewElectives($queryString){
-            $sql = "SELECT NAME, lecturer, shortDescription, credits, cathegory, rating FROM electives WHERE ";
-
-            /*if($_SERVER['QUERY_STRING'] === 'id=winter'){
-                $sql = $sql . "term = 'winter'";
-            } elseif($_SERVER['QUERY_STRING'] === 'id=summer'){
-                $sql = $sql . "term = 'summer'";
-            }*/
+            $sql = "SELECT NAME, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
 
            if($queryString === 'winter'){
                 $sql = $sql . "term = 'winter'";
@@ -83,30 +77,18 @@
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $template = $template . "                   <tr class='elective'>\n";
-                $description = "";
                 $name = "";
                 foreach($row as $key => $value){
                     if($key === "NAME"){
                         $name = $value;
                         $template = $template . "                      <td>" . $name . "</td>\n";
-                    } elseif($key === "lecturer"){
-                        $sql = "SELECT DISTINCT NAMES FROM lecturer, electives WHERE id = lecturer";
-                        $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
-                
-                        $lecturer = $query->fetch(PDO::FETCH_ASSOC);
-
-                        $template = $template . "                      <td>" . $lecturer['NAMES'] . "</td>\n";
-                    } elseif($key == "shortDescription"){
-                        $description = $value;
-                    }else {
+                    } else {
                         $template = $template . "                      <td>" . $value . "</td>\n";
                     }
                 }
 
                 $template = $template . "                   </tr>\n";
             }
-
-            //$template = $template . "                   <tr class='description'>\n" . "                      <td colspan='5'>" . $description . "</td>\n" . "                   </tr>\n";
             $template = $template . "                </table>\n";
 
             return $template;

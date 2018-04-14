@@ -2,29 +2,11 @@
 var ajaxRequest;
 
 /*
- * Toggle the description row - initially it is hidden. When clicked on elective's row,
- * it's description row is shown. On next click, it's hidden again.
+ * Load elective's list page
  */
-function showDescription(){
-    /*
-     * If the content of the row is hidden, change 'display' property to 'block' in 
-     *  order to show it. Else, change it to 'none' to hide it
-     */
-    var elective = document.getElementsByClassName('elective');
-	var description= document.getElementsByClassName('description');
-				
-	for (var i=0; i<description.length; i++){
-		description[i].style.display = 'none';
-		elective[i].elem = description[i];
-		elective[i].addEventListener('click',function(event){
-		    var style = event.target.elem.style;
-			if (style.display=='none'){
-				style.display = 'block';
-            } else{
-				style.display = 'none';
-            }
-		});
-	}
+function loadElectives(term){
+    document.getElementById('adminProfile').style.display = 'none';
+    document.getElementById('adminContent').innerHTML = '<iframe width="100%" height="100%" src="electives.hmtl"></iframe>';
 }
 
 /*
@@ -119,8 +101,8 @@ function addElective(){
 /*
  * Update the information about an elective
  */
-function editElective(){
-    document.getElementById('adminContent').innerHTML = makeEditForm("Редактиране на избираема дисциплина");
+function editElective(title, lecturer, credits, cathegory, term){
+    document.getElementById('adminContent').innerHTML = makeEditForm("Редактиране на избираема дисциплина", title, lecturer, credits, cathegory, term);
 }
 
 /*
@@ -128,7 +110,7 @@ function editElective(){
  */
 function deleteElective(elective){
     connectToServer();
-    ajaxRequest.open("GET", "php/deleteElective.php?id=" + elective, true);
+    ajaxRequest.open("POST", "php/deleteElective.php?id=" + elective, true);
     ajaxRequest.send(null);
 }
 
@@ -136,6 +118,7 @@ function deleteElective(elective){
  * Show content of admin page. The content depends on the selected tab.
  */
 function changeAdminContent(event, tab){
+    document.getElementById('adminProfile').style.display = 'none';
     if(tab == "Edit"){
         
     } else if(tab == "Winter"){
@@ -147,10 +130,11 @@ function changeAdminContent(event, tab){
                 ajaxDisplay.innerHTML = ajaxRequest.responseText;
             }
 
-            makeNewColumn("Редактиране");
+            makeNewColumn("Редактиране", "winter");
 
             var img = document.createElement('img');
             img.setAttribute('id', 'addIcon');
+            img.setAttribute('title', 'Добави');
             img.setAttribute('onclick', 'addElective()');
             img.setAttribute('src', 'img/add.png');
             document.getElementById('adminContent').appendChild(img);
@@ -167,10 +151,11 @@ function changeAdminContent(event, tab){
                 ajaxDisplay.innerHTML = ajaxRequest.responseText;
             }
 
-            makeNewColumn("Редактиране");
+            makeNewColumn("Редактиране", "summer");
 
             var img = document.createElement('img');
             img.setAttribute('id', 'addIcon');
+            img.setAttribute('title', 'Добави');
             img.setAttribute('onclick', 'addElective()');
             img.setAttribute('src', 'img/add.png');
             document.getElementById('adminContent').appendChild(img);
@@ -200,59 +185,147 @@ function viewDescription(){
 /*
  * Add new column to the table with electives according to current location
  */
-function makeNewColumn(name){
+function makeNewColumn(name, term){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);
     document.getElementById('firstRow').appendChild(th);
 
     var tr = document.getElementsByClassName('elective');
-    var td = document.createElement('td');
     
     if(name == "Преглед"){
-        var img = document.createElement('img');
-        img.setAttribute('class', 'viewIcon');
-        img.setAttribute('onclick', 'viewDescription()');
-        img.setAttribute('src', 'img/view.png');
-        td.appendChild(img);
+        for(var i = 0; i < tr.length; i++){
+            var td = document.createElement('td');
+            var img = document.createElement('img');
+            img.setAttribute('class', 'viewIcon');
+            img.setAttribute('title', 'Преглед');
+            img.setAttribute('onclick', 'viewDescription()');
+            img.setAttribute('src', 'img/view.png');
+            td.appendChild(img);
+            tr[i].appendChild(td);
+        }
     } else if(name == "Редактиране"){
-        var img = document.createElement('img');
-        img.setAttribute('class', 'editIcon');
-        img.setAttribute('onclick', 'editElective()');
-        img.setAttribute('src', 'img/edit.png');
-        td.appendChild(img);
+        for(var i = 0; i < tr.length; i++){
+            var title, lecturer, credits, cathegory;
+            var cols = tr[i].getElementsByTagName('td');
+            title = cols[0].innerHTML;
+            lecturer = cols[1].innerHTML;
+            credits = cols[2].innerHTML;
+            cathegory = cols[3].innerHTML;
 
-        img = document.createElement('img');
-        img.setAttribute('class', 'deleteIcon');
-        img.setAttribute('onclick', 'deleteElective()');
-        img.setAttribute('src', 'img/delete.png');
-        td.appendChild(img);
-    }
+            var td = document.createElement('td');
+            var img = document.createElement('img');
+            img.setAttribute('class', 'editIcon');
+            img.setAttribute('title', 'Редактирай');
+            img.setAttribute('onclick', 'editElective("' + title + '", "' + lecturer + '", "' + credits + '", "' + cathegory + '", "' + term + '")');
+            img.setAttribute('src', 'img/edit.png');
+            td.appendChild(img);
 
-    for(var i = 0; i < tr.length; i++){
-        tr[i].appendChild(td);
+            img = document.createElement('img');
+            img.setAttribute('class', 'deleteIcon');
+            img.setAttribute('title', 'Изтрий');
+            img.setAttribute('onclick', 'deleteElective()');
+            img.setAttribute('src', 'img/delete.png');
+            td.appendChild(img);
+
+            tr[i].appendChild(td);
+        }
     }
 }
 
 /*
  * Template of a form for adding/updating an elective
  */
-function makeEditForm(type){
+function makeEditForm(type, title, lecturer, credits, cathegory, term){
+    if(!title){
+        title = "";
+    }
+
+    if(!lecturer){
+        lecturer = "";
+    }
+
+    if(!credits){
+        credits = "";
+    }
+
+    if(!cathegory){
+        cathegory = "";
+    }
+
+    if(!term){
+        term = "";
+    }
+
+    var selectedKP = "", selectedM = "", selectedOKN = "", selectedPM = "", selectedS = "", selectedH = "", selectedQKN = "";
+    var selectedWinter = "", selectedSummer = "";
+
+    switch(cathegory){
+        case "КП": {
+            selectedKP = "selected";
+            break;
+        }
+        case "М": {
+            selectedM = "selected";
+            break;
+        }
+        case "ОКН": {
+            selectedOKN = "selected";
+            break;
+        }
+        case "ПМ": {
+            selectedPM = "selected";
+            break;
+        }
+        case "С": {
+            selectedS = "selected";
+            break;
+        }
+        case "Х": {
+            selectedH = "selected";
+            break;
+        }
+        case "ЯКН": {
+            selectedQKN = "selected";
+            break;
+        }
+    }
+    
+    switch(term){
+        case "winter": {
+            selectedWinter = "selected";
+            break;
+        }
+        case "summer": {
+            selectedSummer = "selected";
+            break;
+        }
+    }
+
     var editForm = "<fieldset id='editForm'>\n" +
     "<form name='edit' method='post' action='php/addElective.php'>\n" +
         "<legend class='editElective'>" + type + "</legend>\n" + 
         "<label class='editElective'>Избираема дисциплина</label>\n" +
-        "<input class='editElective' type='text' name='title'></input>\n" +
+        "<input class='editElective' type='text' name='title' value='" + title + "'></input>\n" +
         "<label class='editElective'>Лектор</label>\n" +
-        "<input class='editElective' type='text' name='lecturer'></input>\n" +
-        "<label class='editElective'>Описание</label>\n" +
-        "<textarea class='editElective' rows='10' name='description'></textarea>\n" +
+        "<input class='editElective' type='text' name='lecturer' value='" + lecturer + "'></input>\n" +
         "<label class='editElective'>Кредити</label>\n" +
-        "<input class='editElective' type='text' name='credits'></input>\n" +
+        "<input class='editElective' type='text' name='credits' value='" + credits + "'></input>\n" +
         "<label class='editElective'>Категория</label>\n" +
-        "<input class='editElective' type='text' name='cathegory'></input>\n" +
+        "<select class='editElective' >\n" +
+            "<option value='КП' " + selectedKP + ">Компютърен практикум</option>" + 
+            "<option value='М' " + selectedM + ">Математика</option>" +
+            "<option value='ОКН' " + selectedOKN + ">Основи на компютърните науки</option>" +
+            "<option value='ПМ' " + selectedPM + ">Приложна математика</option>" +
+            "<option value='С' " + selectedS + ">Семинар</option>" +
+            "<option value='Х' " + selectedH + ">Хуманитарни</option>" +
+            "<option value='ЯКН' " + selectedQKN + ">Ядро на компютърните науки</option>" +
+        "</select>" +
         "<label class='editElective'>Семестър</label>\n" +
-        "<input class='editElective' type='text' name='term'></input>\n" +
+        "<select class='editElective'>\n" +
+            "<option value='winter' " + selectedWinter + ">Зимен</option>" +
+            "<option value='summer' " + selectedSummer + ">Летен</option>" +
+        "</select>" +
         "<input class='editElective' type='submit' value='Добави'></input>\n" +
     "</form>\n" +
     "</fildset>\n";

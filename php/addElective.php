@@ -10,5 +10,8 @@
     $description = (isset($_POST['description']) ? $_POST['description'] : null);
     $term = (isset($_POST['term']) ? $_POST['term'] : null);
    
-    $electives->addNewElective($title, $lecturer, $description, $credits, $cathegory, $term)
+   header('Location: ../admin.html');
+   exit;
+   
+    //$electives->addNewElective($title, $lecturer, $description, $credits, $cathegory, $term)
 ?>
