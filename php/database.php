@@ -4,7 +4,8 @@
 
         public function __construct($host, $db, $user, $password){
             try{
-                $this->connection = new PDO("mysql:host=$host;dbname=$db", $user, $password);
+                $this->connection = new PDO("mysql:host=$host;dbname=$db", $user, $password,
+                                    array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
             } catch(PDOException $e){
                 echo "Connection failed: " . $e->getMessage();
             }

@@ -414,10 +414,93 @@ function postComment(){
     textarea.value = '';
 }
 
+function template_references(){
+	var view_references = "<form class='filter'>\n"+
+                "<select class='search'>\n"+
+                    "<option value='EO'>Електронно обучение</option>\n"+
+                    "<option value='PROOS'>Проектиране разработка и оценка на образователен софтуер</option>\n"+                                
+                "</select>\n"+
+                "<input class='search' type='submit' value='Справка'></input>\n"+
+            "</form>\n"+
+            "<section id='references'>\n"+
+				"<table id='tem_ref_1'>\n"+
+					"<tr>\n"+
+						"<th>Име на избираемата дисциплина</th>\n"+
+						"<td>Електронно обучение</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Брой студенти, записали дисциплина</th>\n"+
+						"<td>80</td>\n"+
+					"</tr>\n"+
+				"</table>\n"+
+				"<div id='div1'>\n"+
+				"<p>Разпределение на студентите по специалности:</p>\n"+
+				"<table id='tem_ref_2'>\n"+
+					"<tr>\n"+
+						"<th>Информатика</th>\n"+
+						"<td>10</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Компютърни науки</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Математика</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Математика и информатика</th>\n"+
+						"<td>30</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Приложна математика</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Информационни системи</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Софтуерно инженерство</th>\n"+
+						"<td>40</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>Статистика</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+				"</table>\n"+
+				"</div>\n"+
+				"<div id='div2'>\n"+
+				"<p>Разпределение на студентите по курсове:</p>\n"+
+				"<table id='tem_ref_3'>\n"+
+					"<tr>\n"+
+						"<th>1-ви курс</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>2-ри курс</th>\n"+
+						"<td>50</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>3-ти курс</th>\n"+
+						"<td>30</td>\n"+
+					"</tr>\n"+
+					"<tr>\n"+
+						"<th>4-ти курс</th>\n"+
+						"<td>0</td>\n"+
+					"</tr>\n"+
+				"</table>\n"+
+				"</div>\n"+
+            "</section>\n";
+			
+		return view_references;
+}
+
+
 /*
  * Show content of lecturer page. The content depends on the selected tab.
  */
-function changeLectureContent(event, tab){
+function changeLecturerContent(event, tab){
     if(tab == "Student"){
         
     } else if(tab == "Evaluation"){
@@ -425,7 +508,9 @@ function changeLectureContent(event, tab){
     } else if(tab == "Message"){
         
     } else if(tab == "References"){
-        
+		
+		document.getElementById('lecturerContent').innerHTML=template_references();       
+	
     } else if(tab == "Editing"){
         
     } else if(tab == "New"){
@@ -463,3 +548,26 @@ function changeStudentContent(event, tab){
     }
 }
 
+function template_messege(){
+	
+	var view_messege = "<p id='tem_mess_p'>В момента няма стартирана кампания за избираеми дисциплини!<p>";
+	
+	return view_messege;
+}
+
+/*
+ * Show content of student page. The content depends on the selected tab.
+ */
+function changeStudentContent(event, tab){
+    if(tab == "Student"){
+		
+        document.getElementById('studentContent').innerHTML=template_messege();   
+		
+    } else if(tab == "Message"){
+        
+    } else if(tab == "References"){
+		  
+    } else if(tab == "Profile"){
+        
+    } 
+}
