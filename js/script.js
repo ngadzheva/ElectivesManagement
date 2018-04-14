@@ -43,11 +43,16 @@ function listElectives(element, term, page){
 
     }
 
-    if(page){
+    var id;
+    if(term){
         document.getElementById('profile').style.display = 'none';
-    } 
+        id = term;
+    } else {
+        var params = new URLSearchParams(window.location.search);
+        id = params.get('id').toString();
+    }
 
-    ajaxRequest.open("GET", "electives.php?id=" + term, true);
+    ajaxRequest.open("GET", "electives.php?id=" + id, true);
     ajaxRequest.send(null);
 }
 

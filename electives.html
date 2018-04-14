@@ -9,7 +9,7 @@
         <script type="text/javascript" src="js/script.js"></script>
     </head>
 
-    <body>
+    <body onload="listElectives('electives')">
         <header>
             <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
             <figure>
@@ -18,8 +18,8 @@
             
             <nav id='mainNav'>
                 <a href="index.html">Начало</a>
-                <a href="#" onclick='listElectives("electives", "winter")'>Избираеми дисциплини Зимен семестър</a>
-                <a href="#" onclick='listElectives("electives", "summer")'>Избираеми дисциплини Летен семестър</a>
+                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
+                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
                 <a href="login.html">Вход</a>
             </nav>
         </header>
