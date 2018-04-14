@@ -506,34 +506,6 @@ function changeLecturerContent(event, tab){
     }
 }
 
-/*
- * Show content of student page. The content depends on the selected tab.
- */
-function changeStudentContent(event, tab){
-    if(tab == "Electives"){
-       
-    }  else if(tab == "Message"){
-        
-    } else if(tab == "References"){
-        connectToServer();
-
-        ajaxRequest.onreadystatechange = function(){
-            if(ajaxRequest.readyState == 4){
-                var ajaxDisplay = document.getElementById("studentContent");
-                ajaxDisplay.innerHTML = ajaxRequest.responseText;
-            }
-        }
-        //this is temporary
-        var student = 61000;
-
-        ajaxRequest.open("GET", "php/creditsReferences.php?student=" + student, true);
-        ajaxRequest.send(null);
-        
-    } else if(tab == "Profile"){
-        
-    }
-}
-
 function template_messege(){
 	
 	var view_messege = "<p id='tem_mess_p'>В момента няма стартирана кампания за избираеми дисциплини!<p>";
@@ -552,7 +524,19 @@ function changeStudentContent(event, tab){
     } else if(tab == "Message"){
         
     } else if(tab == "References"){
-		  
+        connectToServer();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                var ajaxDisplay = document.getElementById("studentContent");
+                ajaxDisplay.innerHTML = ajaxRequest.responseText;
+            }
+        }
+        //this is temporary
+        var student = 61000;
+
+        ajaxRequest.open("GET", "php/creditsReferences.php?student=" + student, true);
+        ajaxRequest.send(null);
     } else if(tab == "Profile"){
         
     } 
