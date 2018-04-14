@@ -489,7 +489,7 @@ function template_references(){
 						"<th>4-ти курс</th>\n"+
 						"<td>0</td>\n"+
 					"</tr>\n"+
-				"</table>v"+
+				"</table>\n"+
 				"</div>\n"+
             "</section>\n";
 			
