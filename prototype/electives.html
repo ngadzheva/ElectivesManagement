@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+
+        <title>Система за управление на избираеми дисциплини</title>
+
+        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <script type="text/javascript" src="js/script.js"></script>
+    </head>
+
+    <body onload="listElectives('electives')">
+        <header>
+            <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
+            <figure>
+                <img id="header" src="img/border.png"/>
+            </figure>
+            
+            <nav id='mainNav'>
+                <a href="index.html">Начало</a>
+                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
+                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
+                <a href="login.html">Вход</a>
+            </nav>
+        </header>
+
+        <main>
+            <form class='filter' method='get' action=''>
+                <input class='search' type='text' name='value'></input>
+                <select class='search' name='filter'>
+                    <option value='name'>Име на дисциплина</option>
+                    <option value='lecturer'>Име на лектор</option>                                
+                    <option value='cathegory'>Категория</option>
+                    <option value='rating'>Рейтинг на дисциплина</option>
+                </select>
+                <input type='button' value='Филтриране' onclick="filterElectives()"></input>
+            </form>
+
+            <section id='electives'>
+
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2018 KNRR</p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Електронно обучени</title>
+		<link href="../css/description.css" rel="stylesheet">
+		<script type="text/javascript" src="../js/script.js"></script>
+	</head>
+	<body>
+	<header>
+		<h1>Електронно обучение</h1>
+	</header>
+	<aside>
+		<img id="dislike" title="Не харесвам" onclick="dislike('Електронно обучение')" src="../img/dislike.png"/>
+		<img id="like" title="Харесвам" onclick="like('Електронно обучение')" src="../img/like.png"/>
+		<section id="comment" onclick="openComments()">Коментари</section>
+		<a id="back" href="../electives.html?id=summer">Назад</a>
+	</aside>
+	<section id="commentsOverlay" class="comments">
+		<section class="closebtn" onclick="closeComments()" title="Затвори коментарите">x</section>
+		<section id="commentContent" class="commentsContent">
+			<textarea id="writeComment" rows="10" cols="40" placeholder="Напиши мнение..."></textarea>
+			<section id="post" onclick="postComment()">Публикувай</section>
+
+			<section class="userComments">
+				<h4>
+					Иван Иванов
+					<time>25.03.2018</time>
+				</h4>
+				<p>Избираемата дисциплина е много интересна и полезна. Заслужава си да се посещава. Силно препоръчвам.</p>
+			</section>
+		</section>
+	</section>
+	<div id="div1">
+		<ul>
+			<li>
+				<a href="#C1">Кратко описание</a>
+			</li>
+			<li>
+				<a href="#C2">Учебен план</a>
+			</li>
+			<li>
+				<a href="#C3">Предварителни изисквания </a>
+			</li>
+			<li>
+				<a  href="#C4">Препоръчителна литература</a>
+			</li>
+		</ul>	
+	</div>
+	<div id="div2">
+	<h2 id="C1">Анотация на учебната дисциплина:</h2>
+	<p>Курсът въвежда в проблематиката на Електронното Обучение (ЕО), 
+	представя основните понятия в областта, класификации на системите за ЕО, 
+	текущото състояние и перспективи за развитие. Прави се преглед на основни въпроси на ЕО: 
+	същност; основни аспекти, планиране, проектиране, организация, внедряване и провеждане; стандарти; 
+	софтуерни системи за управление на учебното съдържание и на процеса на обучение; 
+	подходи и методи за оценяване на обучаемите; оценяване на ефективността на ЕО и др. 
+	Демонстрират се курсове за ЕО, като студените анализират и оценяват курс по свой избор. 
+	Усвояват се съвременни методологии и практически инструментариум за провеждане на ЕО. 
+	По време на обучението студентите разработват текущи задания. Обучението завършва с разработка и защита на курсов проект. 
+	Курсът включва интерактивни лекции, упражнения в компютърна лаборатория, дискусии (включително чрез дискусионен форум в Интернет), 
+	самостоятелна работа (включително онлайн), разработка и представяне на финален проект. Курсът е интегриран в 
+	Интернет-базираната платформа за електронно обучение MOODLE на СУ</p>
+	<h2 id="C2">Учебно съдържание:</h2>
+	<table id="table1">
+		<tr>
+			<th>№</th>
+			<th>Тема:</th>
+			<th>Хорариум</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Въведение в електронното обучение. Основни аспекти.</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Класификации на системите за е-обучение и техните компоненти </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Съвременно състояние и перспективи на електронното обучение</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Социални мрежи и електронно обучение</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Мобилни технологии и електронно обучение.</td>
+			<td>3</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Анализ и оценка на онлайн курсове</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>Проектиране на курсове за електронно обучение</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>Методология и средства за електронно обучение</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>Софтуерни системи за електронно обучение. Адаптивност.</td>
+			<td>6</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>Хранилища за ресурси</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>Стандарти за електронно обучение </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Оценяване на обучаемите при електронно обучени</td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>Планиране, бюджетиране, организация и внедряване на електронното обучение.  </td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td>Провеждане, администриране и оценяване на електронно обучение. Стандарти за оценяване. </td>
+			<td>4</td>
+		</tr>
+		<tr>
+			<td>15</td>
+			<td>Съзадаване, представяне и оценяване на работещ прототип на курс за електронно обучение.</td>
+			<td>10</td>
+		</tr>
+	</table>
+	<h2 id="C3">Предварителни изисквания:</h2>
+	<p>Владеене на английски език за четене на ниво, изучавано във ФМИ. </p>
+	<h2 id="C4">Библиография  </h2>
+	<h4>Основна:</h4>
+	<p>Учебни материали и презентации, публикувани в електронната платформа за обучение, използвана в курса (http://moodle.openfmi.net) </p> 
+	<h4>Допълнителна: </h4>
+	<ul>
+		<li>Ръководство за проектиране на обучението (2003). ТУ-София. НИЛ “Технологии за еОбучение”. http://demlab.vmei.acad.bg  </li>
+		<li>Anderson, T. (Ed.). (2008). The Theory and Practice of Online Learning, (2nd Edition). Athabasca University, Athabasca, Canada.  http://www.aupress.ca/books/120146/ebook/99Z_Anderson_2008Theory_and_Practice_of_Online_Learning.pdf  </li>
+		<li>Clark, R., Mayer, R. (2003). E-Learning and the Science of Instruction. Pfeiffer, Califormia. Inglis, A., Peter Ling, P., Joosten, V. (2002). Delivering Digitally: Managing the Transition to the Knowledge Media (Open and Distance Learning) (2nd edition). Taylor & Francis Group. </li>
+		<li>Khan, B. (2007) Flexible Learning in an Information Society. Information Science Publishing. London, UK. </li>
+		<li>Naidu, S. (2006). E-Learning: A Guidebook of Principles, Procedures and Practices. Commonwealth of Learning. http://www.cemca.org/e-learn.htm  </li>
+		<li>Smaldino, S. Lowther, D., Russell, J., (2012). Instructional Media and Technologies for Learning (10th Edition). Pearson Education, Inc. Boston, MA, USA.   </li>
+	</ul>
+	</div>
+	</body>
+</html>
