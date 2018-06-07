@@ -1,6 +1,6 @@
 <?php
 
-require "User.php"
+require "User.php";
 require_once "database.php";
 
 class Admin extends User{
