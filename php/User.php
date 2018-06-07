@@ -9,6 +9,7 @@ class User{
 	private $userType;
 	private $active;
 	private $email;
+	private $database;
 	
 	public function __construct($userName, $passwd, $userType, $email){
 		$this->database = new DataBase("localhost", "uxProj", "root", "");
