@@ -6,6 +6,7 @@ CREATE TABLE users(
     userName VARCHAR(200),
     passwd VARCHAR(200) NOT NULL,
     userType VARCHAR(200) NOT NULL,
+    active BOOL,
     email VARCHAR(200) NOT NULL,
     PRIMARY KEY(userName)
 ); 
@@ -52,7 +53,8 @@ CREATE TABLE electives(
     subjects JSON,
     term VARCHAR(200),
     cathegory VARCHAR(200),
-    campaign INT
+    campaign INT,
+    active BOOL,
     rating INT,
     PRIMARY KEY (name),
     FOREIGN KEY(lecturer) REFERENCES lecturer(id),
