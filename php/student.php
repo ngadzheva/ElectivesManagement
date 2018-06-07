@@ -1,7 +1,6 @@
 <?php
 
 require "User.php";
-require_once "database.php";
 
 class Student extends User{
 	
@@ -9,6 +8,7 @@ class Student extends User{
 	private $names;
 	private $year;
 	private $bachelorProgram;
+	private $database;
 		
 	public function __construct($fn, $names, $year, $bachelorProgram){
 		$this->database = new DataBase("localhost", "uxProj", "root", "");
