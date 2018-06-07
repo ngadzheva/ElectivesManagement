@@ -22,6 +22,11 @@ CREATE TABLE lecturer(
     id INT NOT NULL AUTO_INCREMENT,
     userName VARCHAR(200),
     names VARCHAR(200) NOT NULL,
+    department  VARCHAR(100) NOT NULL,
+    telephone VARCHAR(20) NOT NULL,
+    visitingHours VARCHAR(50) NOT NULL,
+    office VARCHAR(100) NOT NULL,
+    personalPage VARCHAR(200,)
     PRIMARY KEY (id),
     FOREIGN KEY(userName) REFERENCES users(userName)
 );
@@ -31,7 +36,7 @@ CREATE TABLE student(
     userName VARCHAR(200),
     names VARCHAR(200) NOT NULL,
     year INT,
-    bachelor_program VARCHAR(200),
+    bachelorProgram VARCHAR(200),
     PRIMARY KEY (fn),
     FOREIGN KEY(userName) REFERENCES users(userName)
 );
@@ -39,9 +44,12 @@ CREATE TABLE student(
 CREATE TABLE electives(
     name VARCHAR(200),
     lecturer INT,
-    fullDescription VARCHAR(2000),
-    shortDescription VARCHAR(500),
+    description VARCHAR(2000),
     credits INT,
+    recomendedYear INT,
+    recomendedBachelorProgram VARCHAR(200),
+    literature JSON,
+    subjects JSON,
     term VARCHAR(200),
     cathegory VARCHAR(200),
     rating INT,
@@ -55,6 +63,7 @@ CREATE TABLE messages(
     content VARCHAR(2000),
     sender VARCHAR(200),
     reciver VARCHAR(200),
+    opened BOOL,
     PRIMARY KEY (id),
     FOREIGN KEY(sender) REFERENCES users(userName),
     FOREIGN KEY(reciver) REFERENCES users(userName)
