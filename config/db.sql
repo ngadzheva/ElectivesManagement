@@ -52,9 +52,11 @@ CREATE TABLE electives(
     subjects JSON,
     term VARCHAR(200),
     cathegory VARCHAR(200),
+    campaign INT
     rating INT,
     PRIMARY KEY (name),
-    FOREIGN KEY(lecturer) REFERENCES lecturer(id)
+    FOREIGN KEY(lecturer) REFERENCES lecturer(id),
+    FOREIGN KEY (campaign) REFERENCES campaign(id)
 );
 
 CREATE TABLE messages(
@@ -79,3 +81,22 @@ CREATE TABLE chElectives(
     FOREIGN KEY(name) REFERENCES electives(name),
     FOREIGN KEY(fn) REFERENCES student(fn)
 );
+
+CREATE TABLE coments(
+    id INT AUTO_INCREMENT,
+    content VARCHAR(2000),
+    elective VARCHAR(200),
+    user VARCHAR(200),
+    timePosted TIMESTAMP,
+    PRIMARY KEY (id),
+    FOREIGN KEY (elective) REFERENCES electives(name),
+    FOREIGN KEY(user) REFERENCES users(userName)
+);
+
+CREATE TABLE campaign(
+    id INT AUTO_INCREMENT,
+    startDate DATE,
+    endDate DATE,
+    PRIMARY KEY (id)
+);
+
