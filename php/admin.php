@@ -1,10 +1,10 @@
 <?php
 
 require "User.php"
+require_once "database.php";
 
 class Admin extends User{
 	
-	require_once( "database.php");
 	private $id;
 	private $names;
 	
@@ -21,5 +21,5 @@ class Admin extends User{
 	public function get_names(){
 		return $this->names;
 	}
-
+}
 ?>
