@@ -1,12 +1,12 @@
 <?php
 
 require "User.php";
-require_once "database.php";
 
 class Admin extends User{
 	
 	private $id;
 	private $names;
+	private $database;
 	
 	public function __construct($id, $names){
 		$this->database = new DataBase("localhost", "uxProj", "root", "");
