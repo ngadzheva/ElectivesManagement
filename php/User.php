@@ -1,8 +1,9 @@
 <?php
 
+require_once "database.php";
+
 class User{
 	
-	require_once( "database.php");
 	private $userName;
 	private $passwd;
 	private $userType;
@@ -55,5 +56,5 @@ class User{
 		$sql = "UPDATE users SET active = $active WHERE userName = $userName";
         $query = $this->database->executeQuery($sql, "Failed updating active!");
 	}
-	
+}	
 ?>
