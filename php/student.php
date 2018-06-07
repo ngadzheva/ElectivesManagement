@@ -1,10 +1,10 @@
 <?php
 
 require "User.php"
+require_once "database.php";
 
 class Student extends User{
 	
-	require_once( "database.php");
 	private $fn;
 	private $names;
 	private $year;
@@ -39,5 +39,5 @@ class Student extends User{
 		$sql = "UPDATE student SET year = $year  WHERE year = $year ";
         $query = $this->database->executeQuery($sql, "Failed updating year!");
 	}
-	
+}	
 ?>
