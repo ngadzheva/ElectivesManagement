@@ -30,6 +30,9 @@
                 <fieldset id='loginForm'>
                     <legend class='login'>Вход</legend>
                     <form name='login' method='post' onsubmit='return validate()'>
+                        <label id="emptyUserName" style="display: none;">Невъведено потребителско име</label>
+                        <label id="emptyPass" style="display: none;">Невъведена парола</label>
+                        <label id="wrongData" style="display: none;">Невалидно потребителско име или парола</label>
                         <label class='login'>Потребителско име</label>
                         <input class='login' type='text' name='user'></input>
                         <label class='login'>Парола</label>

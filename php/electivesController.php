@@ -1,15 +1,17 @@
 <?php
-    require "database.php";
-
     class ElectivesController{
-        private $database; 
+        require_once "electivesModel.php";
+        require_once "database.php";
 
-        function __construct(){
+        private $elective;
+        private $database;
+
+        public function __construct(){
             $this->database = new DataBase("localhost", "uxProj", "root", "");
         }
 
         /**
-         * list all electives for winter or summer semester
+         * List all electives for winter or summer semester
          **/
         public function viewElectives($queryString){
             $sql = "SELECT NAME, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
@@ -26,7 +28,7 @@
         }
 
         /**
-         * filters electives for winter or summer semester
+         * Filter electives for winter or summer term
          **/
         public function filterElectives($term, $filter, $value){
             $sql = "SELECT name, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
@@ -45,7 +47,7 @@
         }
 
         /**
-         * gets informations for the electives chosen by a student
+         * Return informations for the electives chosen by a student
          **/
         public function getReferences($student){
             $sql = "SELECT name, credits, grade FROM chElectives WHERE fn=$student";
@@ -56,22 +58,17 @@
         }
 
         /**
-         * add new elective to database
+         * Add new elective to database
          **/
-        public function addNewElective($name, $lecturer, $shortDescription, $credits, $cathegory, $term){
-            $sql = "SELECT id FROM lecturer WHERE NAMES = '$lecturer'";
-            $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
-            $lecturerID = $query->fetch(PDO::FETCH_ASSOC)['id'];
-
-            $sql = "INSERT INTO electives VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
-            $values = ["$name", $lecturerID, " ", "$shortDescription", $credits, "$term", "$cathegory", 0];
-            $this->database->insertValues($sql, $values);
+        public function addNewElective($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating){
+            $newElective  = new ElectivesModel($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating);
+            $newElective->insertNewElective();
 
             header( 'Location: http://' . $_SERVER['HTTP_HOST'] . '/admin.html' );
         }
 
         /**
-         * delete an elective from database
+         * Delete an elective from database
          **/
         public function deleteElective($name){
             $sql = "SELECT term FROM electives WHERE NAME = $name";
@@ -93,7 +90,7 @@
         }
 
         /**
-         * make a table with the electives
+         * Make a table with the electives
          **/
         private function listElectives($query){
             $template = "<table id='electivesList' onload='showDescription()'>\n". 
