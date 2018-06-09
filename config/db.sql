@@ -6,7 +6,7 @@ CREATE TABLE users(
     userName VARCHAR(200),
     passwd VARCHAR(200) NOT NULL,
     userType VARCHAR(200) NOT NULL,
-    active BOOL,
+    active BOOLEAN,
     email VARCHAR(200) NOT NULL,
     PRIMARY KEY(userName)
 ); 
@@ -27,7 +27,7 @@ CREATE TABLE lecturer(
     telephone VARCHAR(20) NOT NULL,
     visitingHours VARCHAR(50) NOT NULL,
     office VARCHAR(100) NOT NULL,
-    personalPage VARCHAR(200,)
+    personalPage VARCHAR(200),
     PRIMARY KEY (id),
     FOREIGN KEY(userName) REFERENCES users(userName)
 );
@@ -47,18 +47,16 @@ CREATE TABLE electives(
     lecturer INT,
     description VARCHAR(2000),
     credits INT,
-    recomendedYear INT,
-    recomendedBachelorProgram VARCHAR(200),
-    literature JSON,
-    subjects JSON,
+    recommendedYear INT,
+    recommendedBachelorProgram VARCHAR(200),
+    literature VARCHAR(2000),
+    subjects VARCHAR(2000),
     term VARCHAR(200),
     cathegory VARCHAR(200),
-    campaign INT,
-    active BOOL,
+    active BOOLEAN,
     rating INT,
     PRIMARY KEY (name),
-    FOREIGN KEY(lecturer) REFERENCES lecturer(id),
-    FOREIGN KEY (campaign) REFERENCES campaign(id)
+    FOREIGN KEY(lecturer) REFERENCES lecturer(id)
 );
 
 CREATE TABLE messages(
@@ -67,7 +65,7 @@ CREATE TABLE messages(
     content VARCHAR(2000),
     sender VARCHAR(200),
     reciver VARCHAR(200),
-    opened BOOL,
+    opened BOOLEAN,
     PRIMARY KEY (id),
     FOREIGN KEY(sender) REFERENCES users(userName),
     FOREIGN KEY(reciver) REFERENCES users(userName)
@@ -84,7 +82,7 @@ CREATE TABLE chElectives(
     FOREIGN KEY(fn) REFERENCES student(fn)
 );
 
-CREATE TABLE coments(
+CREATE TABLE comments(
     id INT AUTO_INCREMENT,
     content VARCHAR(2000),
     elective VARCHAR(200),
