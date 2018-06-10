@@ -7,7 +7,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/electivesScript.js"></script>
+        <script type="text/javascript" src="js/studentsScript.js"></script>
     </head>
 
     <body>
@@ -20,22 +21,28 @@
             
             <nav id='mainNav'>
                 <a href="student.html">Начало</a>
-                <a href="#" onclick='listElectives("studentContent", "winter", "student")'>Избираеми дисциплини Зимен семестър</a>
-                <a href="#" onclick='listElectives("studentContent", "summer", "student")'>Избираеми дисциплини Летен семестър</a>
-                <a href="index.html">Изход</a>
+                <a href="#" onclick='electives("studentContent", "winter", "student")'>Избираеми дисциплини Зимен семестър</a>
+                <a href="#" onclick='electives("studentContent", "summer", "student")'>Избираеми дисциплини Летен семестър</a>
+                <a href="php/logout.php">Изход</a>
             </nav>
         </header>
 
         <main id='student'>
 			<aside id='studentTab'>
-				<button class='tabLinks' onclick='changeStudentContent(event, "Profile")'>Редактиране на профил</button>
-                <button class='tabLinks' onclick='changeStudentContent(event, "Electives")'>Записване/отписване на избираема дисциплина</button>
-                <button class='tabLinks' onclick='changeStudentContent(event, "Message")'>Изпращане на съобщение</button>
-                <button class='tabLinks' onclick='changeStudentContent(event, "References")'>Справки</button>
+				<a href='student.html?id=editProfile' class='tabLinks' id='editProfile'>Редактиране на профил</a>
+                <a href='student.html?id=chooseElectives' class='tabLinks' id='electives'>Кампания за избираема дисциплина</a>
+                <a href='student.html?id=messages' class='tabLinks' id='message'>Съобщения</a>
+                <a href='student.html?id=references' class='tabLinks' id='references'>Справки</a>
             </aside>
 
-            <section id='profile'>
-
+            <<section id='profile'>
+                <h1>Студент</h1>
+                <ul>
+                    <li class='name'>Име: <p class='value' id='studentName'></p></li>
+                    <li class='name'>Факултетен номер: <p class='value' id='fn'></p></li>
+                    <li class='name'>Специалност: <p class='value' id='bachelorProgram'></p></li>
+                    <li class='name'>Курс: <p class='value' id='year'></p></li>
+                </ul>
             </section>
 
             <section id='studentContent' class='tabContent'></section>

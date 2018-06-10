@@ -1,9 +1,9 @@
 <?php
-    require "electivesController.php";
+    require_once 'StudentsController.php';
 
-    $electives = new electivesController();
+    //session_start();
 
-    $student = (isset($_GET['student']) ? $_GET['student'] : null);
-    
-    echo $electives->getReferences($student);
+    $student = new StudentsController();
+
+    echo $student->getReferences();
 ?>
