@@ -45,7 +45,7 @@ function filterElectives() {
     var id = params.get('id').toString();
     var value = form.get("value");
 
-    ajaxRequest.open("GET", "../electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
+    ajaxRequest.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
     ajaxRequest.send(null);
 }
 
@@ -96,7 +96,7 @@ function listElectives(element, term, page){
         id = params.get('id').toString();
     }
 
-    ajaxRequest.open("GET", "../electives.php?id=" + id, true);
+    ajaxRequest.open("GET", "electives.php?id=" + id, true);
     ajaxRequest.send(null);
 }
 
@@ -118,7 +118,7 @@ function makeNewColumn(name, term, page){
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
             img.setAttribute('onclick', 'viewDescription("' + term + '")');            
-            img.setAttribute('src', '../img/view.png');
+            img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
         }
@@ -136,14 +136,14 @@ function makeNewColumn(name, term, page){
             img.setAttribute('class', 'editIcon');
             img.setAttribute('title', 'Редактирай');
             img.setAttribute('onclick', 'editElective("' + title + '", "' + lecturer + '", "' + credits + '", "' + cathegory + '", "' + term + '")');
-            img.setAttribute('src', '../img/edit.png');
+            img.setAttribute('src', 'img/edit.png');
             td.appendChild(img);
 
             img = document.createElement('img');
             img.setAttribute('class', 'deleteIcon');
             img.setAttribute('title', 'Изтрий');
             img.setAttribute('onclick', 'deleteElective()');
-            img.setAttribute('src', '../img/delete.png');
+            img.setAttribute('src', 'img/delete.png');
             td.appendChild(img);
 
             tr[i].appendChild(td);

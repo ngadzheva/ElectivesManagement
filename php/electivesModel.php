@@ -1,7 +1,7 @@
 <?php
-    class ElectivesModel{
-        require_once "database.php";
+    require_once "database.php";
 
+    class ElectivesModel{
         private $database;
         private $id;
         private $title;
@@ -17,7 +17,7 @@
         private $rating;
         private $active;
 
-        public function __construct(){
+        /*public function __construct(){
             $this->database = new DataBase("localhost", "uxProj", "root", "");
             $this->id = 0;
             $this->title = "";
@@ -32,7 +32,7 @@
             $this->term = "";
             $this->rating = 0;
             $this->active = true;
-        }
+        }*/
 
         public function __construct($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating){
             $this->database = new DataBase("localhost", "uxProj", "root", "");

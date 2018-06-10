@@ -1,8 +1,8 @@
 <?php
+    require_once "electivesModel.php";
+    require_once "database.php";
+    
     class ElectivesController{
-        require_once "electivesModel.php";
-        require_once "database.php";
-
         private $elective;
         private $database;
 
