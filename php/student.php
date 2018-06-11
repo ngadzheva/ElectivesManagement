@@ -135,5 +135,45 @@
 
 			return $references;
 		}
+
+		/**
+		 * Retrieve the last electives campaign from database
+		 */
+		public function getLastElectivesCampaign(){
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "SELECT * FROM `campaign` ORDER BY startDate DESC";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$lastCampaign = $query->fetch(PDO::FETCH_ASSOC);
+
+			return $lastCampaign;
+		}
+
+		/**
+		 * Retrieve all student's messages
+		 */
+		public function getMessages(){
+			$userName = parent::getUserName();
+
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "SELECT sender, about, sdate FROM `messages` WHERE receiver='$userName'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			return $messages;
+		}
+
+		/**
+		 * Retrieve current message
+		 */
+		public function getMessage(){
+			$userName = parent::getUserName();
+
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "SELECT * FROM `messages` WHERE receiver='$userName'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$messages = $query->fetch(PDO::FETCH_ASSOC);
+
+			return $messages;
+		}
 	}
 ?>

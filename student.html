@@ -21,21 +21,21 @@
             
             <nav id='mainNav'>
                 <a href="student.html">Начало</a>
-                <a href="#" onclick='electives("studentContent", "winter", "student")'>Избираеми дисциплини Зимен семестър</a>
-                <a href="#" onclick='electives("studentContent", "summer", "student")'>Избираеми дисциплини Летен семестър</a>
+                <a href="student.html?id=winter" onclick='electives("studentContent", "winter")'>Избираеми дисциплини Зимен семестър</a>
+                <a href="student.html?id=summer" onclick='electives("studentContent", "summer")'>Избираеми дисциплини Летен семестър</a>
                 <a href="php/logout.php">Изход</a>
             </nav>
         </header>
 
         <main id='student'>
 			<aside id='studentTab'>
-				<a href='student.html?id=editProfile' class='tabLinks' id='editProfile'>Редактиране на профил</a>
-                <a href='student.html?id=chooseElectives' class='tabLinks' id='electives'>Кампания за избираема дисциплина</a>
+                <a href='student.html?id=editProfile' class='tabLinks' id='editProfile'>Редактиране на профил</a>
+                <a href='student.html?id=electivesCampaign' class='tabLinks' id='electivesCampaign'>Кампания за избираеми дисциплини</a>
                 <a href='student.html?id=messages' class='tabLinks' id='message'>Съобщения</a>
                 <a href='student.html?id=references' class='tabLinks' id='references'>Справки</a>
             </aside>
 
-            <<section id='profile'>
+            <section id='profile'>
                 <h1>Студент</h1>
                 <ul>
                     <li class='name'>Име: <p class='value' id='studentName'></p></li>

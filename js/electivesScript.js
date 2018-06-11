@@ -70,7 +70,7 @@ function makeFilterForm(){
 /*
  * Show a table with the electives depending on the selected term
  */
-function listElectives(element, term, page){
+function listElectives(element, term){
     connect();
 
     ajaxRequest.onreadystatechange = function(){
@@ -79,11 +79,9 @@ function listElectives(element, term, page){
             ajaxDisplay.innerHTML = makeFilterForm() + ajaxRequest.responseText;
         }
 
-        if(page){
-            makeNewColumn("Преглед", term, page);
-        } else{
-            makeNewColumn("Преглед", term);
-        }
+
+        makeNewColumn("Преглед", term);
+
 
     }
 
@@ -103,7 +101,7 @@ function listElectives(element, term, page){
 /*
  * Add new column to the table with electives according to current location
  */
-function makeNewColumn(name, term, page){
+function makeNewColumn(name, term){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);

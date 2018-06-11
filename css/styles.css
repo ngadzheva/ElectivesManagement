@@ -116,7 +116,7 @@ main{
     min-width: 1100px;
 }
 
-#loginForm, #editForm{
+#loginForm, #editForm, #messageForm{
     position: relative;
     display: block;
     width: 500px;
@@ -134,19 +134,19 @@ main{
     min-width: 500px;
 }
 
-#editForm{
+#editForm, #messageForm{
     margin: 30px auto;
     width: 800px;;
 }
 
-legend[class=login], legend[class=editElective], legend[class=editProfile]{
+legend[class=login], legend[class=editElective], legend[class=editProfile], legend[class=sendMessage]{
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
 }
 
-legend[class=editElective], legend[class=editProfile]{
-    margin-top: 0px;
+legend[class=editElective], legend[class=editProfile], legend[class=sendMessage]{
+    margin-top: -40px;
     margin-bottom: 20px;
 }
 
@@ -159,7 +159,9 @@ form{
     font-size: 18px;
 }
 
-label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], select[class=editProfile], label[class=editElective], input[class=editElective], textarea, select[class=editElective]{
+label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], 
+select[class=editProfile], label[class=editElective], input[class=editElective], textarea, 
+select[class=editElective], label[class=sendMessage], input[class=sendMessage]{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
@@ -188,9 +190,9 @@ input[type=submit], input[type=button] {
     text-decoration: none;
     margin: 10px;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 20px;
     padding: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 45px;
     padding-top: 10px;
 }
 
@@ -207,6 +209,13 @@ textarea{
     position: relative;
     width: 95%;
     height: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+textarea[class=sendMessage]{
+    height: 140px;
+    overflow: scroll;
 }
 
 /* electives.php styles */
@@ -255,6 +264,7 @@ input[class=search]{
     margin-top: -4px;
     padding-top: 6px;
     padding-left: 15px;
+    padding-bottom: 30px;
     font-size: 15px;
     font-weight: bold;
 }
@@ -270,13 +280,14 @@ input[class=search]{
 
 /* electives list style */
 
-#electives{
-    width: 780px;
+#electives, #electivesReferences, #allCredits{
+    width: 70%;
     margin-left: auto;
     margin-right: auto;
 }
 
 table{
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
@@ -294,7 +305,7 @@ table{
 tr, th, td{
     padding: 20px 40px;
     margin: 10px 20px;
-    text-align: left;
+    text-align: center;
     vertical-align: middle;
     font-size: 16px;
 }
@@ -344,7 +355,21 @@ td {
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
 }
 
-/* admin nav style */
+#viewMessage, #messagesList{
+    width: 80%;
+    margin-left: 350px;
+    margin-top: 10px;
+}
+
+#messagesList td{
+    text-align: center;
+}
+
+#viewMessage th{
+    width: 50px;
+}
+
+/* users nav style */
 
 #adminTab, #lecturerTab, #studentTab {
     background: #1D224C;
@@ -393,6 +418,8 @@ td {
     height: 360px;
 } 
 
+/* user's content style */
+
 #profile h1{
     font-size: 32px;
     margin-top: 25px;
@@ -430,9 +457,44 @@ td {
     cursor: pointer;
 }
 
-.editIcon, .deleteIcon, .viewIcon{
+.editIcon, .deleteIcon, .viewIcon, .enrolIcon{
     margin-right: 10px;
     cursor: pointer;
+}
+
+/* messages style */
+
+#messagesNav, #messagesHeader{
+    margin-top: 15px;
+    margin-left: 350px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    background-color: #1D224C;
+    width: 80%;
+    color: #FFFFFF;
+}
+
+.messagesButton{
+    border: solid 1px #1D224C;
+    background-color: #1D224C;
+    margin-right: 25px;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.messagesButton:hover{
+    color: #96BCE5;
+}
+
+#messagesHeader{
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #FFFFFF;
+    color: #1D224C;
 }
 
 /* footer style */

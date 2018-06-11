@@ -15,9 +15,16 @@
 
     $student = new StudentsController();
     $studentInfo = $student->viewInfo();
+    echo json_encode($studentInfo);
+
+    /*if(isset($_GET['id']) && $_GET['id'] == 'campaign'){
+        echo 'Campaign';
+    } else {
+        echo json_encode($studentInfo);
+    }*/
 
 
-    if(isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['newPass']) ){
+    /*if(isset($_POST['email']) && isset($_POST['pass']) && isset($_POST['newPass']) ){
         $newPass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         if($studentInfo['pass'] == $newPass){
             $student->updateInfo($studentInfo['userName'], $_POST['email'], $studentInfo['pass'], $newPass);
@@ -30,7 +37,7 @@
         echo $student->getReferences();
     }else {
         echo json_encode($studentInfo);
-    }
+    }*/
 
     
 ?>

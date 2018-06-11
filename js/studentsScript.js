@@ -98,7 +98,59 @@ const connectToServer =  {
 
         ajaxRequest.open("POST", "php/creditsReferences.php", true);
         ajaxRequest.send(null);
-    }          
+    },
+    
+    showCampaign: () => {
+        let ajaxRequest = connectToServer.serverRequest();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                let campaign = ajaxRequest.responseText;
+                
+                document.getElementById('studentContent').innerHTML = campaign;
+            }   
+
+            makeNewColumn('Запиши');
+        }
+
+        ajaxRequest.open("POST", "php/showCampaign.php", true);
+        ajaxRequest.send(null);
+    },
+
+    showIncomeMessages: () => {
+        let header = '<h2 id="messagesHeader">Входящи съобщения</h2>';
+
+        let ajaxRequest = connectToServer.serverRequest();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                let messages = ajaxRequest.responseText;
+                
+                document.getElementById('studentContent').innerHTML += header + messages;
+            }   
+            
+            makeNewColumn('Преглед');
+        }
+
+        ajaxRequest.open("POST", "php/showMessages.php", true);
+        ajaxRequest.send(null);
+    },
+
+    viewMessage: () => {
+        let ajaxRequest = connectToServer.serverRequest();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                let messages = ajaxRequest.responseText;
+                
+                document.getElementById('messagesList').style.display = 'none';
+                document.getElementById('studentContent').innerHTML +=  messages;
+            }   
+        }
+
+        ajaxRequest.open("POST", "php/viewMessage.php", true);
+        ajaxRequest.send(null);
+    }
 }
 
 /**
@@ -126,21 +178,57 @@ function makeProfileEditForm(type, email){
     return editForm;
 }
 
+function makeNewColumn(columnType){
+    var th = document.createElement('th');
+    var value = document.createTextNode(columnType);
+    th.appendChild(value);
+    document.getElementById('firstRow').appendChild(th);
+
+    var tr = document.getElementsByClassName('elective');
+
+    if(columnType === 'Преглед'){
+        for(var i = 0; i < tr.length; i++){
+            var td = document.createElement('td');
+            var img = document.createElement('img');
+            img.setAttribute('class', 'viewIcon');
+            img.setAttribute('title', 'Преглед');
+            img.setAttribute('onclick', 'connectToServer.viewMessage()');            
+            img.setAttribute('src', 'img/view.png');
+            td.appendChild(img);
+            tr[i].appendChild(td);
+        }
+    }
+
+    if(columnType === 'Запиши'){
+        for(var i = 0; i < tr.length; i++){
+            var td = document.createElement('td');
+            var img = document.createElement('img');
+            img.setAttribute('class', 'enrolIcon');
+            img.setAttribute('title', 'Запиши');
+            img.setAttribute('onclick', '');            
+            img.setAttribute('src', 'img/add.png');
+            td.appendChild(img);
+            tr[i].appendChild(td);
+        }
+    }
+    
+}
+
 /**
  * Get cookie by cookie name
- * @param {*} cname 
+ * @param {*} cookieName 
  */
-function getCookie(cname) {
-    var name = cname + "=";
+function getCookie(cookieName) {
+    var name = cookieName + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
+    var cookies = decodedCookie.split(';');
+    for(var i = 0; i <cookies.length; i++) {
+        var currentCookie = cookies[i];
+        while (currentCookie.charAt(0) == ' ') {
+            currentCookie = currentCookie.substring(1);
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+        if (currentCookie.indexOf(name) == 0) {
+            return currentCookie.substring(name.length, currentCookie.length);
         }
     }
     return "";
@@ -150,7 +238,6 @@ function getCookie(cname) {
  * Edit email and password
  */
 function editProfile(){
-    document.getElementById('profile').style.display = 'none';
     email = getCookie('email');
     document.getElementById('studentContent').innerHTML = makeProfileEditForm("Редактиране на профил", email);    
 }
@@ -158,22 +245,79 @@ function editProfile(){
 /**
  * Enroll for elective
  */
-function chooseElective(){
+function showElectivesCampaign(){
+    connectToServer.showCampaign();
+}
+
+/**
+ * Mame template of form for sending messages
+ */
+function makeNewMessageForm(){
+    var messageForm = "<fieldset id='messageForm'>\n" +
+    "<form name='message' method='post' onsubmi='return connectToServer.sendMessage()'>\n" +
+        "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
+        "<label class='sendMessage'>До:</label>\n" +
+        "<input class='sendMessage' type='text' name='to' placeholder='lecturer@email.bg'></input>\n" +
+        "<label class='sendMessage'>Относно:</label>\n" +
+        "<input class='sendMessage' type='text' name='about'></input>\n" +
+        "<textarea class='sendMessage' name='content' placeholder='Напиши своето съобщение тук...'></textarea>\n" +
+        "<input class='sendMessage' type='submit' value='Изпрати'></input>\n" +
+    "</form>\n" +
+    "</fildset>\n";
+
+    document.getElementById('studentContent').innerHTML += messageForm;
+
+    return messageForm;
+}
+
+/**
+ * Make message page header
+ */
+function messagesHeader(){
+    let section = document.createElement('section');
+    section.setAttribute('id', 'messagesNav');
+
+    let incomeMessages = document.createElement('a');
+    incomeMessages.setAttribute('href', 'student.html?id=incomeMessages');
+    incomeMessages.setAttribute('class', 'messagesButton');
+    incomeMessages.setAttribute('id', 'income');
+    incomeMessages.innerHTML = 'Входящи съобщения';
+
+    let sentMessages = document.createElement('a');
+    sentMessages.setAttribute('href', 'student.html?id=sentMessages');
+    sentMessages.setAttribute('class', 'messagesButton');
+    sentMessages.setAttribute('id', 'sent');
+    sentMessages.innerHTML = 'Изходящи съобщения';
     
+    let newMessage = document.createElement('a');
+    newMessage.setAttribute('href', 'student.html?id=newMessage');
+    newMessage.setAttribute('class', 'messagesButton');
+    newMessage.setAttribute('id', 'new');
+    newMessage.innerHTML = 'Ново съобщение';
+
+    section.appendChild(incomeMessages);
+    section.appendChild(sentMessages);
+    section.appendChild(newMessage);
+
+    document.getElementById('studentContent').appendChild(section);
+
+    document.getElementById('income').addEventListener('click', connectToServer.showIncomeMessages);
+    document.getElementById('sent').addEventListener('click', connectToServer.showIncomeMessages);
+    document.getElementById('new').addEventListener('click',makeNewMessageForm);
 }
 
 /**
  * Control messages
  */
 function message(){
-    
+    messagesHeader();
+    connectToServer.showIncomeMessages();
 }
 
 /**
  * Show student references
  */
 function showReferences(){
-    document.getElementById('profile').style.display = 'none';
     connectToServer.references();
 }
 
@@ -184,12 +328,12 @@ var studentPage = () => {
     connectToServer.studentInfo();
 
     let profile = document.getElementById('profile');
-    let electives = document.getElementById('electives');
+    let electivesCampaign = document.getElementById('electivesCampaign');
     let message = document.getElementById('message');
     let references = document.getElementById('references');
 
     profile.addEventListener('click', editProfile);
-    electives.addEventListener('click', chooseElective);
+    electivesCampaign.addEventListener('click', showElectivesCampaign);
     message.addEventListener('click', message);
     references.addEventListener('click', showReferences);
 }
@@ -200,8 +344,8 @@ var studentPage = () => {
  * @param {*} term 
  * @param {*} page 
  */
-function electives(element, term, page){
-    listElectives(element, term, page);
+function electives(element, term){
+    listElectives(element, term);
 }
 
 /**
@@ -212,15 +356,28 @@ window.onload = () => {
     id = params.get('id');
 
     if(id){
+        document.getElementById('profile').style.display = 'none';
+
         if(id.toString() === 'editProfile'){
             editProfile();
-        } else if(id.toString() === 'electives'){
-            chooseElectives();
-        } else if(id.toString() === 'message'){
+        } else if(id.toString() === 'electivesCampaign'){
+            showElectivesCampaign();
+        } else if(id.toString() === 'messages'){
             message();
         } else if(id.toString() === 'references'){
             showReferences();
-        } 
+        } else if(id.toString() === 'incomeMessages'){
+            messagesHeader();
+            connectToServer.showIncomeMessages();
+        } else if(id.toString() === 'sentMessages'){
+            messagesHeader();
+            connectToServer.showIncomeMessages();
+        }else if(id.toString() === 'newMessage'){
+            messagesHeader();
+            makeNewMessageForm();
+        } else if(id.toString() === 'winter' || id.toString() === 'summer'){
+            electives('studentContent', id.toString());
+        }
     } else {
         studentPage();
     }
