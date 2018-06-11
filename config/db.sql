@@ -62,13 +62,14 @@ CREATE TABLE electives(
 CREATE TABLE messages(
     id INT AUTO_INCREMENT,
     sdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    about VARCHAR(2000),
     content VARCHAR(2000),
     sender VARCHAR(200),
-    reciver VARCHAR(200),
+    receiver VARCHAR(200),
     opened BOOLEAN,
     PRIMARY KEY (id),
     FOREIGN KEY(sender) REFERENCES users(userName),
-    FOREIGN KEY(reciver) REFERENCES users(userName)
+    FOREIGN KEY(receiver) REFERENCES users(userName)
 );
 
 CREATE TABLE chElectives(
