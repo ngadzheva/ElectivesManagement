@@ -56,7 +56,7 @@
 		 */
 		public function setEmail($email){
 			$this->email=$email;
-			$sql = "UPDATE `users` SET email='$email'  WHERE userName='$userName'";
+			$sql = "UPDATE `users` SET email='$email'  WHERE userName='$this->userName'";
 			$query = $this->database->executeQuery($sql, "Failed updating email!");
 		}
 		
@@ -65,7 +65,7 @@
 		 */
 		public function setPasswd($passwd){
 			$this->passwd=$passwd;
-			$sql = "UPDATE users SET passwd='$passwd' WHERE userName='$userName'";
+			$sql = "UPDATE users SET passwd='$passwd' WHERE userName='$this->userName'";
 			$query = $this->database->executeQuery($sql, "Failed updating password!");
 		}
 		
@@ -74,7 +74,7 @@
 		 */
 		public function setActive($active){
 			$this->active = $active;
-			$sql = "UPDATE users SET active='$active' WHERE userName='$userName'";
+			$sql = "UPDATE users SET active='$active' WHERE userName='$this->userName'";
 			$query = $this->database->executeQuery($sql, "Failed updating active!");
 		}
 

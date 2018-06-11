@@ -121,7 +121,9 @@
 			$query = 'INSERT INTO `students` (fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
 			$values = [$this->fn, parent:: getUserName(), $this->names, $this->year, $this->getBachelorProgram];
 
-			return $database->insertValues($query, $values);
+			$database->insertValues($query, $values);
+
+			return true;
 		}
 
 		/**
@@ -151,11 +153,13 @@
 		/**
 		 * Retrieve all student's messages
 		 */
-		public function getMessages(){
+		public function getMessages($type){
 			$userName = parent::getUserName();
 
+			$userType = ($type == 'income' ? 'receiver' : 'sender');
+
 			$database = new DataBase("localhost", "uxProj", "root", "");
-			$sql = "SELECT sender, about, sdate FROM `messages` WHERE receiver='$userName'";
+			$sql = "SELECT sender, about, sdate FROM `messages` WHERE $userType='$userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -174,6 +178,27 @@
 			$messages = $query->fetch(PDO::FETCH_ASSOC);
 
 			return $messages;
+		}
+
+		/**
+		 * Insert new message from current student to another user into database
+		 */
+		public function insertNewMessage($to, $about, $content){
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "SELECT userName FROM `users` WHERE email='$to'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$receiver = $query->fetch(PDO::FETCH_ASSOC);
+
+			if($receiver){
+				$query = 'INSERT INTO `messages` (sdate, about, content, sender, receiver, opened) VALUES(?, ?, ?, ?, ?, ?)';
+				$values = [date("Y-m-d H:i:s"), $about, $content, parent:: getUserName(), $receiver, FALSE];
+
+				$database->insertValues($query, $values);
+
+				return 'succes';
+			} else {
+				return 'user not found';
+			}
 		}
 	}
 ?>

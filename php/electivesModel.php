@@ -6,49 +6,20 @@
         private $id;
         private $title;
         private $lecturer;
-        private $category;
+        private $cathegory;
         private $descritpion;
         private $credits;
         private $year;
         private $bachelorsProgram;
         private $literature;
-        private $themes;
+        private $subjects;
         private $term;
         private $rating;
         private $active;
 
-        /*public function __construct(){
+        public function __construct($title){
             $this->database = new DataBase("localhost", "uxProj", "root", "");
-            $this->id = 0;
-            $this->title = "";
-            $this->lecturer = 0;
-            $this->category = "";
-            $this->description = "";
-            $this->credits = 0;
-            $this->year = 0;
-            $this->bachelorsProgram = "";
-            $this->literature = "";
-            $this->themes = "";
-            $this->term = "";
-            $this->rating = 0;
-            $this->active = true;
-        }*/
-
-        public function __construct($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating){
-            $this->database = new DataBase("localhost", "uxProj", "root", "");
-            $this->id = $id;
             $this->title = $title;
-            $this->lecturer = $lecturer;
-            $this->category = $category;
-            $this->description = $description;
-            $this->credits = $credits;
-            $this->year = $year;
-            $this->bachelorsProgram = $bachelorsProgram;
-            $this->literature = $literature;
-            $this->themes = $themes;
-            $this->term = $term;
-            $this->rating = $rating;
-            $this->active = true;
         }
 
         public function getId(){
@@ -62,7 +33,7 @@
         public function setTitle($title){
             $this->title = $title;
 
-            $sql = "UPDATE electives SET NAME = $title WHERE id = $id";
+            $sql = "UPDATE electives SET NAME='$this->title' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating title!");
         }
 
@@ -73,18 +44,18 @@
         public function setLecturer($lecturer){
             $this->lecturer = $lecturer;
 
-            $sql = "UPDATE electives SET lecturer = $lecturer WHERE id = $id";
+            $sql = "UPDATE electives SET lecturer='$this->lecturer' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating lecturer!");
         }
 
-        public function getCategory(){
-            return $this->category;
+        public function getCathegory(){
+            return $this->cathegory;
         }
 
-        public function setCategory($category){
-            $this->category = $category;
+        public function setCathegory($cathegory){
+            $this->cathegory = $cathegory;
 
-            $sql = "UPDATE electives SET category = $category WHERE id = $id";
+            $sql = "UPDATE electives SET cathegory='$this->cathegory' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating category!");
         }
 
@@ -95,7 +66,7 @@
         public function setDescription($description){
             $this->description = $description;
 
-            $sql = "UPDATE electives SET description = $description WHERE id = $id";
+            $sql = "UPDATE electives SET description='$this->description' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating description!");
         }
 
@@ -106,7 +77,7 @@
         public function setCredits($credits){
             $this->credits = $credits;
 
-            $sql = "UPDATE electives SET credits = $credits WHERE id = $id";
+            $sql = "UPDATE electives SET credits='$this->credits' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating credits!");
         }
 
@@ -117,7 +88,7 @@
         public function setYear($year){
             $this->year = $year;
 
-            $sql = "UPDATE electives SET year = $year WHERE id = $id";
+            $sql = "UPDATE electives SET recommendedYear='$this->year' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating year!");
         }
 
@@ -128,7 +99,7 @@
         public function setBachelorsProgram($bachelorsProgram){
             $this->bachelorsProgram = $bachelorsProgram;
 
-            $sql = "UPDATE electives SET bachelorsProgram = $bachelorsProgram WHERE id = $id";
+            $sql = "UPDATE electives SET recommendedBachelorProgram='$this->bachelorsProgram' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating bachelors program!");
         }
 
@@ -139,18 +110,18 @@
         public function setLiterature($literature){
             $this->literature = $literature;
 
-            $sql = "UPDATE electives SET literature = $literature WHERE id = $id";
+            $sql = "UPDATE electives SET literature='$this->literature' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating literature!");
         }
 
-        public function getThemes(){
-            return $this->themes;
+        public function getSubjects(){
+            return $this->subjects;
         }
 
-        public function setThemes($themes){
-            $this->themes = $themes;
+        public function setSubjects($subjects){
+            $this->subjects = $subjects;
 
-            $sql = "UPDATE electives SET themes = $themes WHERE id = $id";
+            $sql = "UPDATE electives SET subjects='$this->subjects' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating themes!");
         }
 
@@ -161,7 +132,7 @@
         public function setTerm($term){
             $this->term = $term;
 
-            $sql = "UPDATE electives SET term = $term WHERE id = $id";
+            $sql = "UPDATE electives SET term='$this->term' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating term!");
         }
 
@@ -172,7 +143,7 @@
         public function setRating($rating){
             $this->rating = $rating;
 
-            $sql = "UPDATE electives SET rating = $rating WHERE id = $id";
+            $sql = "UPDATE electives SET rating='$this->rating' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating rating!");
         }
 
@@ -183,17 +154,37 @@
         public function setActive($active){
             $this->active = $active;
 
-            $sql = "UPDATE electives SET active = $active WHERE id = $id";
+            $sql = "UPDATE electives SET active='$this->active' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating active!");
         }
 
+        public function load(){
+            $electives = [];
+
+            $sql = "SELECT * FROM `electives` WHERE name='$this->title' AND active=1";
+			$query = $database->executeQuery($sql, 'Failed find user');
+            $electives = $query->fetch(PDO::FETCH_ASSOC);
+            
+            $this->lecturer = $electives['lecturer'];
+            $this->cathegory = $electives['cathegory'];
+            $this->description = $electives['description'];
+            $this->credits = $electives['credits'];
+            $this->year = $electives['recommendedYear'];
+            $this->bachelorsProgram = $electives['recommendedBachelorProgram'];
+            $this->literature = $electives['literature'];
+            $this->subjects = $electives['subjects'];
+            $this->term = $electives['term'];
+            $this->rating = $electives['rating'];
+            $this->active = true;
+        }
+
         public function insertNewElective(){
-            $sql = "SELECT id FROM lecturer WHERE NAMES = '$lecturer'";
+            $sql = "SELECT id FROM lecturer WHERE NAMES='$this->lecturer'";
             $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
             $lecturerID = $query->fetch(PDO::FETCH_ASSOC)['id'];
 
-            $sql = "INSERT INTO electives VALUES(?, ?, ?, ?, ?, ?, ?, ?)"; // to do
-            $values = ["$name", $lecturerID, " ", "$shortDescription", $credits, "$term", "$cathegory", 0]; // to do
+            $sql = "INSERT INTO electives VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+            $values = [$this->title, $lecturerID, $this->description, $this->credits, $this->recommendedYear, $this->recommendedBachelorProgram, $this->literature, $this->subjects, $this->term, $this->cathegory, $this->active, $this->rating]; 
             $this->database->insertValues($sql, $values);
         }
 

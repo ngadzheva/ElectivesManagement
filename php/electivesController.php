@@ -14,7 +14,7 @@
          * List all electives for winter or summer semester
          **/
         public function viewElectives($queryString){
-            $sql = "SELECT NAME, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
+            $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
 
            if($queryString === 'winter'){
                 $sql = $sql . "term = 'winter'";
@@ -31,7 +31,7 @@
          * Filter electives for winter or summer term
          **/
         public function filterElectives($term, $filter, $value){
-            $sql = "SELECT name, names, credits, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
+            $sql = "SELECT name, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
 
             if ($filter == "lecturer") {
                 
@@ -94,29 +94,31 @@
          **/
         private function listElectives($query){
             $template = "<table id='electivesList' onload='showDescription()'>\n". 
-                "                   <tr id='firstRow'>\n" .
-                "                      <th>Избираема дисциплина</th>\n" .
-                "                      <th>Лектор</th>\n" .
-                "                      <th>Кредити</th>\n" .
-                "                      <th>Категория</th>\n" .
-                "                      <th>Рейтинг</th>\n" .
-                "                   </tr>\n";
+                "<tr id='firstRow'>\n" .
+                    "<th>Избираема дисциплина</th>\n" .
+                    "<th>Лектор</th>\n" .
+                    "<th>Кредити</th>\n" .
+                    "<th>Курс</th>\n" .
+                    "<th>Специалност</th>\n" .
+                    "<th>Категория</th>\n" .
+                    "<th>Рейтинг</th>\n" .
+                "</tr>\n";
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
-                $template = $template . "                   <tr class='elective'>\n";
+                $template = $template . "<tr class='elective'>\n";
                 $name = "";
                 foreach($row as $key => $value){
                     if($key === "NAME"){
                         $name = $value;
-                        $template = $template . "                      <td>" . $name . "</td>\n";
+                        $template = $template . "<td>" . $name . "</td>\n";
                     } else {
-                        $template = $template . "                      <td>" . $value . "</td>\n";
+                        $template = $template . "<td>" . $value . "</td>\n";
                     }
                 }
 
-                $template = $template . "                   </tr>\n";
+                $template = $template . "</tr>\n";
             }
-            $template = $template . "                </table>\n";
+            $template = $template . "</table>\n";
 
             return $template;
         }
@@ -125,31 +127,31 @@
          **/
         private function listReferences($query){
             $template = "<table id='electivesReferences'>\n". 
-                "                   <tr id='firstRow'>\n" .
-                "                      <th>Избираема дисциплина</th>\n" .
-                "                      <th>Кредити</th>\n" .
-                "                      <th>Оценка</th>\n" .
-                "                   </tr>\n";
+                "<tr id='firstRow'>\n" .
+                    "<th>Избираема дисциплина</th>\n" .
+                    "<th>Кредити</th>\n" .
+                    "<th>Оценка</th>\n" .
+                "</tr>\n";
             $totalCredits = 0;
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
-                $template = $template . "                   <tr class='elective'>\n";
+                $template = $template . "<tr class='elective'>\n";
                 foreach($row as $key => $value){
                     if($key === "credits"){
                         $totalCredits = $totalCredits + $value;
-                        $template = $template . "                      <td>" . $value . "</td>\n";
+                        $template = $template . "<td>" . $value . "</td>\n";
                     } else {
-                        $template = $template . "                      <td>" . $value . "</td>\n";
+                        $template = $template . "<td>" . $value . "</td>\n";
                     }
                 }
 
-                $template = $template . "                   </tr>\n";
+                $template = $template . "</tr>\n";
             }
             $template = $template . "<tr>\n" .
-                "                      <td>Общ брой кредити:</td>\n" .
-                "                      <td></td>\n" .
-                "                      <td>" . $totalCredits . "</td>\n" .
-                "                   </tr>\n";
-            $template = $template . "                </table>\n";
+                    "<td>Общ брой кредити:</td>\n" .
+                    "<td></td>\n" .
+                    "<td>" . $totalCredits . "</td>\n" .
+                "</tr>\n".
+            "</table>\n";
 
             return $template;
         }

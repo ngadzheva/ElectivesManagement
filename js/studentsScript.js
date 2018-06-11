@@ -41,7 +41,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("POST", "php/studentsConnection.php", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php", true);
         ajaxRequest.send(null);
     },
     
@@ -80,7 +80,7 @@ const connectToServer =  {
                 }    
             }
 
-            ajaxRequest.open("POST", "php/studentsConnection.php?email=" + email + '&pass=' + pass + '&newPass=' + newPass, true);
+            ajaxRequest.open("GET", "php/studentsConnection.php?email=" + email + '&pass=' + pass + '&newPass=' + newPass, true);
             ajaxRequest.send(null);
         }
     },
@@ -96,7 +96,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("POST", "php/creditsReferences.php", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?id=creditsReferences", true);
         ajaxRequest.send(null);
     },
     
@@ -113,11 +113,11 @@ const connectToServer =  {
             makeNewColumn('Запиши');
         }
 
-        ajaxRequest.open("POST", "php/showCampaign.php", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?id=showCampaign", true);
         ajaxRequest.send(null);
     },
 
-    showIncomeMessages: () => {
+    showMessages: (type) => {
         let header = '<h2 id="messagesHeader">Входящи съобщения</h2>';
 
         let ajaxRequest = connectToServer.serverRequest();
@@ -132,7 +132,7 @@ const connectToServer =  {
             makeNewColumn('Преглед');
         }
 
-        ajaxRequest.open("POST", "php/showMessages.php", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?id=showMessages&type=" + type, true);
         ajaxRequest.send(null);
     },
 
@@ -148,7 +148,34 @@ const connectToServer =  {
             }   
         }
 
-        ajaxRequest.open("POST", "php/viewMessage.php", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?id=viewMessage", true);
+        ajaxRequest.send(null);
+    },
+
+    sendMessage: () => {
+        let to = document.getElementsByName('to')[0].value;
+        let about = document.getElementsByName('about')[0].value;
+        let content = document.getElementsByName('content')[0].value;
+
+        let ajaxRequest = connectToServer.serverRequest();
+
+        ajaxRequest.onreadystatechange = function(){
+            if(ajaxRequest.readyState == 4){
+                let isSent = ajaxRequest.responseText;
+                
+                if(isSent == 'success'){
+                    document.getElementById('messageForm').setAttribute('action', 'student.html?id=newMessage');
+                    document.getElementById('messageForm').style.display = 'none';
+                    document.getElementById('studentContent').innerHTML += "Съобщението и изпратено успешно.";
+                } else {
+                    document.getElementById('invalidEmail').style.display = 'block';
+
+                    return false;
+                }
+            }   
+        }
+
+        ajaxRequest.open("GET", "php/studentsConnection.php?to=" + to + '&about=' + about + '&content=' + content, true);
         ajaxRequest.send(null);
     }
 }
@@ -254,8 +281,9 @@ function showElectivesCampaign(){
  */
 function makeNewMessageForm(){
     var messageForm = "<fieldset id='messageForm'>\n" +
-    "<form name='message' method='post' onsubmi='return connectToServer.sendMessage()'>\n" +
+    "<form name='message' method='post' action='return connectToServer.sendMessage()'>\n" +
         "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
+        "<label class='sendMessage' id='invalidEmail' style='display: none;'>Невалиден email.</label>\n" +
         "<label class='sendMessage'>До:</label>\n" +
         "<input class='sendMessage' type='text' name='to' placeholder='lecturer@email.bg'></input>\n" +
         "<label class='sendMessage'>Относно:</label>\n" +
@@ -301,8 +329,8 @@ function messagesHeader(){
 
     document.getElementById('studentContent').appendChild(section);
 
-    document.getElementById('income').addEventListener('click', connectToServer.showIncomeMessages);
-    document.getElementById('sent').addEventListener('click', connectToServer.showIncomeMessages);
+    document.getElementById('income').addEventListener('click', connectToServer.showMessages);
+    document.getElementById('sent').addEventListener('click', connectToServer.showMessages);
     document.getElementById('new').addEventListener('click',makeNewMessageForm);
 }
 
@@ -311,7 +339,7 @@ function messagesHeader(){
  */
 function message(){
     messagesHeader();
-    connectToServer.showIncomeMessages();
+    connectToServer.showMessages('income');
 }
 
 /**
@@ -368,10 +396,10 @@ window.onload = () => {
             showReferences();
         } else if(id.toString() === 'incomeMessages'){
             messagesHeader();
-            connectToServer.showIncomeMessages();
+            connectToServer.showMessages('income');
         } else if(id.toString() === 'sentMessages'){
             messagesHeader();
-            connectToServer.showIncomeMessages();
+            connectToServer.showMessages('sent');
         }else if(id.toString() === 'newMessage'){
             messagesHeader();
             makeNewMessageForm();

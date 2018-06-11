@@ -116,7 +116,7 @@
         /**
          * Show student's messages
          */
-        public function showMessages(){
+        public function showMessages($type){
             $template = '<table id="messagesList">' .
                 '<tr id="firstRow">' .
                     '<th>Подател</th>'.
@@ -124,7 +124,7 @@
                     '<th>Дата</th>'.
                 '</tr>';
 
-            $messages = $this->student->getMessages();
+            $messages = $this->student->getMessages($type);
 
             foreach($messages as $key => $value){
                 $message = $value;
@@ -143,6 +143,9 @@
             return $template;
         }
 
+        /**
+         * View selected message
+         */
         public function viewMessage(){
             $message = $this->student->getMessage();
 
@@ -169,6 +172,13 @@
             '</table>';
 
             return $template;
+        }
+
+        /**
+         * Send message from current student to another user
+         */
+        public function sendMessage($to, $about, $content){
+            return $this->student->insertNewMessage($to, $about, $content);
         }
     }
 ?>
