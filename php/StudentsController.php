@@ -194,9 +194,15 @@
                 $message = $value;
 
                 $template = $template . '<tr class="elective" id="' . $id .'">';
+                $isOpened = '';
 
                 foreach($message as $key => $value){
-                    $template = $template . '<td>' . $value . '</td>';
+                    if($key == 'opened'){
+                        $isOpened = $value;
+                    } else {
+                        $template = $template . '<td opened="' . $isOpened . '">' . $value . '</td>';
+                    }
+                    
                 }
 
                 $template = $template . '</tr>';

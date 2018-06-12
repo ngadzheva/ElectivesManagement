@@ -187,7 +187,7 @@
 		}
 
 		/**
-		 * Retrieve all student's messages
+		 * Retrieve all student's messages from database
 		 */
 		public function getMessages($type){
 			$userName = parent::getUserName();
@@ -196,7 +196,7 @@
 			$userToShow = ($type == 'income' ? 'sender' : 'receiver');
 
 			$database = new DataBase("localhost", "uxProj", "root", "");
-			$sql = "SELECT $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
+			$sql = "SELECT opened, $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -204,7 +204,7 @@
 		}
 
 		/**
-		 * Retrieve current message
+		 * Retrieve current message from database
 		 */
 		public function getMessage($receiver, $sender, $date){
 			$userName = parent::getUserName();
@@ -214,7 +214,21 @@
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetch(PDO::FETCH_ASSOC);
 
+			$this->setMessageSeen($receiver, $sender, $date);
+
 			return $messages;
+		}
+
+		/**
+		 * Set current message seen in database
+		 */
+		public function setMessageSeen($receiver, $sender, $date){
+			$userName = parent::getUserName();
+
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "UPDATE `messages` SET opened=TRUE WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+
 		}
 
 		/**

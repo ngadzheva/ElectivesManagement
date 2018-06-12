@@ -370,6 +370,10 @@ td {
     width: 50px;
 }
 
+td[opened="0"]{
+    font-weight: bold;
+}
+
 /* users nav style */
 
 #adminTab, #lecturerTab, #studentTab {
