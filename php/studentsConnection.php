@@ -21,6 +21,9 @@
         if($id == 'creditsReferences'){
             echo $student->getReferences();
         } else if($id == 'showCampaign'){
+            if($_GET['action'] && $_GET['elective'] && $_GET['credits']){
+                $student->changeChosenElectives($_GET['action'], $_GET['elective'], $_GET['credits']);
+            }
             echo $student->showElectivesCampaign();
         } else if($id == 'showMessages'){
             echo $student->showMessages($_GET['type']);

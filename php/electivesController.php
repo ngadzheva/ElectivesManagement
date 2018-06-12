@@ -14,7 +14,7 @@
          * List all electives for winter or summer semester
          **/
         public function viewElectives($queryString){
-            $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
+            $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE active=TRUE AND lecturer=id AND ";
 
            if($queryString === 'winter'){
                 $sql = $sql . "term = 'winter'";

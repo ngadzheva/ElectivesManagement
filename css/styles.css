@@ -376,7 +376,7 @@ td {
     background: #1D224C;
     color: #53687F;
     width: 16%;
-    height: 25%;
+    height: 15%;
     position: relative;
     float: left;
     margin: 10px;
@@ -384,7 +384,7 @@ td {
     border: 1px solid #53687F;
 }
 
-#adminTab button, #lecturerTab button, #studentTab a{
+#adminTab button, #lecturerTab a, #studentTab a{
     color: #CCCCCC;
     background: inherit;
     display: block;
@@ -400,12 +400,12 @@ td {
     transition: 0.3s;
 }
 
-#adminTab button:hover, #lecturerTab button:hover, #studentTab a:hover{
+#adminTab button:hover, #lecturerTab a:hover, #studentTab a:hover{
     background: #53687F;
     color: #FFFFFF;
 }
 
-#studentTab a{
+#lecturerTab a, #studentTab a{
     text-decoration: none;
     color: white;
 }

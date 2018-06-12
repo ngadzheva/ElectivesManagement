@@ -100,7 +100,7 @@ const connectToServer =  {
         ajaxRequest.send(null);
     },
     
-    showCampaign: () => {
+    showCampaign: (action, elective, credits) => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -113,7 +113,7 @@ const connectToServer =  {
             makeNewColumn('Запиши');
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=showCampaign", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?id=showCampaign&action=" + action + "&elective=" + elective + "&credits=" + credits, true);
         ajaxRequest.send(null);
     },
 
@@ -203,6 +203,10 @@ function makeProfileEditForm(type, email){
     return editForm;
 }
 
+/**
+ * Make last column of table for selecting table's row
+ * @param {*} columnType 
+ */
 function makeNewColumn(columnType){
     var th = document.createElement('th');
     var value = document.createTextNode(columnType);
@@ -223,9 +227,9 @@ function makeNewColumn(columnType){
             var date = tr[i].lastChild.innerHTML;
 
             if(document.getElementById('firstRow').firstChild.innerHTML === 'Подател'){
-                sender = document.getElementsByTagName('td')[0].innerHTML;
+                sender = tr[i].firstChild.innerHTML;
             } else {
-                receiver = document.getElementsByTagName('td')[0].innerHTML;
+                receiver = tr[i].firstChild.innerHTML;
             } 
 
             img.setAttribute('onclick', 'connectToServer.viewMessage("' + receiver + '", "' + sender + '", "' + date + '")');            
@@ -237,12 +241,17 @@ function makeNewColumn(columnType){
 
     if(columnType === 'Запиши'){
         for(var i = 0; i < tr.length; i++){
+            var icon = tr[i].lastChild.innerHTML == '' ? 'add.png' : 'delete.png';
+            var elective = tr[i].firstChild.innerHTML;
+            var credits = tr[i].children[2].innerHTML;
+            var action = tr[i].lastChild.innerHTML == '' ? 'enroll' : 'withdraw';
+
             var td = document.createElement('td');
             var img = document.createElement('img');
             img.setAttribute('class', 'enrolIcon');
             img.setAttribute('title', 'Запиши');
-            img.setAttribute('onclick', '');            
-            img.setAttribute('src', 'img/add.png');
+            img.setAttribute('onclick', 'connectToServer.showCampaign("' + action + '","' + elective + '","' + credits + '")');            
+            img.setAttribute('src', 'img/' + icon);
             td.appendChild(img);
             tr[i].appendChild(td);
         }

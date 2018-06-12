@@ -63,6 +63,10 @@
                 foreach($ref as $key => $value){
                     if($key == 'grade'){
                         $grade = $value;
+
+                        if($value == 0){
+                            $value = '';
+                        }
                     }
 
                     if($key == 'credits'){
@@ -107,9 +111,57 @@
                     $term = 'summer';
                 }
 
-                return $this->electives->viewElectives($term);
+                $electivesToChoose = $this->student->getElectivesToChoose($term);
+
+                $template = "<table id='electivesList'>\n". 
+                "<tr id='firstRow'>\n" .
+                    "<th>Избираема дисциплина</th>\n" .
+                    "<th>Лектор</th>\n" .
+                    "<th>Кредити</th>\n" .
+                    "<th>Курс</th>\n" .
+                    "<th>Специалност</th>\n" .
+                    "<th>Категория</th>\n" .
+                    "<th>Рейтинг</th>\n" .
+                    "<th>Статус</th>\n" .
+                "</tr>\n";
+
+                foreach($electivesToChoose as $key => $value){
+                    $elective = $value;
+
+                    $template = $template . '<tr class="elective">';
+
+                    foreach($elective as $key => $value){
+                        if($key == 'grade'){
+                            if($value != ''){
+                                $template = $template . '<td>Записана</td>';
+                            }else {
+                                $template = $template . '<td></td>';
+                            }
+                        } else {
+                            $template = $template . '<td>' . $value . '</td>';
+                        }
+                    }
+
+                    $template = $template . '</tr>';
+                }
+
+                $template = $template . '</table>';
+
+                return $template;
+                //return $this->electives->viewElectives($term);
             } else {
                 return 'В момента няма активна кампания.';
+            }
+        }
+
+        /**
+         * Change chosen electives
+         */
+        public function changeChosenElectives($action, $elective, $credits){
+            if($action == 'enroll'){
+                $this->student->insertNewChosenElective($elective, $credits);
+            } else {
+                $this->student->deleteChosenElective($elective);
             }
         }
 

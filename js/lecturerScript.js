@@ -145,6 +145,16 @@ function newElective() {
 }
 
 /**
+ * List electives depending on the selected
+ * @param {*} element 
+ * @param {*} term 
+ * @param {*} page 
+ */
+function electives(element, term){
+    listElectives(element, term);
+}
+
+/**
  * Load lecturer's page
  */
 var lecturerPage = () => {

@@ -10,7 +10,7 @@ class Lecturer extends User{
 	private $office;
 	private $personalPage;
 	
-	public function __construct($userName, $names ){
+	public function __construct($userName, $names){
 			parent::__construct($userName, '');
 			$this->names = $names ;
 		}

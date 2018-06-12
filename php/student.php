@@ -151,6 +151,42 @@
 		}
 
 		/**
+		 * Retrive list of all available electives in electives campaign 
+		 * without those which were enrolled in other campaign 
+		 * (i.e. chosen electives for which the student has valid grade, 
+		 * i.e. different from zero)
+		 */
+		public function getElectivesToChoose($term){
+			$database = new DataBase("localhost", "uxProj", "root", "");
+
+			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chelectives AS ch ON el.NAME = ch.NAME WHERE grade = 0 OR grade IS NULL ";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$electivesToChoose = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			return $electivesToChoose;
+		}
+
+		/**
+		 * Insert new chosen elective in database for the student
+		 */
+		public function insertNewChosenElective($elective, $credits){
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$query = 'INSERT INTO `chelectives` (name, credits, fn) VALUES(?, ?, ?)';
+			$values = [$elective, $credits, $this->fn];
+
+			$database->insertValues($query, $values);
+		}
+
+		/**
+		 * Delete chosen elective from database for the student
+		 */
+		public function deleteChosenElective($elective){
+			$database = new DataBase("localhost", "uxProj", "root", "");
+			$sql = "DELETE FROM `chelectives` WHERE name='$elective'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+		}
+
+		/**
 		 * Retrieve all student's messages
 		 */
 		public function getMessages($type){
