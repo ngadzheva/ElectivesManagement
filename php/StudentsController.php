@@ -117,25 +117,38 @@
          * Show student's messages
          */
         public function showMessages($type){
-            $template = '<table id="messagesList">' .
+            $header = '';
+            $userTyper = '';
+
+            if($type == 'income'){
+                $header = '<h2 id="messagesHeader">Входящи съобщения</h2>';
+                $userType = 'Подател';
+            } else {
+                $header = '<h2 id="messagesHeader">Изходящи съобщения</h2>';
+                $userType = 'Получател';
+            }
+
+            $template = $header . '<table id="messagesList">' .
                 '<tr id="firstRow">' .
-                    '<th>Подател</th>'.
+                    '<th>' . $userType . '</th>'.
                     '<th>Относно</th>'.
                     '<th>Дата</th>'.
                 '</tr>';
 
             $messages = $this->student->getMessages($type);
+            $id = 0;
 
             foreach($messages as $key => $value){
                 $message = $value;
 
-                $template = $template . '<tr class="elective">';
+                $template = $template . '<tr class="elective" id="' . $id .'">';
 
                 foreach($message as $key => $value){
                     $template = $template . '<td>' . $value . '</td>';
                 }
 
                 $template = $template . '</tr>';
+                $id = $id + 1;
             }
 
             $template = $template . '</table>';
@@ -146,8 +159,14 @@
         /**
          * View selected message
          */
-        public function viewMessage(){
-            $message = $this->student->getMessage();
+        public function viewMessage($receiver, $sender, $date){
+            if($receiver == ''){
+                $receiver = $this->student->getUserName();
+            } else {
+                $sender = $this->student->getUserName();
+            }
+
+            $message = $this->student->getMessage($receiver, $sender, $date);
 
             $template = '<table id="viewMessage">' .
                 '<tr id="firstRow">' .

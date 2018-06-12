@@ -157,9 +157,10 @@
 			$userName = parent::getUserName();
 
 			$userType = ($type == 'income' ? 'receiver' : 'sender');
+			$userToShow = ($type == 'income' ? 'sender' : 'receiver');
 
 			$database = new DataBase("localhost", "uxProj", "root", "");
-			$sql = "SELECT sender, about, sdate FROM `messages` WHERE $userType='$userName'";
+			$sql = "SELECT $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -169,11 +170,11 @@
 		/**
 		 * Retrieve current message
 		 */
-		public function getMessage(){
+		public function getMessage($receiver, $sender, $date){
 			$userName = parent::getUserName();
 
 			$database = new DataBase("localhost", "uxProj", "root", "");
-			$sql = "SELECT * FROM `messages` WHERE receiver='$userName'";
+			$sql = "SELECT * FROM `messages` WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetch(PDO::FETCH_ASSOC);
 

@@ -24,9 +24,7 @@
             echo $student->showElectivesCampaign();
         } else if($id == 'showMessages'){
             echo $student->showMessages($_GET['type']);
-        } else if($id == 'viewMessage'){
-            echo $student->viewMessage();
-        }
+        } 
     } else if(isset($_GET['email']) && isset($_GET['pass']) && isset($_GET['newPass'])){
         $newPass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
         $studentInfo = $student->viewInfo();
@@ -40,6 +38,8 @@
         }
     } else if(isset($_GET['to']) && isset($_GET['about']) && isset($_GET['content'])){
         echo $student->sendMessage($_GET['to'], $_GET['about'], $_GET['content']);
+    } else if(isset($_GET['receiver'])){
+        echo $student->viewMessage($_GET['receiver'], $_GET['sender'], $_GET['date']);
     } else{
         $studentInfo = $student->viewInfo();
         echo json_encode($studentInfo);

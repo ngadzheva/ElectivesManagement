@@ -1,5 +1,5 @@
 /* Holds the connection with the server */
-var ajaxRequest;
+var ajax;
 
 /*
  * Connect to the server
@@ -7,14 +7,14 @@ var ajaxRequest;
 function connect(){
     try{
         /* Opera, Firefox, Safari */
-        ajaxRequest = new XMLHttpRequest();
+        ajax = new XMLHttpRequest();
     } catch(e){
         /* Internet Explorer Browsers */
         try{
-            ajaxRequest = new ActiveXObject('Msxml2.XMLHTTP');
+            ajax = new ActiveXObject('Msxml2.XMLHTTP');
         } catch(e){
             try{
-                ajaxRequest = new ActiveXObject('Microsoft.XMLHTTP');
+                ajax = new ActiveXObject('Microsoft.XMLHTTP');
             } catch(e){
                 alert('Something went wrong with your browser!');
                 return false;
@@ -26,13 +26,13 @@ function connect(){
 /**
  * Filter electives 
  */
-function filterElectives() {
+function filterElectives(element) {
     connect();
 
-    ajaxRequest.onreadystatechange = function(){
-        if(ajaxRequest.readyState == 4){
-            var ajaxDisplay = document.getElementById('electives');
-            ajaxDisplay.innerHTML = ajaxRequest.responseText;
+    ajax.onreadystatechange = function(){
+        if(ajax.readyState == 4){
+            var ajaxDisplay = document.getElementById(element);
+            ajaxDisplay.innerHTML = makeFilterForm() + ajax.responseText;
 
             makeNewColumn("Преглед", id); 
         }
@@ -45,14 +45,14 @@ function filterElectives() {
     var id = params.get('id').toString();
     var value = form.get("value");
 
-    ajaxRequest.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
-    ajaxRequest.send(null);
+    ajax.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
+    ajax.send(null);
 }
 
 /**
  * Make filter form
  */
-function makeFilterForm(){
+function makeFilterForm(element){
     var filterForm = "<form class='filter' method='get' action=''>" + 
     "<input class='search' type='text' name='value'></input>" +
     "<select class='search' name='filter'>" +
@@ -61,7 +61,7 @@ function makeFilterForm(){
         "<option value='cathegory'>Категория</option>" +
         "<option value='rating'>Рейтинг на дисциплина</option>" +
     "</select>" +
-    "<input type='button' value='Филтриране' onclick='filterElectives()'></input>" +
+    "<input type='button' value='Филтриране' onclick='filterElectives(\"" + element + "\")'></input>" +
     "</form>";
 
     return filterForm;
@@ -73,16 +73,13 @@ function makeFilterForm(){
 function listElectives(element, term){
     connect();
 
-    ajaxRequest.onreadystatechange = function(){
-        if(ajaxRequest.readyState == 4){
+    ajax.onreadystatechange = function(){
+        if(ajax.readyState == 4){
             var ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = makeFilterForm() + ajaxRequest.responseText;
+            ajaxDisplay.innerHTML = makeFilterForm(element) + ajax.responseText;
         }
 
-
-        makeNewColumn("Преглед", term);
-
-
+        makeColumn("Преглед", term);
     }
 
     var id;
@@ -94,14 +91,14 @@ function listElectives(element, term){
         id = params.get('id').toString();
     }
 
-    ajaxRequest.open("GET", "electives.php?id=" + id, true);
-    ajaxRequest.send(null);
+    ajax.open("GET", "electives.php?id=" + id, true);
+    ajax.send(null);
 }
 
 /*
  * Add new column to the table with electives according to current location
  */
-function makeNewColumn(name, term){
+function makeColumn(name, term){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);
@@ -146,5 +143,16 @@ function makeNewColumn(name, term){
 
             tr[i].appendChild(td);
         }
+    }
+}
+
+/*
+ * Opem the page with the description of the elective
+ */
+function viewDescription(term){
+    if(term == 'winter'){
+        window.location.replace("html/UZ.html");
+    } else{
+        window.location.replace("html/EO.html");
     }
 }

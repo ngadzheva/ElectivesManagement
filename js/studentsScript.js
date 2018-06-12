@@ -118,15 +118,13 @@ const connectToServer =  {
     },
 
     showMessages: (type) => {
-        let header = '<h2 id="messagesHeader">Входящи съобщения</h2>';
-
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
             if(ajaxRequest.readyState == 4){
                 let messages = ajaxRequest.responseText;
                 
-                document.getElementById('studentContent').innerHTML += header + messages;
+                document.getElementById('studentContent').innerHTML += messages;
             }   
             
             makeNewColumn('Преглед');
@@ -136,7 +134,7 @@ const connectToServer =  {
         ajaxRequest.send(null);
     },
 
-    viewMessage: () => {
+    viewMessage: (receiver, sender, date) => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -148,7 +146,7 @@ const connectToServer =  {
             }   
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=viewMessage", true);
+        ajaxRequest.open("GET", "php/studentsConnection.php?receiver=" + receiver + "&sender=" + sender + "&date=" + date, true);
         ajaxRequest.send(null);
     },
 
@@ -219,7 +217,18 @@ function makeNewColumn(columnType){
             var img = document.createElement('img');
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
-            img.setAttribute('onclick', 'connectToServer.viewMessage()');            
+
+            var receiver = '';
+            var sender = '';
+            var date = tr[i].lastChild.innerHTML;
+
+            if(document.getElementById('firstRow').firstChild.innerHTML === 'Подател'){
+                sender = document.getElementsByTagName('td')[0].innerHTML;
+            } else {
+                receiver = document.getElementsByTagName('td')[0].innerHTML;
+            } 
+
+            img.setAttribute('onclick', 'connectToServer.viewMessage("' + receiver + '", "' + sender + '", "' + date + '")');            
             img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
