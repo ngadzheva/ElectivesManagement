@@ -244,12 +244,12 @@ function makeNewColumn(columnType){
             var icon = tr[i].lastChild.innerHTML == '' ? 'add.png' : 'delete.png';
             var elective = tr[i].firstChild.innerHTML;
             var credits = tr[i].children[2].innerHTML;
-            var action = tr[i].lastChild.innerHTML == '' ? 'enroll' : 'withdraw';
+            var action = tr[i].lastChild.innerHTML == '' ? 'Запиши' : 'Отпиши';
 
             var td = document.createElement('td');
             var img = document.createElement('img');
             img.setAttribute('class', 'enrolIcon');
-            img.setAttribute('title', 'Запиши');
+            img.setAttribute('title', action);
             img.setAttribute('onclick', 'connectToServer.showCampaign("' + action + '","' + elective + '","' + credits + '")');            
             img.setAttribute('src', 'img/' + icon);
             td.appendChild(img);

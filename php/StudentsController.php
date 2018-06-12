@@ -158,7 +158,7 @@
          * Change chosen electives
          */
         public function changeChosenElectives($action, $elective, $credits){
-            if($action == 'enroll'){
+            if($action == 'Запиши'){
                 $this->student->insertNewChosenElective($elective, $credits);
             } else {
                 $this->student->deleteChosenElective($elective);
