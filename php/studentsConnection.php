@@ -31,7 +31,7 @@
             $newPass = hash('sha256', $_POST['newPassword']);
             $studentInfo = $student->viewInfo();
 
-            if($studentInfo['pass'] == $pass){
+            if($studentInfo['password'] == $pass){
                 $student->updateInfo($_POST['email'], $newPass);
                 
                 $status = 'success';

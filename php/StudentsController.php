@@ -24,6 +24,7 @@
             $info['bachelorProgram'] = $this->student->getBachelorProgram();
             $info['year'] = $this->student->getYear();
             $info['email'] = $this->student->getEmail();
+            $info['password'] = $this->student->getPasswd();
 
             return $info;
         }

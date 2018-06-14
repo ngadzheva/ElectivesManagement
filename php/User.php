@@ -8,12 +8,15 @@
 		private $userType;
 		private $active;
 		private $email;
+		private $database;
 		
 		public function __construct($userName, $passwd){
 			$this->userName= $userName;
 			if($passwd != ''){
 				$this->passwd= password_hash($passwd, PASSWORD_DEFAULT);
 			}
+
+			$this->database = new DataBase("localhost", "uxProj", "root", "");
 		}
 		
 		/**
