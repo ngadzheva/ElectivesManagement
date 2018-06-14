@@ -6,12 +6,9 @@
         private $student;
         private $electives;
 
-        public function __construct(){
-            //if(isset($_SESSION['user']) && isset($_SESSION['fn'])){
-                //$student = new Student($_SESSION['user'], $_SESSION['fn']);
-            $this->student = new Student('nmgadzheva', '61938');
+        public function __construct($userName, $fn){
+            $this->student = new Student($userName, $fn);
             $this->student->load();
-            //} 
 
             $this->electives = new ElectivesController();
         }
@@ -34,7 +31,7 @@
         /**
          * Update student data (email and / or password)
          */
-         public function updateInfo($userName, $email, $password, $newPassword){
+         public function updateInfo($email, $newPassword){
             $this->student->setEmail($email);
             $this->student->setPasswd($newPassword);
         }
@@ -148,9 +145,8 @@
                 $template = $template . '</table>';
 
                 return $template;
-                //return $this->electives->viewElectives($term);
             } else {
-                return 'В момента няма активна кампания.';
+                return '<p id="notActive">В момента няма активна кампания.</p>';
             }
         }
 

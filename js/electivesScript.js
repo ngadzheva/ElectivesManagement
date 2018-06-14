@@ -32,7 +32,7 @@ function filterElectives(element) {
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
             var ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = makeFilterForm() + ajax.responseText;
+            ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/  ajax.responseText;
 
             makeNewColumn("Преглед", id); 
         }
@@ -46,6 +46,32 @@ function filterElectives(element) {
     var value = form.get("value");
 
     ajax.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
+    ajax.send(null);
+}
+
+/**
+ * Sort electives 
+ */
+function sortElectives(element) {
+    connect();
+
+    ajax.onreadystatechange = function(){
+        if(ajax.readyState == 4){
+            var ajaxDisplay = document.getElementById(element);
+            ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/ ajax.responseText;
+
+            makeNewColumn("Преглед", id); 
+        }
+    }
+
+    var form = new FormData(document.querySelector('form'));
+    var sort = form.get("sort");
+    
+    var params = new URLSearchParams(window.location.search);
+    var id = params.get('id').toString();
+    var value = form.get("value");
+
+    ajax.open("GET", "electives.php?id=" + id + "&sort=" + sort + "&value=" + value, true);
     ajax.send(null);
 }
 
@@ -67,6 +93,23 @@ function makeFilterForm(element){
     return filterForm;
 }
 
+/**
+ * Make sort form
+ */
+function makeSortForm(element){
+    var filterForm = "<form class='sort' method='get' action=''>" + 
+    "<select class='search' name='sort'>" +
+        "<option value='name'>Име на дисциплина</option>" +
+        "<option value='lecturer'>Име на лектор</option>" +                                
+        "<option value='cathegory'>Категория</option>" +
+        "<option value='rating'>Рейтинг на дисциплина</option>" +
+    "</select>" +
+    "<input type='button' value='Сортиране' onclick='sortElectives(\"" + element + "\")'></input>" +
+    "</form>";
+
+    return filterForm;
+}
+
 /*
  * Show a table with the electives depending on the selected term
  */
@@ -76,7 +119,7 @@ function listElectives(element, term){
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
             var ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = makeFilterForm(element) + ajax.responseText;
+            ajaxDisplay.innerHTML = makeFilterForm(element)  + /*makeSortForm(element) +*/ ajax.responseText;
         }
 
         makeColumn("Преглед", term);

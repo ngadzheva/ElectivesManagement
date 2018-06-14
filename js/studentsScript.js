@@ -30,8 +30,8 @@ const connectToServer =  {
 
         ajaxRequest.onreadystatechange = function(){
             if(ajaxRequest.readyState == 4){
-                let response = ajaxRequest.responseText;
-                let info = JSON.parse(response); 
+               let response = ajaxRequest.responseText;
+               let info = JSON.parse(response); 
                 
                 document.getElementById('studentName').innerHTML = info['names'];
                 document.getElementById('fn').innerHTML = info['fn'];
@@ -43,46 +43,6 @@ const connectToServer =  {
 
         ajaxRequest.open("GET", "php/studentsConnection.php", true);
         ajaxRequest.send(null);
-    },
-    
-    editInfo: () => {
-        let email = getElementsByName('email')[0].value;
-        let pass = getElementsByName('password')[0].value;
-        let newPass = getElementsByName('newPassword')[0].value;
-        let confirmPass = getElementsByName('confirmPassword')[0].value;
-
-        if(newPass !== confirmPass){
-            let p = document.createElement('p');
-            p.innerHTML = 'Двете пароли не съвпадат';
-            document.getElementById('editForm').appendChild(p);
-
-            return false;
-        } else {
-            let ajaxRequest = connectToServer.serverRequest();
-
-            ajaxRequest.onreadystatechange = function(){
-                if(ajaxRequest.readyState == 4){
-                    let response = ajaxRequest.responseText;
-
-                    if(response === 'Incorrect pass'){
-                        let p = document.createElement('p');
-                        p.innerHTML = 'Грешна парола';
-                        document.getElementById('editForm').appendChild(p);
-
-                        return false;
-                    } else {
-                        window.open('student.html', '_self');
-                        let article = document.createElement('article');
-                        article.innerHTML = 'Успешно редактиране на данните.';
-                        document.getElementById('profile').appendChild(article);
-                    }
-                    
-                }    
-            }
-
-            ajaxRequest.open("GET", "php/studentsConnection.php?email=" + email + '&pass=' + pass + '&newPass=' + newPass, true);
-            ajaxRequest.send(null);
-        }
     },
 
     references: () => {
@@ -148,33 +108,6 @@ const connectToServer =  {
 
         ajaxRequest.open("GET", "php/studentsConnection.php?receiver=" + receiver + "&sender=" + sender + "&date=" + date, true);
         ajaxRequest.send(null);
-    },
-
-    sendMessage: () => {
-        let to = document.getElementsByName('to')[0].value;
-        let about = document.getElementsByName('about')[0].value;
-        let content = document.getElementsByName('content')[0].value;
-
-        let ajaxRequest = connectToServer.serverRequest();
-
-        ajaxRequest.onreadystatechange = function(){
-            if(ajaxRequest.readyState == 4){
-                let isSent = ajaxRequest.responseText;
-                
-                if(isSent == 'success'){
-                    document.getElementById('messageForm').setAttribute('action', 'student.html?id=newMessage');
-                    document.getElementById('messageForm').style.display = 'none';
-                    document.getElementById('studentContent').innerHTML += "Съобщението и изпратено успешно.";
-                } else {
-                    document.getElementById('invalidEmail').style.display = 'block';
-
-                    return false;
-                }
-            }   
-        }
-
-        ajaxRequest.open("GET", "php/studentsConnection.php?to=" + to + '&about=' + about + '&content=' + content, true);
-        ajaxRequest.send(null);
     }
 }
 
@@ -186,8 +119,10 @@ const connectToServer =  {
 function makeProfileEditForm(type, email){
 
     var editForm = "<fieldset id='editForm'>\n" +
-    "<form name='edit' method='post' onsubmi='return connectToServer.editInfo()'>\n" +
+    "<form name='edit' method='post' action='php/studentsConnection.php'>\n" +
         "<legend class='editProfile'>" + type + "</legend>\n" + 
+        "<label class='error' id='invalidPass' style='display: none;'>Невалидна парола.</label>\n" +
+        "<label class='error' id='notEqual' style='display: none;'>Двете пароли не съвпадат</label>\n" +
         "<label class='editProfile'>E-mail:</label>\n" +
         "<input class='editProfile' type='text' name='email' value='" + email + "'></input>\n" +
         "<label class='editProfile'>Парола:</label>\n" +
@@ -295,13 +230,13 @@ function showElectivesCampaign(){
 }
 
 /**
- * Mame template of form for sending messages
+ * Make template of form for sending messages
  */
 function makeNewMessageForm(){
     var messageForm = "<fieldset id='messageForm'>\n" +
-    "<form name='message' method='post' action='return connectToServer.sendMessage()'>\n" +
+    "<form name='message' method='post' action='php/studentsConnection.php'>\n" +
         "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
-        "<label class='sendMessage' id='invalidEmail' style='display: none;'>Невалиден email.</label>\n" +
+        "<label class='error' id='invalidEmail' style='display: none;'>Невалиден email.</label>\n" +
         "<label class='sendMessage'>До:</label>\n" +
         "<input class='sendMessage' type='text' name='to' placeholder='lecturer@email.bg'></input>\n" +
         "<label class='sendMessage'>Относно:</label>\n" +
@@ -398,14 +333,28 @@ function electives(element, term){
  * Load window
  */
 window.onload = () => {
-    var params = new URLSearchParams(window.location.search);
+    let params = new URLSearchParams(window.location.search);
     id = params.get('id');
 
     if(id){
         document.getElementById('profile').style.display = 'none';
 
         if(id.toString() === 'editProfile'){
-            editProfile();
+            status = params.get('status');
+
+            if(status === 'success'){
+                editProfile();
+                document.getElementById('studentContent').innerHTML =  "<p id='success'>Успешно обновена информация.</p>";
+            } else if(status === 'notfound'){
+                editProfile();
+                document.getElementById('invalidPass').style.display = 'block';
+            } else if(status === 'notequal'){
+                editProfile();
+                document.getElementById('notEqual').style.display = 'block';
+            } else {
+                editProfile();
+            }
+            
         } else if(id.toString() === 'electivesCampaign'){
             showElectivesCampaign();
         } else if(id.toString() === 'messages'){
@@ -419,8 +368,20 @@ window.onload = () => {
             messagesHeader();
             connectToServer.showMessages('sent');
         }else if(id.toString() === 'newMessage'){
-            messagesHeader();
-            makeNewMessageForm();
+            let status = params.get('status');
+
+            if(status === 'success'){
+                messagesHeader();
+                document.getElementById('studentContent').innerHTML +=  "<p id='success'>Съобщението е изпратено успешно.</p>";
+            } else if(status === 'notfound'){
+                messagesHeader();
+                makeNewMessageForm();
+
+                document.getElementById('invalidEmail').style.display = 'block';
+            } else {
+                messagesHeader();
+                makeNewMessageForm();
+            }
         } else if(id.toString() === 'winter' || id.toString() === 'summer'){
             electives('studentContent', id.toString());
         }

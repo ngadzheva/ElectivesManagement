@@ -1,13 +1,13 @@
 USE uxProj;
 
 INSERT INTO `users` (userName, passwd, userType, active, email)
-VALUES ('nmgadzheva', '$2y$10$r9Rite9Ew5SSV4bq/XIQ.O5i59VHsSLYDq/krW4YhHhZ2pN/cQULC', 'student', TRUE, 'v3n17oy@abv.bg');
+VALUES ('nmgadzheva', 'a054c563253f561fd63003cf7af86d7aebbb5a603d346d859157fb518988a1ec', 'student', TRUE, 'v3n17oy@abv.bg');
 
 INSERT INTO `users` (userName, passwd, userType, active, email)
-VALUES ('pboychev', '$2y$10$HHJpTs9DkxYyEML/pjFRw.c/NI0OaUvHNWUpq6x0lERTRjrxjQKoS', 'lecturer', TRUE, 'boytchev@fmi.uni-sofia.bg');
+VALUES ('pboychev', '58ec05393ccf774c5c89046cca4573f2e7ad695650fa3accaec8fd0be67731d5', 'lecturer', TRUE, 'boytchev@fmi.uni-sofia.bg');
 
 INSERT INTO `users` (userName, passwd, userType, active, email)
-VALUES ('hrhristov', '$2y$10$kjuPXxrxbGb7NeNFNh9Qo.79d8NmUHk6ELeZ4vbxxvgqDFOLD3Up.', 'lecturer', TRUE, 'hristohristov@fmi.uni-sofia.bg');
+VALUES ('hrhristov', '2b32e24a7f0cd189017a5e1a73d30dc4d274c181caaf11d5026cbdc837bd2c3e', 'lecturer', TRUE, 'hristohristov@fmi.uni-sofia.bg');
 
 INSERT INTO `student` (fn, userName, names, year, bachelorProgram)
 VALUES (61938, 'nmgadzheva', 'Невена Михайлова Гаджева', 3, 'Софтуерно инженерство');

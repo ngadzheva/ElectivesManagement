@@ -241,14 +241,14 @@
 			$receiver = $query->fetch(PDO::FETCH_ASSOC);
 
 			if($receiver){
-				$query = 'INSERT INTO `messages` (sdate, about, content, sender, receiver, opened) VALUES(?, ?, ?, ?, ?, ?)';
-				$values = [date("Y-m-d H:i:s"), $about, $content, parent:: getUserName(), $receiver, FALSE];
+				$query = 'INSERT INTO messages(sdate, about, content, sender, receiver, opened) VALUES(?, ?, ?, ?, ?, ?)';
+				$values = [date("Y-m-d H:i:s"), $about, $content, parent::getUserName(), $receiver['userName'], TRUE];
 
 				$database->insertValues($query, $values);
 
-				return 'succes';
+				return 'success';
 			} else {
-				return 'user not found';
+				return 'notfound';
 			}
 		}
 	}

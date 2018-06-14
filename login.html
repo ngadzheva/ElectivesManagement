@@ -6,8 +6,7 @@
         <title>Система за управление на избираеми дисциплини</title>
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-        <script type="text/javascript" src="js/script.js"></script>
-        <script type="text/javascript" src="js/validation.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
     </head>
 
     <body>
@@ -29,14 +28,11 @@
             <section id='background'>
                 <fieldset id='loginForm'>
                     <legend class='login'>Вход</legend>
-                    <form name='login' method='post' onsubmit='return validate()'>
-                        <label id="emptyUserName" style="display: none;">Невъведено потребителско име</label>
-                        <label id="emptyPass" style="display: none;">Невъведена парола</label>
-                        <label id="wrongData" style="display: none;">Невалидно потребителско име или парола</label>
+                    <form name='login' method='post' action='php/login.php'>
                         <label class='login'>Потребителско име</label>
-                        <input class='login' type='text' name='user'></input>
+                        <input class='login' type='text' name='user' id='userName'></input>
                         <label class='login'>Парола</label>
-                        <input class='login' type='password' name='password'></input>
+                        <input class='login' type='password' name='password' id='pass'></input>
                         <input class='login' type='submit' value='Вход'></input>
                     </form>
                 </fieldset>

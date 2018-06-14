@@ -152,15 +152,17 @@ legend[class=editElective], legend[class=editProfile], legend[class=sendMessage]
 }
 
 form{
-    margin-top: 50px;
+    margin-top: 25px;
 }
 
-#error{
+.error{
     color: red;
-    font-size: 18px;
+    font-size: 16px;
+    text-align: left;
+    margin: 10px;
 }
 
-label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], 
+label[class=error], label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], 
 select[class=editProfile], label[class=editElective], input[class=editElective], textarea, 
 select[class=editElective], label[class=sendMessage], input[class=sendMessage]{
     display: block;
@@ -232,7 +234,7 @@ textarea[class=sendMessage]{
     margin-right: auto;
 }
 
-.filter{
+.filter, .sort{
     display: flex;
     flex-direction: row;
     width: 1000px;
@@ -244,11 +246,11 @@ textarea[class=sendMessage]{
     padding-bottom: 0px;
 }
 
-.filter input, .filter select{
+.filter input, .filter select, .sort select{
     margin-right: 20px;
 }
 
-.filter > input{
+.filter > input {
     width: 500px;
     height: 20px;
     font-size: 16px;
@@ -270,7 +272,7 @@ input[class=search]{
     font-weight: bold;
 }
 
-.filter select{
+.filter select, .sort select{
     width: 300px;
     height: 30px;
     font-size: 16px;
@@ -582,7 +584,7 @@ p{
 	margin-right: 30px;
 }
 
-#tem_mess_p {
+#notActive {
 	color: #FF0000;
 	text-align: center;
 	font-size: 16px;

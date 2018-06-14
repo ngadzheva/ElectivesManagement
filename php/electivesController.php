@@ -47,6 +47,17 @@
         }
 
         /**
+         * Sort electives for winter or summer term
+         **/
+        public function sortElectives($term, $sort, $value){
+            $sql = "SELECT name, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND term='$term' ORDER BY '$sort' ";
+
+            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+
+            return $this->listElectives($query);
+        }
+
+        /**
          * Return informations for the electives chosen by a student
          **/
         public function getReferences($student){

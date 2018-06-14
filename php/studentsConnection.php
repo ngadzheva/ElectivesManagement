@@ -1,19 +1,9 @@
 <?php
     require_once 'StudentsController.php';
 
-    //session_start();
+    session_start();
 
-    /*if(isset($_SESSION['type']) && $_SESSION['type'] == 'admin'){
-
-    } else if(isset($_SESSION['type']) && $_SESSION['type'] == 'lecturer'){
-
-    } else if(isset($_SESSION['type']) && $_SESSION['type'] == 'student'){
-        $student = new StudentsController();
-
-        echo json_encode($student->viewInfo());
-    }*/
-
-    $student = new StudentsController();
+    $student = new StudentsController($_SESSION['userName'], $_SESSION['fn']);
 
     $id = isset($_GET['id']) ? $_GET['id'] : null;
 
@@ -28,23 +18,36 @@
         } else if($id == 'showMessages'){
             echo $student->showMessages($_GET['type']);
         } 
-    } else if(isset($_GET['email']) && isset($_GET['pass']) && isset($_GET['newPass'])){
-        $newPass = password_hash($_POST['pass'], PASSWORD_DEFAULT);
-        $studentInfo = $student->viewInfo();
-
-        if($studentInfo['pass'] == $newPass){
-            $student->updateInfo($studentInfo['userName'], $_POST['email'], $studentInfo['pass'], $newPass);
-            
-            echo 'Successfully updated information';
-        } else {
-            echo 'Incorrect pass';
-        }
-    } else if(isset($_GET['to']) && isset($_GET['about']) && isset($_GET['content'])){
-        echo $student->sendMessage($_GET['to'], $_GET['about'], $_GET['content']);
     } else if(isset($_GET['receiver'])){
         echo $student->viewMessage($_GET['receiver'], $_GET['sender'], $_GET['date']);
+    } else if(isset($_POST['to']) && isset($_POST['about']) && isset($_POST['content'])){
+        $status = $student->sendMessage($_POST['to'], $_POST['about'], $_POST['content']);
+        header("Location: ../student.html?id=newMessage&status=" . $status);
+    } else if(isset($_POST['email']) && isset($_POST['passwd']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword'])){
+        $status = '';
+
+        if($_POST['newPassword'] == $_POST['confirmPassword']){
+            $pass = hash('sha256', $_POST['passwd']);
+            $newPass = hash('sha256', $_POST['newPassword']);
+            $studentInfo = $student->viewInfo();
+
+            if($studentInfo['pass'] == $pass){
+                $student->updateInfo($_POST['email'], $newPass);
+                
+                $status = 'success';
+                header("Location: ../student.html?id=editProfile&status=" . $status);
+            } else {
+                $status = 'notfound';
+                header("Location: ../student.html?id=editProfile&status=" . $status);
+            }
+        } else {
+            $status = 'notequal';
+            header("Location: ../student.html?id=editProfile&status=" . $status);
+        }
+        
     } else{
         $studentInfo = $student->viewInfo();
+
         echo json_encode($studentInfo);
     }
 
