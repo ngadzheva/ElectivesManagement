@@ -92,7 +92,7 @@
 
 			$student = [];
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT * FROM `student` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$student = $query->fetch(PDO::FETCH_ASSOC);
@@ -117,7 +117,7 @@
 
 			parent:: insert();
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$query = 'INSERT INTO `students` (fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
 			$values = [$this->fn, parent:: getUserName(), $this->names, $this->year, $this->getBachelorProgram];
 
@@ -130,7 +130,7 @@
 		 * Retrieve references for electives, credits and grades from database
 		 */
 		public function getReferences(){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT name, grade, credits FROM `chelectives` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$references = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -142,7 +142,7 @@
 		 * Retrieve the last electives campaign from database
 		 */
 		public function getLastElectivesCampaign(){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT * FROM `campaign` ORDER BY startDate DESC";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$lastCampaign = $query->fetch(PDO::FETCH_ASSOC);
@@ -157,7 +157,7 @@
 		 * i.e. different from zero)
 		 */
 		public function getElectivesToChoose($term){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 
 			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chelectives AS ch ON el.NAME = ch.NAME WHERE grade = 0 OR grade IS NULL ";
 			$query = $database->executeQuery($sql, 'Failed find user');
@@ -170,7 +170,7 @@
 		 * Insert new chosen elective in database for the student
 		 */
 		public function insertNewChosenElective($elective, $credits){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$query = 'INSERT INTO `chelectives` (name, credits, fn) VALUES(?, ?, ?)';
 			$values = [$elective, $credits, $this->fn];
 
@@ -181,7 +181,7 @@
 		 * Delete chosen elective from database for the student
 		 */
 		public function deleteChosenElective($elective){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "DELETE FROM `chelectives` WHERE name='$elective'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 		}
@@ -195,7 +195,7 @@
 			$userType = ($type == 'income' ? 'receiver' : 'sender');
 			$userToShow = ($type == 'income' ? 'sender' : 'receiver');
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT opened, $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -209,7 +209,7 @@
 		public function getMessage($receiver, $sender, $date){
 			$userName = parent::getUserName();
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT * FROM `messages` WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetch(PDO::FETCH_ASSOC);
@@ -225,7 +225,7 @@
 		public function setMessageSeen($receiver, $sender, $date){
 			$userName = parent::getUserName();
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "UPDATE `messages` SET opened=TRUE WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 
@@ -235,7 +235,7 @@
 		 * Insert new message from current student to another user into database
 		 */
 		public function insertNewMessage($to, $about, $content){
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT userName FROM `users` WHERE email='$to'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$receiver = $query->fetch(PDO::FETCH_ASSOC);

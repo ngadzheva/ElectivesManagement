@@ -90,7 +90,7 @@ class Lecturer extends User{
 	public function load() :bool{
 			parent:: load();
 			$lecturer = [];
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT * FROM `lecturer` WHERE userName='$this->userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$lecturer = $query->fetch(PDO::FETCH_ASSOC);

@@ -18,7 +18,7 @@
         private $active;
 
         public function __construct($title){
-            $this->database = new DataBase("localhost", "uxProj", "root", "");
+            $this->database = new DataBase();
             $this->title = $title;
         }
 

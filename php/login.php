@@ -3,7 +3,7 @@
 
     session_start();
 
-    $database = new DataBase("localhost", "uxProj", "root", "");
+    $database = new DataBase();
 
     $user = $_POST["user"];
     $pass = $_POST["password"];

@@ -7,7 +7,7 @@
         private $db;
 
         public function __construct(){
-            $this->db = new DataBase("localhost", "uxProj", "root", "");
+            $this->db = new DataBase();
         }
 
         /**

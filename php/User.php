@@ -16,7 +16,7 @@
 				$this->passwd= password_hash($passwd, PASSWORD_DEFAULT);
 			}
 
-			$this->database = new DataBase("localhost", "uxProj", "root", "");
+			$this->database = new DataBase();
 		}
 		
 		/**
@@ -87,7 +87,7 @@
 		public function load(){
 			$user = [];
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$sql = "SELECT * FROM `users` WHERE userName = '$this->userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$user = $query->fetch(PDO::FETCH_ASSOC);
@@ -111,7 +111,7 @@
 				return false;
 			}
 
-			$database = new DataBase("localhost", "uxProj", "root", "");
+			$database = new DataBase();
 			$query = 'INSERT INTO `users` (userName, passwd, userType, active, email) VALUES(?, ?, ?, ?, ?)';
 			$values = [$this->userName, $this->passwd, $this->userType, $this->active, $this->email];
 

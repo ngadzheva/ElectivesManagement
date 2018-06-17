@@ -1,5 +1,5 @@
 <?php
-    require_once 'Student.php';
+    require_once 'student.php';
     require_once 'electivesController.php';
 
     class StudentsController{

@@ -2,7 +2,15 @@
     class DataBase{
         private $connection;
 
-        public function __construct($host, $db, $user, $password){
+        public function __construct(){
+            require_once 'Config.php';
+            Config::_init();
+
+            $host = CONFIG['db']['host'];
+            $db = CONFIG['db']['name'];
+            $user = CONFIG['db']['user'];
+            $password = CONFIG['db']['password'];
+            
             try{
                 $this->connection = new PDO("mysql:host=$host;dbname=$db", $user, $password,
                                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));

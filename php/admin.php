@@ -9,7 +9,7 @@ class Admin extends User{
 	private $database;
 	
 	public function __construct($id, $names){
-		$this->database = new DataBase("localhost", "uxProj", "root", "");
+		$this->database = new DataBase();
 		$this->id= $id;
 		$this->names=$names;
 	}
