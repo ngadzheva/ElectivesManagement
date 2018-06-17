@@ -32,9 +32,9 @@ function filterElectives(element) {
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
             var ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/  ajax.responseText;
+            ajaxDisplay.innerHTML = makeFilterForm(element) + ajax.responseText;
 
-            makeNewColumn("Преглед", id); 
+            makeColumn("Преглед"); 
         }
     }
 
@@ -60,7 +60,7 @@ function sortElectives(element) {
             var ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/ ajax.responseText;
 
-            makeNewColumn("Преглед", id); 
+            makeColumn("Преглед"); 
         }
     }
 
@@ -83,7 +83,10 @@ function makeFilterForm(element){
     "<input class='search' type='text' name='value'></input>" +
     "<select class='search' name='filter'>" +
         "<option value='name'>Име на дисциплина</option>" +
-        "<option value='lecturer'>Име на лектор</option>" +                                
+        "<option value='lecturer'>Име на лектор</option>" +   
+        "<option value='credits'>Кредити</option>" + 
+        "<option value='recommendedYear'>Курс</option>" +    
+        "<option value='recommendedBachelorProgram'>Специалност</option>" +                        
         "<option value='cathegory'>Категория</option>" +
         "<option value='rating'>Рейтинг на дисциплина</option>" +
     "</select>" +
@@ -122,7 +125,7 @@ function listElectives(element, term){
             ajaxDisplay.innerHTML = makeFilterForm(element)  + /*makeSortForm(element) +*/ ajax.responseText;
         }
 
-        makeColumn("Преглед", term);
+        makeColumn("Преглед");
     }
 
     var id;
@@ -141,7 +144,7 @@ function listElectives(element, term){
 /*
  * Add new column to the table with electives according to current location
  */
-function makeColumn(name, term){
+function makeColumn(name){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);
@@ -155,7 +158,9 @@ function makeColumn(name, term){
             var img = document.createElement('img');
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
-            img.setAttribute('onclick', 'viewDescription("' + term + '")');            
+
+            var elective = tr[i].childNodes[1].innerHTML;
+            img.setAttribute('onclick', 'viewDescription("' + elective + '")');            
             img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
@@ -192,10 +197,8 @@ function makeColumn(name, term){
 /*
  * Opem the page with the description of the elective
  */
-function viewDescription(term){
-    if(term == 'winter'){
-        window.location.replace("html/UZ.html");
-    } else{
-        window.location.replace("html/EO.html");
-    }
+function viewDescription(elective){
+    document.cookie = 'elective=' + elective;
+    document.cookie = 'lastLocation=' + window.location.href;
+    window.location.replace('description.html');
 }

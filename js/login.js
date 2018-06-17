@@ -1,3 +1,14 @@
+const validations = {
+    showErrors: (errors) => {
+        let error = document.createElement('label');
+        error.innerHTML = errors;
+        error.setAttribute('class', 'error');
+
+        let form = document.getElementsByName('login')[0];
+        form.insertBefore(error, form.childNodes[0]);
+    }
+}
+
 window.onload = () => {
     let params = new URLSearchParams(window.location.search);
     status = params.get('status');

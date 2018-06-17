@@ -119,8 +119,8 @@ const connectToServer =  {
 function makeProfileEditForm(type, email){
 
     var editForm = "<fieldset id='editForm'>\n" +
+    "<legend class='editProfile'>" + type + "</legend>\n" + 
     "<form name='edit' method='post' action='php/studentsConnection.php'>\n" +
-        "<legend class='editProfile'>" + type + "</legend>\n" + 
         "<label class='error' id='invalidPass' style='display: none;'>Невалидна парола.</label>\n" +
         "<label class='error' id='notEqual' style='display: none;'>Двете пароли не съвпадат</label>\n" +
         "<label class='editProfile'>E-mail:</label>\n" +
@@ -234,8 +234,8 @@ function showElectivesCampaign(){
  */
 function makeNewMessageForm(){
     var messageForm = "<fieldset id='messageForm'>\n" +
+    "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
     "<form name='message' method='post' action='php/studentsConnection.php'>\n" +
-        "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
         "<label class='error' id='invalidEmail' style='display: none;'>Невалиден email.</label>\n" +
         "<label class='sendMessage'>До:</label>\n" +
         "<input class='sendMessage' type='text' name='to' placeholder='lecturer@email.bg'></input>\n" +
@@ -334,7 +334,7 @@ function electives(element, term){
  */
 window.onload = () => {
     let params = new URLSearchParams(window.location.search);
-    id = params.get('id');
+    let id = params.get('id');
 
     if(id){
         document.getElementById('profile').style.display = 'none';

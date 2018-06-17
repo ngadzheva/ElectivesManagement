@@ -242,7 +242,7 @@
 
 			if($receiver){
 				$query = 'INSERT INTO messages(sdate, about, content, sender, receiver, opened) VALUES(?, ?, ?, ?, ?, ?)';
-				$values = [date("Y-m-d H:i:s"), $about, $content, parent::getUserName(), $receiver['userName'], TRUE];
+				$values = [date('Y-m-d G:i:s'), $about, $content, parent::getUserName(), $receiver['userName'], TRUE];
 
 				$database->insertValues($query, $values);
 

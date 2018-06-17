@@ -6,7 +6,7 @@
         <title>Система за управление на избираеми дисциплини</title>
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-        <script type="text/javascript" src="js/script.js"></script>
+        <script type="text/javascript" src="js/electivesScript.js"></script>
     </head>
 
     <body onload="listElectives('electives')">
@@ -25,20 +25,7 @@
         </header>
 
         <main>
-            <form class='filter' method='get' action=''>
-                <input class='search' type='text' name='value'></input>
-                <select class='search' name='filter'>
-                    <option value='name'>Име на дисциплина</option>
-                    <option value='lecturer'>Име на лектор</option>                                
-                    <option value='cathegory'>Категория</option>
-                    <option value='rating'>Рейтинг на дисциплина</option>
-                </select>
-                <input type='button' value='Филтриране' onclick="filterElectives()"></input>
-            </form>
-
-            <section id='electives'>
-
-            </section>
+            <section id='electives'></section>
         </main>
 
         <footer>

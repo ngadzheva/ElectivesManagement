@@ -141,10 +141,17 @@
         }
 
         public function setRating($rating){
-            $this->rating = $rating;
+            if($rating == 'dislike'){
+                $sql = "UPDATE electives SET rating='$this->rating'-1 WHERE name='$this->title'";
+            } else {
+                $sql = "UPDATE electives SET rating='$this->rating'+1 WHERE name='$this->title'";
+            }
 
-            $sql = "UPDATE electives SET rating='$this->rating' WHERE id='$this->id'";
             $query = $this->database->executeQuery($sql, "Failed updating rating!");
+
+            $sql = "SELECT rating FROM `electives` WHERE name='$this->title'";
+			$query = $this->database->executeQuery($sql, 'Failed find user');
+            $this->rating = $query->fetch(PDO::FETCH_ASSOC)['rating'];
         }
 
         public function getActive(){
@@ -162,7 +169,7 @@
             $electives = [];
 
             $sql = "SELECT * FROM `electives` WHERE name='$this->title' AND active=1";
-			$query = $database->executeQuery($sql, 'Failed find user');
+			$query = $this->database->executeQuery($sql, 'Failed find user');
             $electives = $query->fetch(PDO::FETCH_ASSOC);
             
             $this->lecturer = $electives['lecturer'];
@@ -188,5 +195,24 @@
             $this->database->insertValues($sql, $values);
         }
 
+        /**
+         * Retrieve all comments for current elective from database
+         */
+        public function getComments(){
+            $sql = "SELECT user, timePosted, content FROM comments WHERE elective='$this->title'";
+            $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
+            $comments = $query->fetchAll(PDO::FETCH_ASSOC);
+
+            return $comments;
+        }
+
+        /**
+         * Insert new comment for current elective to database
+         */
+        public function insertNewComment($comment, $user){
+            $sql = "INSERT INTO comments(content, elective, user, timePosted) VALUES(?, ?, ?, ?)"; 
+            $values = [$comment, $this->title, $user, date('Y-m-d G:i:s')]; 
+            $this->database->insertValues($sql, $values);
+        }
     }
 ?>

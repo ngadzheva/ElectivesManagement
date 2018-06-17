@@ -44,7 +44,8 @@
             $creditsSum = 0;
             $grade = 0;
 
-            $template = '<table id="electivesReferences">' .
+            $template = '<h2 id="referencesHeader">Справки</h2>' .
+            '<table id="electivesReferences">' .
                 '<tr id="firstRow">' .
                     '<th>Избираема дисциплина</th>'.
                     '<th>Оценка</th>'.
@@ -111,17 +112,18 @@
 
                 $electivesToChoose = $this->student->getElectivesToChoose($term);
 
-                $template = "<table id='electivesList'>\n". 
-                "<tr id='firstRow'>\n" .
-                    "<th>Избираема дисциплина</th>\n" .
-                    "<th>Лектор</th>\n" .
-                    "<th>Кредити</th>\n" .
-                    "<th>Курс</th>\n" .
-                    "<th>Специалност</th>\n" .
-                    "<th>Категория</th>\n" .
-                    "<th>Рейтинг</th>\n" .
-                    "<th>Статус</th>\n" .
-                "</tr>\n";
+                $template = "<h1 id='campaignHeader'>Кампания за избираеми дисциплини</h1>" .
+                "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Избираема дисциплина</th>\n" .
+                        "<th>Лектор</th>\n" .
+                        "<th>Кредити</th>\n" .
+                        "<th>Курс</th>\n" .
+                        "<th>Специалност</th>\n" .
+                        "<th>Категория</th>\n" .
+                        "<th>Рейтинг</th>\n" .
+                        "<th>Статус</th>\n" .
+                    "</tr>\n";
 
                 foreach($electivesToChoose as $key => $value){
                     $elective = $value;
