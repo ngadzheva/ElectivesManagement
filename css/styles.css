@@ -124,6 +124,7 @@ main{
     height: auto;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 100px;
     background: #FFFFFF;
     color: #1D224C;
     border: 1px solid #1D224C;
@@ -423,10 +424,14 @@ td[opened="0"]{
 
 /* user's content style */
 #lecturerContent, #studentContent {
-    position: absolute;
+    position:  absolute;
     margin-left: 340px;
     width: 80%;
-}  
+} 
+
+#lecturerContent{
+    position: relative;
+}
 
 #profile {
     position: absolute;
@@ -518,6 +523,7 @@ footer{
     position: relative;
     width: 100%;
     height: 50px;
+    margin-top: 10px;
 }
 
 footer p{
