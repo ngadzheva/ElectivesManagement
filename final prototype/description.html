@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+
+			<title>Система за управление на избираеми дисциплини</title>
+
+			<link href="css/description.css" rel="stylesheet">
+			<script type="text/javascript" src="js/descriptionScript.js"></script>
+		</head>
+		<body>
+			<header>
+				<h1 id='title'></h1>
+			</header>
+
+			<aside>
+				<img id="dislike" title="Не харесвам" src="img/dislike.png"/>
+				<img id="like" title="Харесвам" src="img/like.png"/>
+				<section id="comment">Коментари</section>
+				<section id="back">Назад</section>
+			</aside>
+
+			<section id="commentsOverlay" class="comments">
+				<section class="closebtn" title="Затвори коментарите">x</section>
+				<section id="commentContent" class="commentsContent">
+					<textarea id="writeComment" rows="10" cols="40" placeholder="Напиши мнение..."></textarea>
+					<section id="post" onclick="postComment()">Публикувай</section>
+
+					<section id="userCommentsList"></section>
+				</section>
+			</section>
+
+			<aside id="menu">
+				<a href="#lecturer">Преподавател</a>
+				<a href="#rating">Рейтинг</a>
+				<a href="#term">Семестър</a>
+				<a href="#year">Курс</a>
+				<a href="#bachelorPrograme">Специалност</a>
+				<a href="#credits">Кредити</a>
+				<a href="#cathegory">Категория</a>
+				<a href="#description">Кратко описание</a>
+				<a href="#subjects">Учебен план</a>
+				<a  href="#literature">Препоръчителна литература</a>	
+			</aside>
+
+			<aside id="characteristics">
+				<p id="ratingCount"><mark id="bold">Рейтинг: </mark></p>
+				<p id="termType"><mark id="bold">Семестър: </mark></p>
+				<p id="yearType"><mark id="bold">Курс: </mark></p>
+				<p id="bachelorProgrameType"><mark id="bold">Специалност: </mark></p>
+				<p id="numOfCredits"><mark id="bold">Кредити: </mark></p>
+				<p id="cathegoryType"><mark id="bold">Категория: </mark></p>	
+			</aside>
+			
+			<section id="lecturer">
+				<h2>Преподавател:</h2>
+				<p id="lecturerContent"></p>
+			</section>			
+
+			<section id="description">
+				<h2>Анотация на учебната дисциплина:</h2>
+				<p id="descriptionContent"></p>
+				</section>
+
+			<section id="subjects">
+				<h2>Учебно съдържание:</h2>
+				<p id="subjectsContent"></p>
+			</section>
+
+			<section id="literature">
+				<h2>Библиография:</h2>
+				<p id="literatureContent"></p>
+			</section>
+		</body>
+	</html>

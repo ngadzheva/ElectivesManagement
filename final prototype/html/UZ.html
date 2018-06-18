@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Управление на знания</title>
+		<link href="../css/description.css" rel="stylesheet">
+		<script type="text/javascript" src="../js/script.js"></script>
+	</head>
+	<body>
+	<header>
+		<h1>Управление на знания</h1>
+	</header>
+	<aside>
+		<img id="dislike" title="Не харесвам" onclick="dislike('Електронно обучение')" src="../img/dislike.png"/>
+		<img id="like" title="Харесвам" onclick="like('Електронно обучение')" src="../img/like.png"/>
+		<section id="comment" onclick="openComments()">Коментари</section>
+		<a id="back" href="../electives.html?id=winter">Назад</a>
+	</aside>
+	<section id="commentsOverlay" class="comments">
+		<section class="closebtn" onclick="closeComments()" title="Затвори коментарите">x</section>
+		<section id="commentContent" class="commentsContent">
+			<textarea id="writeComment" rows="10" cols="40" placeholder="Напиши мнение..."></textarea>
+			<section id="post" onclick="postComment()">Публикувай</section>
+
+			<section class="userComments">
+				<h4>
+					Иван Иванов
+					<time>25.03.2018</time>
+				</h4>
+				<p>Избираемата дисциплина е много интересна и полезна. Заслужава си да се посещава. Силно препоръчвам.</p>
+			</section>
+		</section>
+	</section>
+	<div id="div1">
+		<ul>
+			<li>
+				<a href="#C1">Кратко описание</a>
+			</li>
+			<li>
+				<a href="#C2">Учебен план</a>
+			</li>
+			<li>
+				<a href="#C3">Предварителни изисквания </a>
+			</li>
+			<li>
+				<a  href="#C4">Препоръчителна литература</a>
+			</li>
+		</ul>	
+	</div>
+	<div id="div2">
+	<h2 id="C1">Анотация на учебната дисциплина:</h2>
+	<p>Основна цел на дисциплината е да запознае студентите с основите на теорията на мениджмънт 
+	на знания и приложението и в организации и фирми. Курсът дава обща представа за управлението 
+	на знания като научна дисциплина и връзката й със стратегическото управление на организациите. 
+	Разглеждат се основни понятия за дисциплината, основни процеси и модели за управление на знания 
+	и иновации, трансфер на знания, организационна култура, техники и технологии за управление на знания, 
+	проектиране и контрол на система за управление на знания. Специално внимание в курса се обръща на одита 
+	на знания и контрола на ефективността на стратегията за управление на знания във връзка с реализирането 
+	на корпоративните цели. В курса се разглеждат практически методи за управление на знания, както по отношение 
+	на човешките ресурси, така и във връзка с бизнес процесите и информационните технологии, които ги подпомагат. 
+	Практическите занятия са свързани с обсъждане на примери от реалната практика при управлението на знания.</p>
+	<h2 id="C2">Учебно съдържание:</h2>
+	<table id="table1">
+		<tr>
+			<th>№</th>
+			<th>Тема:</th>
+			<th>Хорариум</th>
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>Въведение в управлението на знания </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>2</td>
+			<td>Данни, информация, знания</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>3</td>
+			<td>Процеси и модели за управление на знания </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>4</td>
+			<td>Процеси за създаване на знания</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>5</td>
+			<td>Организационна култура и мотивиране на персонала</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>6</td>
+			<td>Споделяне на знания. Практически общности.</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>7</td>
+			<td>Разработване на стратегия. Методи за анализ.</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>8</td>
+			<td>Стратегия за управление на знания</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td>Одит на знания. Методи за анализ.</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>10</td>
+			<td>Организация на знания. Екип за управление на знания.</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>11</td>
+			<td>Технологии за управление на знания </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>12</td>
+			<td>Система за управление на знания</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>13</td>
+			<td>Трансфер на знания и иновации. </td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>14</td>
+			<td>Практика за управление на знания</td>
+			<td>2</td>
+		</tr>
+		<tr>
+			<td>15</td>
+			<td>Общество на знания.</td>
+			<td>2</td>
+		</tr>
+	</table>
+	<h2 id="C3">Предварителни изисквания:</h2>
+	<p>Познания в областта на информационните технологии</p>
+	<h2 id="C4">Библиография  </h2>
+	<h4>Основна:</h4>
+	<ul>
+		<li>Гурова, Е., А.Антонова, Р.Николов (ред.), Управление на знания, Булвест 2000, София, 2012</li>
+		<li>TRAINMOR KNOWMORE, Handbook on organizational knowledge management, 2008, Greece, http://www.trainmor-knowmore.eu/ </li>
+		<li>Лекции по управление на знания, http://elearn.uni-sofia.bg/ </li>
+	</ul>
+	<h4>Допълнителна: </h4>
+	<ul>
+		<li>Shelda Debowski, Knowledge Management, John Wiley & Sons Australia Ltd., Sidney, 200 </li>
+		<li>Dalkir, K.: Knowledge management in theory and practice, Elsevier, Butterworth, 2005 </li>
+		<li>Paul Bocij, Andrew Greasley, Simon Hickie, Business Information Systems, Technology Development & Management, Pearson Education Ltd, Harlow,2008  </li>
+		<li>Nonaka, I., H.Takeuchi, The knowledge creating company: How Japanese Companies create the Dynamics of Innovation, Oxford, Oxford University Press, 1995  </li>
+		<li>Mertins, K., P.Heisig, J.Vorbeck, Knowledge Management – Concepts and Best Practices, Springer Verlag, Berlin-Heidelberg, 2003 </li>
+		<li>Tiwana, A., The Knowledge Management Toolkit, Prentice Hall, 1999 </li>
+		<li>Liebowitz, J., Knowledge management Handbook, CRC Press LLC, 1999 </li>
+		<li>Davenport, T. H., L. Prusak, Working Knowledge: How Organizations Manage What They Know, Boston: Harvard Business School Press, 1998</li>
+		<li>Bergeron B., Essentials of Knowledge Management, John Wiley & Sons, Inc., Hoboken, New Jersey, 2003 </li>
+		<li>Ackerman M., Pipek V., and Wulf V., Sharing Expertise: Beyond Knowledge Management, Cambridge Ma: MIT Press, London, 2003 </li>
+		<li>Hildreth P., Kimble C., Knowledge Networks: Innovation through Communities of Practice, Idea Group Publishing, Hershey, 2004</li>
+		<li>Bensoussan, B. , C. S. Fleisher, The Financial Time Guide to Analysis for Managers, Pearson Education Ltd.,2009 </li>
+		<li>Strategic Management, Theory and Application, Adrian Haberberg & Alison Rieple, Oxford University Press, New York, 2008 </li>
+	</ul>
+	</div>
+	</body>
+</html>
