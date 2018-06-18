@@ -107,23 +107,26 @@
 		/**
 		 * Insert new student to database
 		 */
-		public function insert(){
-			$existingUser = new Student($this->userName, $this->fn);
-			$existingUser->load();
-
-			if($existingUser->fn){
-				return false;
+		public static function insertStudent($userName, $passwd, $email, $fn, $names, $year, $getBachelorProgram){
+			if (User::insert($userName, $passwd, "student", $email)) {
+				$student = new Student($userName, $password);
+				$student->load();
+	
+				if ($student->userName) {
+					return false;
+				}
+				
+				$query = 'INSERT INTO `students` (fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
+				$values = [$fn, $userName, $names, $year, $getBachelorProgram];
+	
+				$database = new DataBase();
+				$database->insertValues($query, $values);
+	
+				return true;
 			}
-
-			parent:: insert();
-
-			$database = new DataBase();
-			$query = 'INSERT INTO `students` (fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
-			$values = [$this->fn, parent:: getUserName(), $this->names, $this->year, $this->getBachelorProgram];
-
-			$database->insertValues($query, $values);
-
-			return true;
+	
+			return false;
+			
 		}
 
 		/**

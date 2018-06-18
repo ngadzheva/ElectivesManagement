@@ -16,7 +16,7 @@ CREATE TABLE admin(
     userName VARCHAR(200),
     names VARCHAR(200) NOT NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY(userName) REFERENCES users(userName)
+    FOREIGN KEY(userName) REFERENCES users(userName) ON UPDATE CASCADE
 );
 
 CREATE TABLE lecturer(
@@ -29,7 +29,7 @@ CREATE TABLE lecturer(
     office VARCHAR(100) NOT NULL,
     personalPage VARCHAR(200),
     PRIMARY KEY (id),
-    FOREIGN KEY(userName) REFERENCES users(userName)
+    FOREIGN KEY(userName) REFERENCES users(userName) ON UPDATE CASCADE
 );
 
 CREATE TABLE student(
@@ -39,7 +39,7 @@ CREATE TABLE student(
     year INT,
     bachelorProgram VARCHAR(200),
     PRIMARY KEY (fn),
-    FOREIGN KEY(userName) REFERENCES users(userName)
+    FOREIGN KEY(userName) REFERENCES users(userName) ON UPDATE CASCADE
 );
 
 CREATE TABLE electives(
@@ -56,7 +56,7 @@ CREATE TABLE electives(
     active BOOLEAN,
     rating INT,
     PRIMARY KEY (name),
-    FOREIGN KEY(lecturer) REFERENCES lecturer(id)
+    FOREIGN KEY(lecturer) REFERENCES lecturer(id) ON UPDATE CASCADE
 );
 
 CREATE TABLE messages(
@@ -68,8 +68,8 @@ CREATE TABLE messages(
     receiver VARCHAR(200),
     opened BOOLEAN,
     PRIMARY KEY (id),
-    FOREIGN KEY(sender) REFERENCES users(userName),
-    FOREIGN KEY(receiver) REFERENCES users(userName)
+    FOREIGN KEY(sender) REFERENCES users(userName) ON UPDATE CASCADE,
+    FOREIGN KEY(receiver) REFERENCES users(userName) ON UPDATE CASCADE
 );
 
 CREATE TABLE chElectives(
@@ -79,8 +79,8 @@ CREATE TABLE chElectives(
     fn INT,
     grade INT DEFAULT 0,
     PRIMARY KEY (id),
-    FOREIGN KEY(name) REFERENCES electives(name),
-    FOREIGN KEY(fn) REFERENCES student(fn)
+    FOREIGN KEY(name) REFERENCES electives(name) ON UPDATE CASCADE,
+    FOREIGN KEY(fn) REFERENCES student(fn) ON UPDATE CASCADE
 );
 
 CREATE TABLE comments(
@@ -90,8 +90,8 @@ CREATE TABLE comments(
     user VARCHAR(200),
     timePosted TIMESTAMP,
     PRIMARY KEY (id),
-    FOREIGN KEY (elective) REFERENCES electives(name),
-    FOREIGN KEY(user) REFERENCES users(userName)
+    FOREIGN KEY (elective) REFERENCES electives(name) ON UPDATE CASCADE,
+    FOREIGN KEY(user) REFERENCES users(userName) ON UPDATE CASCADE
 );
 
 CREATE TABLE campaign(

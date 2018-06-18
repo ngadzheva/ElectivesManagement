@@ -71,8 +71,8 @@
         /**
          * Add new elective to database
          **/
-        public function addNewElective($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating){
-            $newElective  = new ElectivesModel($id, $title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating);
+        public function addNewElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating){
+            $newElective  = new ElectivesModel($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, $rating);
             $newElective->insertNewElective();
 
             header( 'Location: http://' . $_SERVER['HTTP_HOST'] . '/admin.html' );

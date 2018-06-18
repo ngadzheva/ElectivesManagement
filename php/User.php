@@ -103,19 +103,21 @@
 		/**
 		 * Insert new user to database
 		 */
-		public function insert(){
-			$existingUser = new User($this->userName, $this->passwd);
+		public static function insert($userName, $passwd, $userType, $email){
+			$existingUser = new User($userName, $passwd);
 			$existingUser->load();
 
 			if($existingUser->userName){
 				return false;
 			}
 
-			$database = new DataBase();
 			$query = 'INSERT INTO `users` (userName, passwd, userType, active, email) VALUES(?, ?, ?, ?, ?)';
-			$values = [$this->userName, $this->passwd, $this->userType, $this->active, $this->email];
+			$values = [$userName, $passwd, $userType, true, $email];
 
-			return $database->insertValues($query, $values);
+			$database = new DataBase();
+			$database->insertValues($query, $values);
+
+			return true;
 		}
 	}	
 ?>
