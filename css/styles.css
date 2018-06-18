@@ -136,11 +136,11 @@ main{
     min-width: 500px;
 }
 
-#editForm, #messageForm{
+#editForm, #messageForm, #writeForm{
     width: 800px;
 }
 
-legend[class=login], legend[class=editElective], legend[class=editProfile], legend[class=sendMessage]{
+legend[class=login], legend[class=editElective], legend[class=editProfile], legend[class=sendMessage], legend[class=writeOn], legend[class=writeOff], legend[class=writeMark]{
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
@@ -159,7 +159,8 @@ form{
 
 label[class=error], label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], 
 select[class=editProfile], label[class=editElective], input[class=editElective], textarea, 
-select[class=editElective], label[class=sendMessage], input[class=sendMessage]{
+select[class=editElective], label[class=sendMessage], input[class=sendMessage], label[class=writeOn], input[class=writeOn], 
+label[class=writeOff], input[class=writeOff], label[class=writeMark], input[class=writeMark]{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
