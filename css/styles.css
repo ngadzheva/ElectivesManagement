@@ -424,7 +424,7 @@ td[opened="0"]{
 }              
 
 /* user's content style */
-#lecturerContent, #studentContent {
+#lecturerContent, #studentContent, #adminContent {
     position:  absolute;
     margin-left: 340px;
     width: 80%;
