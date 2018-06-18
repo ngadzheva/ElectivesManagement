@@ -430,6 +430,10 @@ td[opened="0"]{
     width: 80%;
 } 
 
+#lecturerContent{
+    position:  relative;
+}
+
 #profile {
     position: absolute;
     margin-left: 360px;
@@ -515,7 +519,6 @@ td[opened="0"]{
 /* footer style */
 
 footer{
-    clear: both;
     bottom: 0px;
     position: relative;
     width: 100%;
