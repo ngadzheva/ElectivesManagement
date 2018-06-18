@@ -134,7 +134,7 @@
 		 */
 		public function getReferences(){
 			$database = new DataBase();
-			$sql = "SELECT name, grade, credits FROM `chelectives` WHERE fn='$this->fn'";
+			$sql = "SELECT name, grade, credits FROM `chElectives` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$references = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -162,7 +162,7 @@
 		public function getElectivesToChoose($term){
 			$database = new DataBase();
 
-			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chelectives AS ch ON el.NAME = ch.NAME WHERE grade = 0 OR grade IS NULL ";
+			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE grade = 0 OR grade IS NULL ";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$electivesToChoose = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -174,7 +174,7 @@
 		 */
 		public function insertNewChosenElective($elective, $credits){
 			$database = new DataBase();
-			$query = 'INSERT INTO `chelectives` (name, credits, fn) VALUES(?, ?, ?)';
+			$query = 'INSERT INTO `chElectives` (name, credits, fn) VALUES(?, ?, ?)';
 			$values = [$elective, $credits, $this->fn];
 
 			$database->insertValues($query, $values);
@@ -185,7 +185,7 @@
 		 */
 		public function deleteChosenElective($elective){
 			$database = new DataBase();
-			$sql = "DELETE FROM `chelectives` WHERE name='$elective'";
+			$sql = "DELETE FROM `chElectives` WHERE name='$elective'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 		}
 
