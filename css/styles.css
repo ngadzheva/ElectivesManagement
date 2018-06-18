@@ -422,7 +422,7 @@ td[opened="0"]{
 }              
 
 /* user's content style */
-#studentContent {
+#lecturerContent, #studentContent {
     position: absolute;
     margin-left: 340px;
     width: 80%;
