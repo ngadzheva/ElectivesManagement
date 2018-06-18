@@ -376,7 +376,7 @@ function makeProfileEditForm(type, email){
 }
 
 function makeElectivesEditForm(name, is){
-	  var info = JSON.decode(is);
+	  var info = JSON.parse(is);
 	  var editForm = "<fieldset id='editForm'>\n" +
     "<form name='edit' method='post' onsubmi='return connectToServer.editInfo()'>\n" +
         "<legend class='editProfile'>Редактиране на избираема дисциплина</legend>\n" + 
