@@ -117,7 +117,7 @@ main{
     min-width: 1100px;
 }
 
-#loginForm, #editForm, #messageForm{
+#loginForm, #editForm, #messageForm, #writeForm{
     position: relative;
     display: block;
     width: 500px;
