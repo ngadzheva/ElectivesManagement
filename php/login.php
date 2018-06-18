@@ -29,6 +29,11 @@
                     $student = $query->fetch(PDO::FETCH_ASSOC);
 
                     $_SESSION['fn'] = $student['fn'];
+                } else if($exist['userType'] == 'lecturer'){
+                    $sql = "SELECT id FROM lecturer WHERE userName='$user'";
+                    $query = $database->executeQuery($sql, "Failed finding $user!");
+                    $lecturer = $query->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['id'] = $lecturer['id'];
                 }
 
                 header('Location: ../' . $exist['userType'] . '.html'); 
