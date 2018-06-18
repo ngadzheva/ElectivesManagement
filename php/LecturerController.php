@@ -1,5 +1,4 @@
 <?php
-
     require_once 'lecturer.php';
 	require_once 'electivesController.php';
 	
