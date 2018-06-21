@@ -1,6 +1,5 @@
 <?php
 require_once "User.php";
-
 class Lecturer extends User{
 	
 	private $id;
@@ -78,7 +77,6 @@ class Lecturer extends User{
 	public function getEmail(){
 		return parent::getEmail();
 	}
-
 	/**
 	 * Get user name
 	 */
@@ -105,16 +103,16 @@ class Lecturer extends User{
 	 */
 	public function setTelephone($telephone){
 		$this->telephone = $telephone;
-		$sql = "UPDATE `lecturer` SET telephone = '$telephone'  WHERE id='$this->id'";
+		$sql = "UPDATE `lecturer` SET telephone ='$telephone'  WHERE userName='$this->userName'";
         $query = $this->database->executeQuery($sql, "Failed updating telephone!");
 	}
-
+	
 	/**
 	* Set new visiting hours
 	 */
 	public function setVisitingHours($visitingHours){
 		$this->visitingHours = $visitingHours;
-		$sql = "UPDATE `lecturer` SET `visitingHours` = '$visitingHours'  WHERE id='$this->id'";
+		$sql = "UPDATE `lecturer` SET `visitingHours` = '$visitingHours'  WHERE userName='$this->userName'";
         $query = $this->database->executeQuery($sql, "Failed updating hours of visit!");
 	}
 	
@@ -123,7 +121,7 @@ class Lecturer extends User{
 	*/
 	public function setOffice($office){
 		$this->office = $office;
-		$sql = "UPDATE `lecturer` SET `office` = '$office'  WHERE id='$this->id'";
+		$sql = "UPDATE `lecturer` SET `office` = '$office'  WHERE userName='$this->userName'";
         $query = $this->database->executeQuery($sql, "Failed updating office!");
 	}
 	
@@ -132,7 +130,7 @@ class Lecturer extends User{
 	*/
 	public function setPersonalPage($personalPage){
 		$this->personalPage = $personalPage ;
-		$sql = "UPDATE `lecturer` SET `personalPage` = '$personalPage'  WHERE id='$this->id'";
+		$sql = "UPDATE `lecturer` SET `personalPage` = '$personalPage'  WHERE userName='$this->userName'";
         $query = $this->database->executeQuery($sql, "Failed updating personal page!");
 	}
 	
@@ -141,7 +139,7 @@ class Lecturer extends User{
 	 */
 	public function getReferences($name){
 			$database = new DataBase();
-			$sql = "SELECT student.year, COUNT(student.year) AS countYear, student. bachelorProgram , COUNT(student. bachelorProgram ) AS counterprogram FROM `chelectives` JOIN `student` ON chelectives.fn = student.fn WHERE chelectives.name='$name' GROUP BY student.year, student.bachelorProgram";
+			$sql = "SELECT student.year, COUNT(student.year) AS countYear, student. bachelorProgram , COUNT(student. bachelorProgram ) AS counterprogram FROM `chElectives` JOIN `student` ON chElectives.fn = student.fn WHERE chElectives.name='$name' GROUP BY student.year, student.bachelorProgram";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$references = $query->fetchAll(PDO::FETCH_ASSOC);
 			return $references;
@@ -212,7 +210,6 @@ class Lecturer extends User{
 				return 'notfound';
 			}
 		}
-
 		/**
 		 * Updating information for an elective
 		 */
@@ -229,17 +226,35 @@ class Lecturer extends User{
 		 */
 		public function writeOffStudent($name, $names, $fn){
 			$database = new DataBase();
-			$sql = "DELETE FROM `chelectives` WHERE name='$name' AND fn='$fn'";
+			$sql= "SELECT fn FROM `student` WHERE names='$names' AND fn='$fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
+			$receiver = $query->fetch(PDO::FETCH_ASSOC);
+			if($receiver){
+				$sql  = "DELETE FROM `chElectives` WHERE name='$name' AND fn='$fn'";
+				$query = $database->executeQuery($sql, 'Failed find user');
+				return 'success';
+				return 'notfound';
+			} else {
+				return 'notfound';
+			}
 		}
-		
+				
 		/**
 		 * Write-off students
 		 */
 		public function writeOnStudent($nameElective, $name, $fn){
 			$database = new DataBase();
-			$sql = "INSERT INTO `chelectives`(`name`, `credits`, `fn`) SELECT '$nameElective', credits, '$fn' FROM `electives` WHERE name='$nameElective'";
+			$sql= "SELECT fn FROM `student` WHERE names='$names' AND fn='$fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
+			$receiver = $query->fetch(PDO::FETCH_ASSOC);
+			if($receiver){
+				$sql  = "INSERT INTO `chElectives`(`name`, `credits`, `fn`) SELECT '$nameElective', credits, '$fn' FROM `electives` WHERE name='$nameElective'";
+				$query = $database->executeQuery($sql, 'Failed find user');
+				return 'success';
+				return 'notfound';
+			} else {
+				return 'notfound';
+			}
 		}
 		
 		/**
@@ -247,8 +262,17 @@ class Lecturer extends User{
 		 */
 		public function writeMarkStudent($nameElectives, $names, $fn, $mark){
 			$database = new DataBase();
-			$sql = "UPDATE `chelectives` SET grade='$mark' WHERE name='$nameElectives' AND fn='$fn'";
+			$sql= "SELECT fn FROM `student` WHERE names='$names' AND fn='$fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
+			$receiver = $query->fetch(PDO::FETCH_ASSOC);
+			if($receiver){
+				$sql  = "UPDATE `chElectives` SET grade='$mark' WHERE name='$nameElectives' AND fn='$fn'";
+				$query = $database->executeQuery($sql, 'Failed find user');
+				return 'success';
+				return 'notfound';
+			} else {
+				return 'notfound';
+			}
 		}
 		
 		/**
@@ -269,7 +293,7 @@ class Lecturer extends User{
 			$this->personalPage = $lecturer['personalPage'];
 			return !!$lecturer;
 		}
-
+		
 		public static function insertLecturer($userName, $passwd, $email, $names, $department, $telephone, $visitingHours, $office, $personalPage) : bool {
 			if(User::insert($userName, $passwd, "lecturer", $email)) {
 				$newLecturer = Lecturer($userName, $names);
@@ -290,6 +314,5 @@ class Lecturer extends User{
 	
 			return false;
 		}
-
 }
 ?>
