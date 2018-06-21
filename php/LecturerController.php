@@ -13,6 +13,7 @@
 			$this->electives = new ElectivesController();
   
         }
+		
         /**
          * Return lecturer data (names, department, telephone, visitingHours, office and personalPage)
          */
@@ -32,7 +33,7 @@
 		/**
          * Update lecturer data (email and / or password and / or telephone and / or visitingHours and / or office and / or personalPage )
          */
-         public function updateInfo($userName, $email, $password, $newPassword, $telephone, $visitingHours, $office, $personalPage){
+         public function updateInfo($email, $newPassword, $telephone, $visitingHours, $office, $personalPage){
             $this->lecturer->setEmail($email);
             $this->lecturer->setPasswd($newPassword);
 			$this->lecturer->setTelephone($telephone);
@@ -77,7 +78,6 @@
             return $template;
         }
 		 
-
 		/**
          * List of electives
          */
@@ -176,7 +176,6 @@
             '</table>';
             return $template;
         }
-
         /**
          * Send message from current lecturer to another user
          */
@@ -204,6 +203,5 @@
 		public function writeMark($nameElectives, $names, $fn, $mark){
             return $this->lecturer->writeMarkStudent($nameElectives, $names, $fn, $mark);
         }
-    }
+    } 
 ?>
-
