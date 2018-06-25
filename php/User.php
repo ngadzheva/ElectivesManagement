@@ -104,13 +104,6 @@
 		 * Insert new user to database
 		 */
 		public static function insert($userName, $passwd, $userType, $email){
-			$existingUser = new User($userName, $passwd);
-			$existingUser->load();
-
-			if($existingUser->userName){
-				return false;
-			}
-
 			$query = 'INSERT INTO `users` (userName, passwd, userType, active, email) VALUES(?, ?, ?, ?, ?)';
 			$values = [$userName, $passwd, $userType, true, $email];
 

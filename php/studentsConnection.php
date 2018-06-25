@@ -15,6 +15,12 @@
                 $student->changeChosenElectives($_GET['action'], $_GET['elective'], $_GET['credits']);
             }
             echo $student->showElectivesCampaign();
+        } else if($id == 'showSuggestions'){
+            echo $student->showElectivesSuggestions();
+        } else if($id == 'schedule'){
+            echo $student->showSchedule();
+        } else if($id == 'exams'){
+            echo $student->showExams();
         } else if($id == 'showMessages'){
             echo $student->showMessages($_GET['type']);
         } 
@@ -45,6 +51,9 @@
             header("Location: ../student.html?id=editProfile&status=" . $status);
         }
         
+    } else if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['year']) && isset($_POST['bachelorPrograme']) && isset($_POST['term']) && isset($_POST['cathegory'])){
+        $student->suggestNewElective($_POST['name'], $_POST['description'], $_POST['year'], $_POST['bachelorPrograme'], $_POST['term'], $_POST['cathegory']);
+        header("Location: ../student.html?id=electivesSuggestions");
     } else{
         $studentInfo = $student->viewInfo();
 

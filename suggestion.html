@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+
+			<title>Система за управление на избираеми дисциплини</title>
+
+			<link href="css/description.css" rel="stylesheet">
+			<script type="text/javascript" src="js/suggestionScript.js"></script>
+		</head>
+		<body>
+			<header>
+				<h1 id='title'></h1>
+			</header>
+
+			<aside>
+				<img id="dislike" title="Не харесвам" src="img/dislike.png"/>
+				<img id="like" title="Харесвам" src="img/like.png"/>
+				<section id="comment">Коментари</section>
+				<section id="back">Назад</section>
+			</aside>
+
+			<section id="commentsOverlay" class="comments">
+				<section class="closebtn" title="Затвори коментарите">x</section>
+				<section id="commentContent" class="commentsContent">
+					<textarea id="writeComment" rows="10" cols="40" placeholder="Напиши мнение..."></textarea>
+					<section id="post" onclick="postComment()">Публикувай</section>
+
+					<section id="userCommentsList"></section>
+				</section>
+			</section>
+
+			<aside id="menu">
+				<a href="#characteristics">Характеристики</a>
+				<a href="#description">Кратко описание</a>	
+			</aside>
+
+			<section id="characteristics">
+				<h2>Характеристики:</h2>
+				<p id="ratingCount"><mark id="bold">Рейтинг: </mark></p>
+				<p id="termType"><mark id="bold">Семестър: </mark></p>
+				<p id="yearType"><mark id="bold">Курс: </mark></p>
+				<p id="bachelorProgrameType"><mark id="bold">Специалност: </mark></p>
+				<p id="cathegoryType"><mark id="bold">Категория: </mark></p>	
+			</section>		
+
+			<section id="description">
+				<h2>Кратко описание</h2>
+				<p id="descriptionContent"></p>
+			</section>
+		</body>
+	</html>

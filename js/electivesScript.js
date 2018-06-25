@@ -144,7 +144,7 @@ function listElectives(element, term){
 /*
  * Add new column to the table with electives according to current location
  */
-function makeColumn(name){
+function makeColumn(name, isSuggestion){
     var th = document.createElement('th');
     var value = document.createTextNode(name);
     th.appendChild(value);
@@ -159,8 +159,8 @@ function makeColumn(name){
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
 
-            var elective = tr[i].childNodes[1].innerHTML;
-            img.setAttribute('onclick', 'viewDescription("' + elective + '")');            
+            var elective = isSuggestion ? tr[i].childNodes[0].innerHTML : tr[i].childNodes[1].innerHTML;
+            img.setAttribute('onclick', 'viewDescription("' + elective + '", ' + isSuggestion + ')');            
             img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
@@ -197,8 +197,10 @@ function makeColumn(name){
 /*
  * Opem the page with the description of the elective
  */
-function viewDescription(elective){
+function viewDescription(elective, isSuggestion){
     document.cookie = 'elective=' + elective;
     document.cookie = 'lastLocation=' + window.location.href;
-    window.location.replace('description.html');
+
+    let page = isSuggestion ? 'suggestion.html' : 'description.html';
+    window.location.replace(page);
 }

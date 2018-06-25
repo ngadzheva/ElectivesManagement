@@ -54,7 +54,8 @@ CREATE TABLE electives(
     term VARCHAR(200),
     cathegory VARCHAR(200),
     active BOOLEAN,
-    rating INT,
+    rating INT DEFAULT 0,
+    type VARCHAR(10),
     PRIMARY KEY (name),
     FOREIGN KEY(lecturer) REFERENCES lecturer(id) ON UPDATE CASCADE
 );
@@ -78,6 +79,7 @@ CREATE TABLE chElectives(
     credits INT,
     fn INT,
     grade INT DEFAULT 0,
+    enrolledDate TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY(name) REFERENCES electives(name) ON UPDATE CASCADE,
     FOREIGN KEY(fn) REFERENCES student(fn) ON UPDATE CASCADE
@@ -99,5 +101,26 @@ CREATE TABLE campaign(
     startDate DATE,
     endDate DATE,
     PRIMARY KEY (id)
+);
+
+CREATE TABLE schedule(
+    id INT AUTO_INCREMENT,
+    elective VARCHAR(200),
+    lecturesType VARCHAR(20),
+    day VARCHAR(10),
+    hours VARCHAR(12),
+    hall INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(elective) REFERENCES electives(name) ON UPDATE CASCADE
+);
+
+CREATE TABLE exams(
+    id INT AUTO_INCREMENT,
+    elective VARCHAR(200),
+    examType CHAR,
+    date TIMESTAMP,
+    hall INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(elective) REFERENCES electives(name) ON UPDATE CASCADE
 );
 

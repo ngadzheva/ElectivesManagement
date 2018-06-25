@@ -107,17 +107,10 @@
 		/**
 		 * Insert new student to database
 		 */
-		public static function insertStudent($userName, $passwd, $email, $fn, $names, $year, $getBachelorProgram){
-			if (User::insert($userName, $passwd, "student", $email)) {
-				$student = new Student($userName, $password);
-				$student->load();
-	
-				if ($student->userName) {
-					return false;
-				}
-				
-				$query = 'INSERT INTO `students` (fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
-				$values = [$fn, $userName, $names, $year, $getBachelorProgram];
+		public static function insertStudent($userName, $passwd, $email, $fn, $names, $year, $bachelorProgram){
+			if (User::insert($userName, $passwd, "student", $email)) {				
+				$query = 'INSERT INTO student(fn, userName, names, year, bachelorProgram) VALUES(?, ?, ?, ?, ?)';
+				$values = [$fn, $userName, $names, $year, $bachelorProgram];
 	
 				$database = new DataBase();
 				$database->insertValues($query, $values);
@@ -134,7 +127,7 @@
 		 */
 		public function getReferences(){
 			$database = new DataBase();
-			$sql = "SELECT name, grade, credits FROM `chElectives` WHERE fn='$this->fn'";
+			$sql = "SELECT name, grade, credits, enrolledDate FROM `chElectives` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$references = $query->fetchAll(PDO::FETCH_ASSOC);
 
@@ -154,6 +147,59 @@
 		}
 
 		/**
+		 * Retrieve new electives suggestions from database
+		 */
+		public function getSuggestions(){
+			$database = new DataBase();
+			$sql = "SELECT name, recommendedYear, recommendedBachelorProgram, term, cathegory, rating FROM `electives` WHERE type='suggestion'";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			return $suggestions;
+		}
+
+		/**
+		 * Retrieve student's schedule from database
+		 */
+		public function getSchedule(){
+			$database = new DataBase();
+			$sql = "SELECT elective, lecturesType, day, hours, hall FROM schedule, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			return $suggestions;
+		}
+
+		/**
+		 * Retrieve student's exams from database
+		 */
+		public function getExams(){
+			$database = new DataBase();
+			$sql = "SELECT elective, examType, date, hall FROM exams, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
+			$query = $database->executeQuery($sql, 'Failed find user');
+			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			return $suggestions;
+		}
+
+		/**
+		 * Insert new suggestion for elective into database
+		 */
+		public function insertNewSuggestedElective($name, $description, $year, $bachelorPrograme, $term, $cathegory){
+			$recommendedBachelorPrograme = '';
+
+			foreach($bachelorPrograme as $key => $value){
+				$recommendedBachelorPrograme = $recommendedBachelorPrograme . $value . ' ';
+			}
+			
+			$database = new DataBase();
+			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, active, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
+			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, true, 'suggestion'];
+
+			$database->insertValues($query, $values);
+		}
+
+		/**
 		 * Retrive list of all available electives in electives campaign 
 		 * without those which were enrolled in other campaign 
 		 * (i.e. chosen electives for which the student has valid grade, 
@@ -161,8 +207,9 @@
 		 */
 		public function getElectivesToChoose($term){
 			$database = new DataBase();
+			$term = (date('M') >= 9 && date('M') <= 12) ? 'winter' : 'summer';
 
-			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE grade = 0 OR grade IS NULL ";
+			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE term='$term' AND (grade = 0 OR grade IS NULL)";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$electivesToChoose = $query->fetchAll(PDO::FETCH_ASSOC);
 

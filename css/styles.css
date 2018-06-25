@@ -102,7 +102,7 @@ main{
 
 /* login.php styles */
 
-#background{
+#background, #registerBackground{
     min-height: 540px;
     width: 100%;
     background-image: url("../img/background.jpg");
@@ -117,7 +117,12 @@ main{
     min-width: 1100px;
 }
 
-#loginForm, #editForm, #messageForm, #writeForm{
+#registerBackground{
+    padding-top: 30px;
+    padding-bottom: 5px;
+}
+
+#loginForm, #registerForm, #editForm, #messageForm, #writeForm, #suggestionForm{
     position: relative;
     display: block;
     width: 500px;
@@ -136,11 +141,13 @@ main{
     min-width: 500px;
 }
 
-#editForm, #messageForm, #writeForm{
+#editForm, #messageForm, #writeForm, #suggestionForm{
     width: 800px;
 }
 
-legend[class=login], legend[class=editElective], legend[class=editProfile], legend[class=sendMessage], legend[class=writeOn], legend[class=writeOff], legend[class=writeMark]{
+legend[class=login], legend[class=register], legend[class=editElective], legend[class=editProfile], 
+legend[class=sendMessage], legend[class=writeOn], legend[class=writeOff], legend[class=writeMark],
+legend[class=makeSuggestion]{
     font-size: 32px;
     font-weight: bold;
     margin: 10px;
@@ -157,18 +164,24 @@ form{
     margin: 10px;
 }
 
-label[class=error], label[class=login], input[class=login], label[class=editProfile], input[class=editProfile], 
-select[class=editProfile], label[class=editElective], input[class=editElective], textarea, 
-select[class=editElective], label[class=sendMessage], input[class=sendMessage], label[class=writeOn], input[class=writeOn], 
-label[class=writeOff], input[class=writeOff], label[class=writeMark], input[class=writeMark]{
+label[class=error], label[class=login], input[class=login], label[class=register], input[class=register], 
+select[class=register], label[class=student], input[class=student], label[class=lecturer], input[class=lecturer],
+label[class=editProfile], input[class=editProfile], select[class=editProfile], label[class=editElective], 
+input[class=editElective], textarea, select[class=editElective], label[class=sendMessage], input[class=sendMessage], 
+label[class=writeOn], input[class=writeOn], label[class=writeOff], input[class=writeOff], label[class=writeMark], input[class=writeMark],
+label[class=makeSuggestion], input[class=makeSuggestion], select[class=makeSuggestion]{
     display: block;
     font-size: 24px;
     margin: 20px 10px;
     height: 30px;
 }
 
-input[type=text], input[type=password]{
+input[type=text], input[type=email], input[type=tel], input[type=password], select[class=register], select[class=makeSuggestion],input[type=number]{
     width: 95%;
+}
+
+input[type=checkbox], label[for]{
+    display: inline;
 }
 
 input[type=text]:focus {
@@ -212,7 +225,7 @@ textarea{
     font-size: 16px;
 }
 
-textarea[class=sendMessage]{
+textarea[class=sendMessage], textarea[class=makeSuggestion]{
     height: 140px;
     overflow: scroll;
 }
@@ -354,6 +367,10 @@ td {
     text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
 }
 
+#lastRow{
+    border: none;
+}
+
 #viewMessage, #messagesList{
     width: 99%;
     margin-left: 20px;
@@ -426,7 +443,7 @@ td[opened="0"]{
 /* user's content style */
 #lecturerContent, #studentContent, #adminContent {
     position:  absolute;
-    margin-left: 340px;
+    margin-left: 360px;
     width: 80%;
 } 
 
@@ -439,7 +456,7 @@ td[opened="0"]{
     margin-left: 360px;
 }
 
-#profile h1, #campaignHeader, #referencesHeader{
+#profile h1, #campaignHeader, #referencesHeader, #suggestionsHeader, #scheduleHeader, #examsHeader{
     font-size: 32px;
     margin-top: 25px;
     margin-left: 25px;
@@ -476,7 +493,7 @@ td[opened="0"]{
     cursor: pointer;
 }
 
-.editIcon, .deleteIcon, .viewIcon, .enrolIcon{
+.editIcon, .deleteIcon, .viewIcon, .enrolIcon, .addIcon{
     margin-right: 10px;
     cursor: pointer;
 }
@@ -490,7 +507,7 @@ td[opened="0"]{
     padding-bottom: 20px;
     padding-left: 10px;
     background-color: #1D224C;
-    width: 958;
+    width: 99%;
     color: #FFFFFF;
 }
 
@@ -509,7 +526,7 @@ td[opened="0"]{
     color: #96BCE5;
 }
 
-#messagesHeader, #campaignHeader{
+#messagesHeader{
     font-size: 24px;
     font-weight: bold;
     background-color: #FFFFFF;

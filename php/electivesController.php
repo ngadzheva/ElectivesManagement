@@ -196,7 +196,7 @@
             $electives->load();
 
             $this->elective['lecturer'] = $this->lecturerInfo($electives->getLecturer());
-            $this->elective['rating'] = $electives->getRating();
+            $this->elective['rating'] = $electives->getRating() ? $electives->getRating() : 0;
             $this->elective['term'] = $electives->getTerm() == 'winter' ? 'Зимен' : 'Летен';
             $this->elective['year'] = $electives->getYear();
             $this->elective['bachelorPrograme'] = $electives->getBachelorsProgram();
@@ -217,25 +217,29 @@
             $query = $this->db->executeQuery($sql, "Failed finding lecturer!");
             $lecturerInfo = $query->fetch(PDO::FETCH_ASSOC);
 
-            $template = '<h3>' . $lecturerInfo['names'] . '</h3>' .
+            if($lecturerInfo){
+                $template = '<h3>' . $lecturerInfo['names'] . '</h3>' .
                 '<h4>' . $lecturerInfo['department'] . '</h4>' .
                 '<p><mark id="bold">Email: </mark>' . $lecturerInfo['email'] . '</p>';
 
-            if($lecturerInfo['telephone']){
-                $template = $template . '<p><mark id="bold">Телефон: </mark>' . $lecturerInfo['telephone'] . '</p>';
-            }
+                if($lecturerInfo['telephone']){
+                    $template = $template . '<p><mark id="bold">Телефон: </mark>' . $lecturerInfo['telephone'] . '</p>';
+                }
 
-            if($lecturerInfo['office']){
-                $template = $template . '<p><mark id="bold">Кабинет: </mark>' . $lecturerInfo['office'] . '</p>';
-            }
+                if($lecturerInfo['office']){
+                    $template = $template . '<p><mark id="bold">Кабинет: </mark>' . $lecturerInfo['office'] . '</p>';
+                }
 
-            if($lecturerInfo['visitingHours']){
-                $template = $template . '<p><mark id="bold">Приемно време: </mark>' . $lecturerInfo['visitingHours'] . '</p>';
+                if($lecturerInfo['visitingHours']){
+                    $template = $template . '<p><mark id="bold">Приемно време: </mark>' . $lecturerInfo['visitingHours'] . '</p>';
+                }
+                    
+                if($lecturerInfo['personalPage']){
+                    $template = $template . '<p><mark id="bold">Лична страница: </mark>' . $lecturerInfo['personalPage'] . '</p>';
+                }  
+            }  else {
+                $template = '';
             }
-                
-            if($lecturerInfo['personalPage']){
-                $template = $template . '<p><mark id="bold">Лична страница: </mark>' . $lecturerInfo['personalPage'] . '</p>';
-            }    
 
             return $template;
         }
@@ -254,14 +258,18 @@
             $subjectsInfo = json_decode($subjects, true);
             $num = 1;
 
-            foreach($subjectsInfo as $key => $value){
-                $template = $template . '<tr>' .
-                    '<td>' . $num .'</td>' .
-                    '<td>' . $key .'</td>' .
-                    '<td>' . $value .'</td>' .
-                '</tr>';
-
-                $num++;
+            if($subjectsInfo){
+                foreach($subjectsInfo as $key => $value){
+                    $template = $template . '<tr>' .
+                        '<td>' . $num .'</td>' .
+                        '<td>' . $key .'</td>' .
+                        '<td>' . $value .'</td>' .
+                    '</tr>';
+    
+                    $num++;
+                }
+            } else {
+                $template = '';
             }
 
             return $template;
@@ -280,18 +288,22 @@
 
             $num = 0;
 
-            foreach($literatureInfo as $key => $value){
-               if($value == 'Допълнителна' && $num == 0){
-                   $template = $template . '</ul>' . $additionalLiterature . '<ul>';
+            if($literatureInfo){
+               foreach($literatureInfo as $key => $value){
+                    if($value == 'Допълнителна' && $num == 0){
+                        $template = $template . '</ul>' . $additionalLiterature . '<ul>';
 
-                   $num++;
-               }
+                        $num++;
+                    }
 
-               $template = $template . '<li>' . $key . '</li>';
+                    $template = $template . '<li>' . $key . '</li>';
+                }
+
+                $template = $template . '</ul>'; 
+            } else {
+                $template = '';
             }
-
-            $template = $template . '</ul>';
-
+            
             return $template;
         }
 

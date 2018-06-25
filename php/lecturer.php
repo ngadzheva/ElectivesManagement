@@ -296,13 +296,6 @@ class Lecturer extends User{
 		
 		public static function insertLecturer($userName, $passwd, $email, $names, $department, $telephone, $visitingHours, $office, $personalPage) : bool {
 			if(User::insert($userName, $passwd, "lecturer", $email)) {
-				$newLecturer = Lecturer($userName, $names);
-				$newLecturer->load();
-	
-				if($newLecturer->names) {
-					return false;
-				}
-	
 				$query = 'INSERT INTO `lecturer` (userName, names, department, telephone, visitingHours, office, personalPage) VALUES(?, ?, ?, ?, ?, ?, ?)';
 				$values = [$userName, $names, $department, $telephone, $visitingHours, $office, $personalPage];
 	
