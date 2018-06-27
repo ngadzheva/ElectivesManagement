@@ -209,7 +209,7 @@
 			$database = new DataBase();
 			$term = (date('M') >= 9 && date('M') <= 12) ? 'winter' : 'summer';
 
-			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON active = TRUE AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE term='$term' AND (grade = 0 OR grade IS NULL)";
+			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON type='active' AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE term='$term' AND (grade = 0 OR grade IS NULL)";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$electivesToChoose = $query->fetchAll(PDO::FETCH_ASSOC);
 

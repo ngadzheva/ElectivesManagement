@@ -63,7 +63,7 @@ CREATE TABLE electives(
 CREATE TABLE messages(
     id INT AUTO_INCREMENT,
     sdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    about VARCHAR(2000),
+    about VARCHAR(200),
     content VARCHAR(2000),
     sender VARCHAR(200),
     receiver VARCHAR(200),

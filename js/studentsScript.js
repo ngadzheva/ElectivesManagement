@@ -160,87 +160,132 @@ const connectToServer =  {
 }
 
 /**
- * Make template for edit form
- * @param {*} type 
- * @param {*} email 
+ * Get cookie by cookie name
+ * @param {*} cookieName 
  */
-function makeProfileEditForm(type, email){
-
-    var editForm = "<fieldset id='editForm'>\n" +
-    "<legend class='editProfile'>" + type + "</legend>\n" + 
-    "<form name='edit' method='post' action='php/studentsConnection.php'>\n" +
-        "<label class='error' id='invalidPass' style='display: none;'>Невалидна парола.</label>\n" +
-        "<label class='error' id='notEqual' style='display: none;'>Двете пароли не съвпадат</label>\n" +
-        "<label class='editProfile'>E-mail:</label>\n" +
-        "<input class='editProfile' type='email' name='email' value='" + email + "'></input>\n" +
-        "<label class='editProfile'>Парола:</label>\n" +
-        "<input class='editProfile' type='password' name='passwd'></input>\n" +
-        "<label class='editProfile'>Нова парола:</label>\n" +
-        "<input class='editProfile' type='password' name='newPassword'></input>\n" +
-        "<label class='editProfile'>Потвърди парола:</label>\n" +
-        "<input class='editProfile' type='password' name='confirmPassword'></input>\n" +
-        "<input class='editProfile' type='submit' value='Запази'></input>\n" +
-    "</form>\n" +
-    "</fildset>\n";
-
-    return editForm;
+function getCookie(cookieName) {
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(';');
+    for(let i = 0; i <cookies.length; i++) {
+        let currentCookie = cookies[i];
+        while (currentCookie.charAt(0) == ' ') {
+            currentCookie = currentCookie.substring(1);
+        }
+        if (currentCookie.indexOf(name) == 0) {
+            return  decodeURIComponent(currentCookie.substring(name.length, currentCookie.length).replace(/\+/g, ' '));
+        }
+    }
+    return "";
 }
 
-/**
- * Make template for form for suggesting new elective
- */
-function makeSuggestionForm(){
-    var suggestForm = "<fieldset id='suggestionForm'>\n" +
-    "<legend class='makeSuggestion'>Предлагане на избираема дисциплина</legend>\n" + 
-    "<form name='suggestion' method='post' action='php/studentsConnection.php'>\n" +
-        "<label class='makeSuggestion'>Име на дисциплината:</label>\n" +
-        "<input class='makeSuggestion' type='text' name='name'></input>\n" +
-        "<label class='makeSuggestion'>Кратко описание:</label>\n" +
-        "<textarea class='makeSuggestion' name='description' placeholder='Напиши своето предложение тук...'></textarea>\n" +
-        "<label class='makeSuggestion'>Курс:</label>\n" +
-        "<input class='makeSuggestion' type='number' name='year' min='1' max='4'></input>\n" +
-        "<label class='makeSuggestion'>Специалност:</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='И'></input>" +
-        "<label class='makeSuggestion' for='И'>И</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='ИС'></input>" +
-        "<label class='makeSuggestion' for='ИС'>ИС</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='КН'></input>" +
-        "<label class='makeSuggestion' for='КН'>КН</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='M'></input>" +
-        "<label class='makeSuggestion' for='М'>М</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='МИ'></input>" +
-        "<label class='makeSuggestion' for='МИ'>МИ</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='ПМ'></input>" +
-        "<label class='makeSuggestion' for='ПМ'>ПМ</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='СИ'></input>" +
-        "<label class='makeSuggestion' for='СИ'>СИ</label>\n" +
-        "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='Стат'></input>" +
-        "<label class='makeSuggestion' for='Стат'>Стат</label>\n" +
-        "<label class='makeSuggestion'>Семестър:</label>\n" +
-        "<select class='makeSuggestion' name='term'>" +
-            "<option value='-' select='selected'>-</option>" +
-            "<option value='winter'>Зимен</option>" +
-            "<option value='summer'>Летен</option>" +
-        "</select>" +
-        "<label class='makeSuggestion'>Категория:</label>\n" +
-        "<select class='makeSuggestion' name='cathegory'>" +
-            "<option value='-' select='selected'>-</option>" +
-            "<option value='КП'>КП</option>" +
-            "<option value='М'>М</option>" +
-            "<option value='ОКН'>ОКН</option>" +
-            "<option value='ПМ'>ПМ</option>" +
-            "<option value='С'>С</option>" +
-            "<option value='Х'>Х</option>" +
-            "<option value='ЯКН'>ЯКН</option>" +
-        "</select>" +
-        "<input class='makeSuggestion' type='submit' value='Предложи'></input>\n" +
-    "</form>\n" +
-    "</fildset>\n";
+const forms = {
+    /**
+     * Make template for edit form
+     * @param {*} type 
+     * @param {*} email 
+     */
+    makeProfileEditForm: (type, email) =>{
+        let editForm = "<fieldset id='editForm'>\n" +
+        "<legend class='editProfile'>" + type + "</legend>\n" + 
+        "<form name='edit' method='post' action='php/studentsConnection.php'>\n" +
+            "<label class='error' id='invalid' style='display: none;'></label>\n" +
+            "<label class='editProfile'>E-mail:<mark id='star'>*</mark></label>\n" +
+            "<input class='editProfile' type='email' name='email' value='" + email + "'></input>\n" +
+            "<label class='editProfile'>Парола:<mark id='star'>*</mark></label>\n" +
+            "<input class='editProfile' type='password' name='password'></input>\n" +
+            "<label class='editProfile'>Нова парола:<mark id='star'>*</mark></label>\n" +
+            "<input class='editProfile' type='password' name='newPassword'></input>\n" +
+            "<label class='editProfile'>Потвърди парола:<mark id='star'>*</mark></label>\n" +
+            "<input class='editProfile' type='password' name='confirmPassword'></input>\n" +
+            "<input class='editProfile' type='submit' value='Запази'></input>\n" +
+        "</form>\n" +
+        "</fildset>\n";
+    
+        return editForm;
+    },
 
-    document.getElementById('studentContent').innerHTML = suggestForm;
+    /**
+     * Make template for form for suggesting new elective
+     */
+    makeSuggestionForm: (name, year) =>{
+        let suggestForm = "<fieldset id='suggestionForm'>\n" +
+        "<legend class='makeSuggestion'>Предлагане на избираема дисциплина</legend>\n" + 
+        "<form name='suggestion' method='post' action='php/studentsConnection.php'>\n" +
+            "<label class='error' id='invalid' style='display: none;'></label>\n" +
+            "<label class='makeSuggestion'>Име на дисциплината:<mark id='star'>*</mark></label>\n" +
+            "<input class='makeSuggestion' type='text' name='name' value='" + name + "'></input>\n" +
+            "<label class='makeSuggestion'>Кратко описание:<mark id='star'>*</mark></label>\n" +
+            "<textarea class='makeSuggestion' name='description' placeholder='Напиши своето предложение тук...'></textarea>\n" +
+            "<label class='makeSuggestion'>Курс:</label>\n" +
+            "<input class='makeSuggestion' type='number' name='year' min='1' max='4' value='" + year + "'></input>\n" +
+            "<label class='makeSuggestion'>Специалност:</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='Всички' checked></input>" +
+            "<label class='makeSuggestion' for='-'>-</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='И'></input>" +
+            "<label class='makeSuggestion' for='И'>И</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='ИС'></input>" +
+            "<label class='makeSuggestion' for='ИС'>ИС</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='КН'></input>" +
+            "<label class='makeSuggestion' for='КН'>КН</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='M'></input>" +
+            "<label class='makeSuggestion' for='М'>М</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='МИ'></input>" +
+            "<label class='makeSuggestion' for='МИ'>МИ</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='ПМ'></input>" +
+            "<label class='makeSuggestion' for='ПМ'>ПМ</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='СИ'></input>" +
+            "<label class='makeSuggestion' for='СИ'>СИ</label>\n" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='Стат'></input>" +
+            "<label class='makeSuggestion' for='Стат'>Стат</label>\n" +
+            "<label class='makeSuggestion'>Семестър:</label>\n" +
+            "<select class='makeSuggestion' name='term'>" +
+                "<option value='-' select='selected'>-</option>" +
+                "<option value='winter'>Зимен</option>" +
+                "<option value='summer'>Летен</option>" +
+            "</select>" +
+            "<label class='makeSuggestion'>Категория:</label>\n" +
+            "<select class='makeSuggestion' name='cathegory'>" +
+                "<option value='-' select='selected'>-</option>" +
+                "<option value='КП'>КП</option>" +
+                "<option value='М'>М</option>" +
+                "<option value='ОКН'>ОКН</option>" +
+                "<option value='ПМ'>ПМ</option>" +
+                "<option value='С'>С</option>" +
+                "<option value='Х'>Х</option>" +
+                "<option value='ЯКН'>ЯКН</option>" +
+            "</select>" +
+            "<input class='makeSuggestion' type='submit' value='Предложи'></input>\n" +
+        "</form>\n" +
+        "</fildset>\n";
+    
+        document.getElementById('studentContent').innerHTML = suggestForm;
+    
+        return suggestForm;
+    },
 
-    return suggestForm;
-}
+    /**
+     * Make template of form for sending messages
+     */
+    makeNewMessageForm: (to, about) => {
+        let messageForm = "<fieldset id='messageForm'>\n" +
+        "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
+        "<form name='message' method='post' action='php/studentsConnection.php'>\n" +
+            "<label class='error' id='invalid' style='display: none;'></label>\n" +
+            "<label class='sendMessage'>До:<mark id='star'>*</mark></label>\n" +
+            "<input class='sendMessage' type='email' name='to' placeholder='lecturer@email.bg' value='" + to + "'></input>\n" +
+            "<label class='sendMessage'>Относно:</label>\n" +
+            "<input class='sendMessage' type='text' name='about' value='" + about + "'></input>\n" +
+            "<textarea class='sendMessage' name='content' placeholder='Напиши своето съобщение тук...'></textarea>\n" +
+            "<input class='sendMessage' type='submit' value='Изпрати'></input>\n" +
+        "</form>\n" +
+        "</fildset>\n";
+    
+        document.getElementById('studentContent').innerHTML += messageForm;
+    
+        return messageForm;
+    }
+};
 
 /**
  * Make last row of table for adding new suggestion
@@ -258,7 +303,7 @@ function makeNewRow(){
     let img = document.createElement('img');
     img.setAttribute('class', 'addIcon');
     img.setAttribute('title', 'Добави предложение');
-    img.setAttribute('onclick','makeSuggestionForm()');
+    img.setAttribute('onclick','makeSuggestion()');
     img.setAttribute('src', 'img/add.png');
     td.appendChild(img);
     row.appendChild(td);
@@ -271,23 +316,23 @@ function makeNewRow(){
  * @param {*} columnType 
  */
 function makeNewColumn(columnType){
-    var th = document.createElement('th');
-    var value = document.createTextNode(columnType);
+    let th = document.createElement('th');
+    let value = document.createTextNode(columnType);
     th.appendChild(value);
     document.getElementById('firstRow').appendChild(th);
 
-    var tr = document.getElementsByClassName('elective');
+    let tr = document.getElementsByClassName('elective');
 
     if(columnType === 'Преглед'){
-        for(var i = 0; i < tr.length; i++){
-            var td = document.createElement('td');
-            var img = document.createElement('img');
+        for(let i = 0; i < tr.length; i++){
+            let td = document.createElement('td');
+            let img = document.createElement('img');
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
 
-            var receiver = '';
-            var sender = '';
-            var date = tr[i].lastChild.innerHTML;
+            let receiver = '';
+            let sender = '';
+            let date = tr[i].lastChild.innerHTML;
 
             if(document.getElementById('firstRow').firstChild.innerHTML === 'Подател'){
                 sender = tr[i].firstChild.innerHTML;
@@ -303,14 +348,14 @@ function makeNewColumn(columnType){
     }
 
     if(columnType === 'Запиши'){
-        for(var i = 0; i < tr.length; i++){
-            var icon = tr[i].lastChild.innerHTML == '' ? 'add.png' : 'delete.png';
-            var elective = tr[i].firstChild.innerHTML;
-            var credits = tr[i].children[2].innerHTML;
-            var action = tr[i].lastChild.innerHTML == '' ? 'Запиши' : 'Отпиши';
+        for(let i = 0; i < tr.length; i++){
+            let icon = tr[i].lastChild.innerHTML == '' ? 'add.png' : 'delete.png';
+            let elective = tr[i].firstChild.innerHTML;
+            let credits = tr[i].children[2].innerHTML;
+            let action = tr[i].lastChild.innerHTML == '' ? 'Запиши' : 'Отпиши';
 
-            var td = document.createElement('td');
-            var img = document.createElement('img');
+            let td = document.createElement('td');
+            let img = document.createElement('img');
             img.setAttribute('class', 'enrolIcon');
             img.setAttribute('title', action);
             img.setAttribute('onclick', 'connectToServer.showCampaign("' + action + '","' + elective + '","' + credits + '")');            
@@ -320,70 +365,6 @@ function makeNewColumn(columnType){
         }
     }
     
-}
-
-/**
- * Get cookie by cookie name
- * @param {*} cookieName 
- */
-function getCookie(cookieName) {
-    var name = cookieName + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var cookies = decodedCookie.split(';');
-    for(var i = 0; i <cookies.length; i++) {
-        var currentCookie = cookies[i];
-        while (currentCookie.charAt(0) == ' ') {
-            currentCookie = currentCookie.substring(1);
-        }
-        if (currentCookie.indexOf(name) == 0) {
-            return currentCookie.substring(name.length, currentCookie.length);
-        }
-    }
-    return "";
-}
-
-/**
- * Edit email and password
- */
-function editProfile(){
-    email = getCookie('email');
-    document.getElementById('studentContent').innerHTML = makeProfileEditForm("Редактиране на профил", email);    
-}
-
-/**
- * Enroll for elective
- */
-function showElectivesCampaign(){
-    connectToServer.showCampaign();
-}
-
-/**
- * Show new electives suggestions
- */
-function showElectivesSuggestions(){
-    connectToServer.showSuggestions();
-}
-
-/**
- * Make template of form for sending messages
- */
-function makeNewMessageForm(){
-    var messageForm = "<fieldset id='messageForm'>\n" +
-    "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
-    "<form name='message' method='post' action='php/studentsConnection.php'>\n" +
-        "<label class='error' id='invalidEmail' style='display: none;'>Невалиден email.</label>\n" +
-        "<label class='sendMessage'>До:</label>\n" +
-        "<input class='sendMessage' type='email' name='to' placeholder='lecturer@email.bg'></input>\n" +
-        "<label class='sendMessage'>Относно:</label>\n" +
-        "<input class='sendMessage' type='text' name='about'></input>\n" +
-        "<textarea class='sendMessage' name='content' placeholder='Напиши своето съобщение тук...'></textarea>\n" +
-        "<input class='sendMessage' type='submit' value='Изпрати'></input>\n" +
-    "</form>\n" +
-    "</fildset>\n";
-
-    document.getElementById('studentContent').innerHTML += messageForm;
-
-    return messageForm;
 }
 
 /**
@@ -419,7 +400,37 @@ function messagesHeader(){
 
     document.getElementById('income').addEventListener('click', connectToServer.showMessages);
     document.getElementById('sent').addEventListener('click', connectToServer.showMessages);
-    document.getElementById('new').addEventListener('click',makeNewMessageForm);
+    document.getElementById('new').addEventListener('click', forms.makeNewMessageForm);
+}
+
+/**
+ * Edit email and password
+ */
+function editProfile(){
+    let email = getCookie('email');
+    document.getElementById('studentContent').innerHTML = forms.makeProfileEditForm("Редактиране на профил", email);   
+}
+
+/**
+ * Enroll for elective
+ */
+function showElectivesCampaign(){
+    connectToServer.showCampaign();
+}
+
+/**
+ * Show new electives suggestions
+ */
+function showElectivesSuggestions(){
+    connectToServer.showSuggestions();
+}
+
+/**
+ * Make suggestion for new elective
+ */
+function makeSuggestion(){
+    document.location = 'student.html?id=makeSuggestion';
+    forms.makeSuggestionForm();
 }
 
 /**
@@ -454,10 +465,9 @@ function showReferences(){
 /**
  * Load student's page
  */
-var studentPage = () => {
+const studentPage = () => {
     connectToServer.studentInfo();
 
-    let profile = document.getElementById('profile');
     let electivesCampaign = document.getElementById('electivesCampaign');
     let electivesSuggestions = document.getElementById('electivesSuggestions');
     let schedule = document.getElementById('schedule');
@@ -465,7 +475,6 @@ var studentPage = () => {
     let message = document.getElementById('message');
     let references = document.getElementById('references');
 
-    profile.addEventListener('click', editProfile);
     electivesCampaign.addEventListener('click', showElectivesCampaign);
     electivesSuggestions.addEventListener('click', showElectivesSuggestions);
     schedule.addEventListener('click', showSchedule);
@@ -495,17 +504,19 @@ window.onload = () => {
         document.getElementById('profile').style.display = 'none';
 
         if(id.toString() === 'editProfile'){
-            status = params.get('status');
+            let status = getCookie('status');
 
-            if(status === 'success'){
-                editProfile();
-                document.getElementById('studentContent').innerHTML =  "<p id='success'>Успешно обновена информация.</p>";
-            } else if(status === 'notfound'){
-                editProfile();
-                document.getElementById('invalidPass').style.display = 'block';
-            } else if(status === 'notequal'){
-                editProfile();
-                document.getElementById('notEqual').style.display = 'block';
+            if(status !== ''){
+                if(status === 'success'){
+                    document.getElementById('studentContent').innerHTML =  "<p id='success'>Успешно обновена информация.</p>";
+                } else {
+                    editProfile();
+
+                    document.getElementById('invalid').innerHTML = status;
+                    document.getElementById('invalid').style.display = 'block';
+                }
+
+                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
             } else {
                 editProfile();
             }
@@ -514,6 +525,37 @@ window.onload = () => {
             showElectivesCampaign();
         } else if(id.toString() === 'electivesSuggestions'){
             showElectivesSuggestions();
+        } else if(id.toString() === 'makeSuggestion'){
+            let status = getCookie('status');
+            let name = getCookie('name');
+            let description = getCookie('description');
+            let year = getCookie('year');
+            let term = getCookie('term');
+            let cathegory = getCookie('cathegory');
+
+            if(status !== ''){
+                if(status === 'success'){
+                    document.getElementById('studentContent').innerHTML =  "<p id='success'>Успешно добавено предложение.</p>";
+                } else {
+                    forms.makeSuggestionForm(name, year);
+                    document.getElementsByName('description')[0].value = description;
+                    document.getElementsByName('cathegory')[0].value = cathegory;
+                    document.getElementsByName('term')[0].value = term;
+
+                    document.getElementById('invalid').innerHTML = status;
+                    document.getElementById('invalid').style.display = 'block';
+                }
+
+                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            } else {
+                forms.makeSuggestionForm(name, year);
+            }
+            
+            document.cookie = "name=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "description=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "year=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "term=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "cathegory=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
         } else if(id.toString() === 'schedule'){
             showSchedule();
         } else if(id.toString() === 'exams'){
@@ -528,26 +570,38 @@ window.onload = () => {
         } else if(id.toString() === 'sentMessages'){
             messagesHeader();
             connectToServer.showMessages('sent');
-        }else if(id.toString() === 'newMessage'){
-            let status = params.get('status');
+        } else if(id.toString() === 'newMessage'){
+            let status = getCookie('status');
+            let to = getCookie('to');
+            let about = getCookie('about');
+            let content = getCookie('content');
 
-            if(status === 'success'){
-                messagesHeader();
-                document.getElementById('studentContent').innerHTML +=  "<p id='success'>Съобщението е изпратено успешно.</p>";
-            } else if(status === 'notfound'){
-                messagesHeader();
-                makeNewMessageForm();
+            if(status !== ''){
+                if(status === 'success'){
+                    document.getElementById('studentContent').innerHTML +=  "<p id='success'>Съобщението е изпратено успешно.</p>";
+                } else {
+                    messagesHeader();
+                    forms.makeNewMessageForm(to, about);
 
-                document.getElementById('invalidEmail').style.display = 'block';
+                    document.getElementsByName('content')[0].value = content;
+
+                    document.getElementById('invalid').innerHTML = status;
+                    document.getElementById('invalid').style.display = 'block';
+                }
+
+                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
             } else {
                 messagesHeader();
-                makeNewMessageForm();
+                forms.makeNewMessageForm(to, about);
             }
+
+            document.cookie = "to=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "about=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = "content=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
         } else if(id.toString() === 'winter' || id.toString() === 'summer'){
             electives('studentContent', id.toString());
         }
     } else {
         studentPage();
-    }
-    
+    }  
 }

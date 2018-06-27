@@ -14,7 +14,7 @@
          * List all electives for winter or summer semester
          **/
         public function viewElectives($queryString){
-            $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE active=TRUE AND lecturer=id AND ";
+            $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE type='active' AND lecturer=id AND ";
 
            if($queryString === 'winter'){
                 $sql = $sql . "term = 'winter'";
@@ -35,7 +35,7 @@
 
             if ($filter == "lecturer") {
                 
-                $sql = $sql . "term='$term'" . " AND " . "names='$value'";
+                $sql = $sql . "term='$term'" . " AND " . "names LIKE '%$value%'";
             }
             else {
                 $sql = $sql . "term='$term'" . " AND " . "$filter LIKE '%$value%'";
@@ -144,6 +144,7 @@
                     "<th>Оценка</th>\n" .
                 "</tr>\n";
             $totalCredits = 0;
+            
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $template = $template . "<tr class='elective'>\n";
                 foreach($row as $key => $value){
@@ -210,7 +211,7 @@
         }
 
         /**
-         * 
+         * Retrieve the information for the lecturer of current elective from database
          */
         private function lecturerInfo($lecturer){
             $sql = "SELECT names, department, telephone, visitingHours, office, email, personalPage FROM lecturer AS l, users AS u WHERE id='$lecturer' AND l.userName=u.userName";

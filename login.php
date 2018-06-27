@@ -6,7 +6,6 @@
         <title>Система за управление на избираеми дисциплини</title>
 
         <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-        <script type="text/javascript" src="js/login.js"></script>
     </head>
 
     <body>
@@ -20,8 +19,8 @@
                 <a href="index.html">Начало</a>
                 <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
                 <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
-                <a href="register.html">Регистрация</a>
-                <a href="login.html">Вход</a>
+                <a href="register.php">Регистрация</a>
+                <a href="login.php">Вход</a>
             </nav>
         </header>
 
@@ -29,7 +28,17 @@
             <section id='background'>
                 <fieldset id='loginForm'>
                     <legend class='login'>Вход</legend>
-                    <form name='login' method='post' action='php/login.php'>
+                    <form name='login' method='post' action='php/loginValidation.php'>
+                    
+                        <?php 
+                            session_start();
+
+                            if(isset($_SESSION['loginError']) && $_SESSION['loginError']){
+                                echo '<label class="error">' . $_SESSION['loginError'] . '</label>';
+                                $_SESSION['loginError'] = '';
+                            }
+                        ?>
+
                         <label class='login'>Потребителско име</label>
                         <input class='login' type='text' name='user' id='userName'></input>
                         <label class='login'>Парола</label>

@@ -3,11 +3,11 @@
  * @param {*} cookieName 
  */
 function getCookie(cookieName) {
-    var name = cookieName + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var cookies = decodedCookie.split(';');
-    for(var i = 0; i <cookies.length; i++) {
-        var currentCookie = cookies[i];
+    let name = cookieName + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(';');
+    for(let i = 0; i <cookies.length; i++) {
+        let currentCookie = cookies[i];
         while (currentCookie.charAt(0) == ' ') {
             currentCookie = currentCookie.substring(1);
         }
@@ -158,8 +158,8 @@ function openComments(){
  * Post new comment
  */
 function postComment(){
-    var textarea = document.getElementById('writeComment');
-    var comment = textarea.value;
+    let textarea = document.getElementById('writeComment');
+    let comment = textarea.value;
     connectToServer.postComment(comment);
 
     textarea.value = '';

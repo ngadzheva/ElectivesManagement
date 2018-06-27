@@ -1,10 +1,9 @@
-/* Holds the connection with the server */
-var ajax;
-
 /*
  * Connect to the server
  */
 function connect(){
+    let ajax;
+
     try{
         /* Opera, Firefox, Safari */
         ajax = new XMLHttpRequest();
@@ -21,29 +20,31 @@ function connect(){
             }
         }
     }
+
+    return ajax;
 }
 
 /**
  * Filter electives 
  */
 function filterElectives(element) {
-    connect();
+    let ajax = connect();
 
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
-            var ajaxDisplay = document.getElementById(element);
+            let ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = makeFilterForm(element) + ajax.responseText;
 
             makeColumn("Преглед"); 
         }
     }
 
-    var form = new FormData(document.querySelector('form'));
-    var filter = form.get("filter");
+    let form = new FormData(document.querySelector('form'));
+    let filter = form.get("filter");
     
-    var params = new URLSearchParams(window.location.search);
-    var id = params.get('id').toString();
-    var value = form.get("value");
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get('id').toString();
+    let value = form.get("value");
 
     ajax.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
     ajax.send(null);
@@ -53,23 +54,23 @@ function filterElectives(element) {
  * Sort electives 
  */
 function sortElectives(element) {
-    connect();
+    let ajax = connect();
 
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
-            var ajaxDisplay = document.getElementById(element);
+            let ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/ ajax.responseText;
 
             makeColumn("Преглед"); 
         }
     }
 
-    var form = new FormData(document.querySelector('form'));
-    var sort = form.get("sort");
+    let form = new FormData(document.querySelector('form'));
+    let sort = form.get("sort");
     
-    var params = new URLSearchParams(window.location.search);
-    var id = params.get('id').toString();
-    var value = form.get("value");
+    let params = new URLSearchParams(window.location.search);
+    let id = params.get('id').toString();
+    let value = form.get("value");
 
     ajax.open("GET", "electives.php?id=" + id + "&sort=" + sort + "&value=" + value, true);
     ajax.send(null);
@@ -79,7 +80,7 @@ function sortElectives(element) {
  * Make filter form
  */
 function makeFilterForm(element){
-    var filterForm = "<form class='filter' method='get' action=''>" + 
+    let filterForm = "<form class='filter' method='get' action=''>" + 
     "<input class='search' type='text' name='value'></input>" +
     "<select class='search' name='filter'>" +
         "<option value='name'>Име на дисциплина</option>" +
@@ -100,7 +101,7 @@ function makeFilterForm(element){
  * Make sort form
  */
 function makeSortForm(element){
-    var filterForm = "<form class='sort' method='get' action=''>" + 
+    let filterForm = "<form class='sort' method='get' action=''>" + 
     "<select class='search' name='sort'>" +
         "<option value='name'>Име на дисциплина</option>" +
         "<option value='lecturer'>Име на лектор</option>" +                                
@@ -117,23 +118,23 @@ function makeSortForm(element){
  * Show a table with the electives depending on the selected term
  */
 function listElectives(element, term){
-    connect();
+    let ajax = connect();
 
     ajax.onreadystatechange = function(){
         if(ajax.readyState == 4){
-            var ajaxDisplay = document.getElementById(element);
+            let ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = makeFilterForm(element)  + /*makeSortForm(element) +*/ ajax.responseText;
         }
 
         makeColumn("Преглед");
     }
 
-    var id;
+    let id;
     if(term){
         document.getElementById('profile').style.display = 'none';
         id = term;
     } else {
-        var params = new URLSearchParams(window.location.search);
+        let params = new URLSearchParams(window.location.search);
         id = params.get('id').toString();
     }
 
@@ -145,37 +146,37 @@ function listElectives(element, term){
  * Add new column to the table with electives according to current location
  */
 function makeColumn(name, isSuggestion){
-    var th = document.createElement('th');
-    var value = document.createTextNode(name);
+    let th = document.createElement('th');
+    let value = document.createTextNode(name);
     th.appendChild(value);
     document.getElementById('firstRow').appendChild(th);
 
-    var tr = document.getElementsByClassName('elective');
+    let tr = document.getElementsByClassName('elective');
     
     if(name == "Преглед"){
-        for(var i = 0; i < tr.length; i++){
-            var td = document.createElement('td');
-            var img = document.createElement('img');
+        for(let i = 0; i < tr.length; i++){
+            let td = document.createElement('td');
+            let img = document.createElement('img');
             img.setAttribute('class', 'viewIcon');
             img.setAttribute('title', 'Преглед');
 
-            var elective = isSuggestion ? tr[i].childNodes[0].innerHTML : tr[i].childNodes[1].innerHTML;
+            let elective = isSuggestion ? tr[i].childNodes[0].innerHTML : tr[i].childNodes[1].innerHTML;
             img.setAttribute('onclick', 'viewDescription("' + elective + '", ' + isSuggestion + ')');            
             img.setAttribute('src', 'img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
         }
     } else if(name == "Редактиране"){
-        for(var i = 0; i < tr.length; i++){
-            var title, lecturer, credits, cathegory;
-            var cols = tr[i].getElementsByTagName('td');
+        for(let i = 0; i < tr.length; i++){
+            let title, lecturer, credits, cathegory;
+            let cols = tr[i].getElementsByTagName('td');
             title = cols[0].innerHTML;
             lecturer = cols[1].innerHTML;
             credits = cols[2].innerHTML;
             cathegory = cols[3].innerHTML;
 
-            var td = document.createElement('td');
-            var img = document.createElement('img');
+            let td = document.createElement('td');
+            let img = document.createElement('img');
             img.setAttribute('class', 'editIcon');
             img.setAttribute('title', 'Редактирай');
             img.setAttribute('onclick', 'editElective("' + title + '", "' + lecturer + '", "' + credits + '", "' + cathegory + '", "' + term + '")');

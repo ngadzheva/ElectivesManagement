@@ -322,26 +322,30 @@
             $messages = $this->student->getMessages($type);
             $id = 0;
 
-            foreach($messages as $key => $value){
-                $message = $value;
-
-                $template = $template . '<tr class="elective" id="' . $id .'">';
-                $isOpened = '';
-
-                foreach($message as $key => $value){
-                    if($key == 'opened'){
-                        $isOpened = $value;
-                    } else {
-                        $template = $template . '<td opened="' . $isOpened . '">' . $value . '</td>';
+            if($messages){
+                foreach($messages as $key => $value){
+                    $message = $value;
+    
+                    $template = $template . '<tr class="elective" id="' . $id .'">';
+                    $isOpened = '';
+    
+                    foreach($message as $key => $value){
+                        if($key == 'opened'){
+                            $isOpened = $value;
+                        } else {
+                            $template = $template . '<td opened="' . $isOpened . '">' . $value . '</td>';
+                        }
+                        
                     }
-                    
+    
+                    $template = $template . '</tr>';
+                    $id = $id + 1;
                 }
-
-                $template = $template . '</tr>';
-                $id = $id + 1;
+    
+                $template = $template . '</table>';
+            } else {
+                $template = '<p id="notActive">В момента няма налични съобщения.</p>';
             }
-
-            $template = $template . '</table>';
 
             return $template;
         }

@@ -141,8 +141,16 @@ main{
     min-width: 500px;
 }
 
-#editForm, #messageForm, #writeForm, #suggestionForm{
+#registerForm{
+    width: 600px;
+}
+
+#editForm, #messageForm, #writeForm{
     width: 800px;
+}
+
+#suggestionForm{
+    width: 860px;
 }
 
 legend[class=login], legend[class=register], legend[class=editElective], legend[class=editProfile], 
@@ -159,13 +167,22 @@ form{
 
 .error{
     color: red;
-    font-size: 16px;
+    font-size: 14px;
     text-align: left;
     margin: 10px;
 }
 
+#star{
+    color: red;
+    background-color: #FFFFFF;
+    position: relative;
+    top: -7px;
+    font-size: 14px;
+    font-style: normal;
+}
+
 label[class=error], label[class=login], input[class=login], label[class=register], input[class=register], 
-select[class=register], label[class=student], input[class=student], label[class=lecturer], input[class=lecturer],
+select[class=register], select[class=student], label[class=student], input[class=student], label[class=lecturer], input[class=lecturer],
 label[class=editProfile], input[class=editProfile], select[class=editProfile], label[class=editElective], 
 input[class=editElective], textarea, select[class=editElective], label[class=sendMessage], input[class=sendMessage], 
 label[class=writeOn], input[class=writeOn], label[class=writeOff], input[class=writeOff], label[class=writeMark], input[class=writeMark],
@@ -176,7 +193,7 @@ label[class=makeSuggestion], input[class=makeSuggestion], select[class=makeSugge
     height: 30px;
 }
 
-input[type=text], input[type=email], input[type=tel], input[type=password], select[class=register], select[class=makeSuggestion],input[type=number]{
+input[type=text], input[type=email], input[type=tel], input[type=password], select[class=register], select[class=student], select[class=makeSuggestion],input[type=number]{
     width: 95%;
 }
 

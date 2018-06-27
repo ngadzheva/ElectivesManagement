@@ -5,15 +5,18 @@
 
     $database = new DataBase();
 
-    $user = $_POST["user"];
-    $pass = $_POST["password"];
+    $user = modifyInput($_POST["user"]);
+    $pass = modifyInput($_POST["password"]);
 
     if(!$user && !$pass){
-        header('Location: ../login.html?status=required');
+        $_SESSION['loginError'] = 'Въведете потребителско име и парола.';
+        header('Location: ../login.php');
     } else if(!$user){
-        header('Location: ../login.html?status=requiredu');
+       $_SESSION['loginError'] = 'Въведете потребителско име.';
+       header('Location: ../login.php');
     } else if(!$pass){
-        header('Location: ../login.html?status=requiredp');
+        $_SESSION['loginError'] = 'Въведете парола.';
+        header('Location: ../login.php');
     } else {
         $sql = "SELECT * FROM users WHERE userName='$user'";
         $query = $database->executeQuery($sql, "Failed finding $user!");
@@ -38,12 +41,20 @@
 
                 header('Location: ../' . $exist['userType'] . '.html'); 
             } else {
-                header('Location: ../login.html?status=wrongp');
+                $_SESSION['loginError'] = 'Грешна парола.';
+                header('Location: ../login.php');
             }
         } else {
-            header('Location: ../login.html?status=wrongu');
+            $_SESSION['loginError'] = 'Грешно потребителско име.';
+            header('Location: ../login.php');
         }
     }
 
-    
+    function modifyInput($data){
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+
+        return $data;
+    }
 ?>
