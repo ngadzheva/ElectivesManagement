@@ -51,32 +51,6 @@ function filterElectives(element) {
 }
 
 /**
- * Sort electives 
- */
-function sortElectives(element) {
-    let ajax = connect();
-
-    ajax.onreadystatechange = function(){
-        if(ajax.readyState == 4){
-            let ajaxDisplay = document.getElementById(element);
-            ajaxDisplay.innerHTML = makeFilterForm(element) + /*makeSortForm(element) +*/ ajax.responseText;
-
-            makeColumn("Преглед"); 
-        }
-    }
-
-    let form = new FormData(document.querySelector('form'));
-    let sort = form.get("sort");
-    
-    let params = new URLSearchParams(window.location.search);
-    let id = params.get('id').toString();
-    let value = form.get("value");
-
-    ajax.open("GET", "electives.php?id=" + id + "&sort=" + sort + "&value=" + value, true);
-    ajax.send(null);
-}
-
-/**
  * Make filter form
  */
 function makeFilterForm(element){
@@ -92,23 +66,6 @@ function makeFilterForm(element){
         "<option value='rating'>Рейтинг на дисциплина</option>" +
     "</select>" +
     "<input type='button' value='Филтриране' onclick='filterElectives(\"" + element + "\")'></input>" +
-    "</form>";
-
-    return filterForm;
-}
-
-/**
- * Make sort form
- */
-function makeSortForm(element){
-    let filterForm = "<form class='sort' method='get' action=''>" + 
-    "<select class='search' name='sort'>" +
-        "<option value='name'>Име на дисциплина</option>" +
-        "<option value='lecturer'>Име на лектор</option>" +                                
-        "<option value='cathegory'>Категория</option>" +
-        "<option value='rating'>Рейтинг на дисциплина</option>" +
-    "</select>" +
-    "<input type='button' value='Сортиране' onclick='sortElectives(\"" + element + "\")'></input>" +
     "</form>";
 
     return filterForm;
