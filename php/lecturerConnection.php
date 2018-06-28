@@ -37,27 +37,27 @@
 		$status = $lecturer->sendMessage($_POST['to'], $_POST['about'], $_POST['content']);
 		header("Location: ../lecturer.html?id=newMessage&status=" . $status);
 	} else if(isset($_POST['email']) && isset($_POST['passwd']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword']) && isset($_POST['newTelephone']) && isset($_POST['newVisitingHours']) && isset($_POST['newOffice']) && isset($_POST['newPersonalPage'])){
-			$status = '';
-			if($_POST['newPassword'] == $_POST['confirmPassword']){
-				$pass = hash('sha256', $_POST['passwd']);
-				$newPass = hash('sha256', $_POST['newPassword']);
-				$lecturerInfo = $lecturer->viewInfo();
-				if($lecturerInfo['password'] == $pass){
-					$lecturer->updateInfo($_POST['email'], $_POST['newPass'], $_POST['newTelephone'], $_POST['newVisitingHours'], $_POST['newOffice'], $_POST['newPersonalPage']);
-					
-					$status = 'success';
-					header("Location: ../lecturer.html?id=editProfile&status=" . $status);
-				} else { 
-					$status = 'notfound';
-					header("Location: ../lecturer.html?id=editProfile&status=" . $status);
-				}
-			} else {
-					$status = 'notequal';
-					header("Location: ../lecturer.html?id=editProfile&status=" . $status);
-			}
-        } else{
+		$status = '';
+		if($_POST['newPassword'] == $_POST['confirmPassword']){
+			$pass = hash('sha256', $_POST['passwd']);
+			$newPass = hash('sha256', $_POST['newPassword']);
 			$lecturerInfo = $lecturer->viewInfo();
-			echo json_encode($lecturerInfo);
+			if($lecturerInfo['password'] == $pass){
+				$lecturer->updateInfo($_POST['email'], $_POST['newPass'], $_POST['newTelephone'], $_POST['newVisitingHours'], $_POST['newOffice'], $_POST['newPersonalPage']);
+				
+				$status = 'success';
+				header("Location: ../lecturer.html?id=editProfile&status=" . $status);
+			} else { 
+				$status = 'notfound';
+				header("Location: ../lecturer.html?id=editProfile&status=" . $status);
+			}
+		} else {
+				$status = 'notequal';
+				header("Location: ../lecturer.html?id=editProfile&status=" . $status);
 		}
+	} else{
+		$lecturerInfo = $lecturer->viewInfo();
+		echo json_encode($lecturerInfo);
+	}
     
 ?>
