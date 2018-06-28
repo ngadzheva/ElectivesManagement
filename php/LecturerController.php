@@ -176,6 +176,7 @@
             '</table>';
             return $template;
         }
+		
         /**
          * Send message from current lecturer to another user
          */
@@ -198,10 +199,120 @@
         }
 		
 		/**
+		* Updating information for an elective
+		*/
+		public function updateElective($name, $description, $literature, $subjects ){
+			return $this->lecturer->updateElective($name, $description, $literature, $subjects );
+		}
+	
+		/**
          * Writing marks
          */
 		public function writeMark($nameElectives, $names, $fn, $mark){
             return $this->lecturer->writeMarkStudent($nameElectives, $names, $fn, $mark);
         }
-    } 
+		
+		/**
+         * Show new electives suggestions
+         */
+        public function showElectivesSuggestions(){
+            $suggestions = $this->lecturer->getSuggestions();
+            $template = "<h1 id='suggestionsHeader'>Предложения за избираеми дисциплини</h1>" .
+                "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Избираема дисциплина</th>\n" .
+                        "<th>Курс</th>\n" .
+                        "<th>Специалност</th>\n" .
+                        "<th>Семестър</th>\n" .
+                        "<th>Категория</th>\n" .
+                        "<th>Рейтинг</th>\n" .
+                    "</tr>\n";
+            if($suggestions){
+                foreach($suggestions as $key => $value){
+                    $elective = $value;
+                    $template = $template . '<tr class="elective">';
+                    foreach($elective as $key => $value){
+                        if($key == 'term'){
+                            if($value == 'winter'){
+                                $template = $template . '<td>Зимен</td>';
+                            } else{
+                                $template = $template . '<td>Летен</td>';
+                            }
+                        } else {
+                            $template = $template . '<td>' . $value . '</td>';
+                        }
+                        
+                    }
+                    $template = $template . '</tr>';
+                }
+                $template = $template . '</table>';
+            } else {
+                $template = '<p id="notActive">В момента няма нови предложения.</p>';
+            }
+            
+            return $template;
+        }
+		
+		
+		/**
+         * Make new suggestion for elective
+         */
+        public function suggestNewElective($name, $description, $year, $bachelorPrograme, $term, $cathegory){
+            $this->lecturer->insertNewSuggestedElective($name, $description, $year, $bachelorPrograme, $term, $cathegory);
+        }
+		
+		/**
+         * Show schedule
+         */
+        public function showSchedule(){
+            $suggestions = $this->lecturer->getSchedule();
+            $template = "<h1 id='scheduleHeader'>Разписание</h1>" .
+                "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Избираема дисциплина</th>\n" .
+                        "<th>Вид занятия</th>\n" .
+                        "<th>Ден</th>\n" .
+                        "<th>Час</th>\n" .
+                        "<th>Зала</th>\n" .
+                    "</tr>\n";
+                foreach($suggestions as $key => $value){
+                    $elective = $value;
+                    $template = $template . '<tr class="elective">';
+                    foreach($elective as $key => $value){
+                        $template = $template . '<td>' . $value . '</td>';
+                        
+                    }
+                    $template = $template . '</tr>';
+                }
+                $template = $template . '</table>';
+            return $template;
+        }
+  
+		/**
+         * Show exams
+         */
+        public function showExams(){
+            $suggestions = $this->lecturer->getExams();
+            $template = "<h1 id='examsHeader'>Изпити</h1>" .
+                "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Избираема дисциплина</th>\n" .
+                        "<th>Вид изпит</th>\n" .
+                        "<th>Дата</th>\n" .
+                        "<th>Зала</th>\n" .
+                    "</tr>\n";
+                foreach($suggestions as $key => $value){
+                    $elective = $value;
+                    $template = $template . '<tr class="elective">';
+                    foreach($elective as $key => $value){
+                        $template = $template . '<td>' . $value . '</td>';
+                        
+                    }
+                    $template = $template . '</tr>';
+                }
+                $template = $template . '</table>';
+            
+            return $template;
+        }
+	}
 ?>
