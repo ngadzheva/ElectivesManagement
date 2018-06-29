@@ -53,7 +53,7 @@ INSERT INTO `campaign` (startDate, endDate)
 VALUES ('2018-02-10', '2018-02-20');
 
 INSERT INTO `campaign` (startDate, endDate)
-VALUES ('2018-06-11', '2018-06-23');
+VALUES ('2018-06-23', '2018-07-07');
 
 INSERT INTO `messages` (sdate, about, content, sender, receiver, opened)
 VALUES ('2018-06-11 12:37:32', 'Защити на проекти', 'Здравейте! Защитите на проектите ще бъдат на 16.06.2018г.', 'hrhristov', 'nmgadzheva', FALSE);
