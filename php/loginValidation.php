@@ -37,6 +37,11 @@
                     $query = $database->executeQuery($sql, "Failed finding $user!");
                     $lecturer = $query->fetch(PDO::FETCH_ASSOC);
                     $_SESSION['id'] = $lecturer['id'];
+                } else if($exist['userType'] == 'admin'){
+                    $sql = "SELECT id FROM lecturer WHERE userName='$user'";
+                    $query = $database->executeQuery($sql, "Failed finding $user!");
+                    $admin = $query->fetch(PDO::FETCH_ASSOC);
+                    $_SESSION['names'] = $admin['names'];
                 }
 
                 header('Location: ../' . $exist['userType'] . '.html'); 

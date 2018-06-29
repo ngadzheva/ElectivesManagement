@@ -2,7 +2,7 @@
     require_once 'admin.php';
     require_once 'electivesController.php';
     require_once 'StudentsController.php';
-    require_once 'lecturer';
+    require_once 'lecturer.php';
 
     class AdminController{
         private $admin;
@@ -30,12 +30,20 @@
             $this->admin->setPasswd($newPassword);
         }
 
-        public function addElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term){
-            $electives->addNewElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $themes, $term, 0);
+        public function addElective($electiveName){            
+            $query = "UPDATE `electives` SET type='active' WHERE name='$electiveName'";
+            $values = [$electiveName];
+            $d = new DataBase();
+			$d->executeQuery($query, "Failed updating password!");
         }
 
-        public function deleteElective($name){
-            $electives->deleteElective($name);
+        public function removeElective($electiveName){
+            $query = "UPDATE `electives` SET type='disabled' WHERE name='$electiveName'";
+            $values = [$electiveName];
+            $d = new DataBase();
+            
+            // $admin->getDataBase()->updateValues($query, $values);
+            $d->executeQuery($query, "Failed updating password!");
         }
 
         public function updateUserInfo($userName, $active) {
@@ -56,20 +64,66 @@
             //return to insertion form
         }
 
-        public function addStudent($userName, $passwd, $email, $fn, $names, $year, $getBachelorProgram){
-            if(!Student::insertStudent($userName, $passwd, $email, $fn, $names, $year, $getBachelorProgram)) {
-                //error message
-            }
 
-            //return to insertion form
+        public function showElectives($type){
+            $electives = $this->admin->getElectives($type);
+            $template =  "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Избираема дисциплина</th>\n" .
+                        "<th>Курс</th>\n" .
+                        "<th>Специалност</th>\n" .
+                        "<th>Семестър</th>\n" .
+                        "<th>Категория</th>\n" .
+                        "<th>Преподавател</th>\n" .
+                    "</tr>\n";
+            if($electives){
+                foreach($electives as $key => $value){
+                    $elective = $value;
+                    $template = $template . '<tr class="elective">';
+                    foreach($elective as $key => $value){
+                        if($key == 'term'){
+                            if($value == 'winter'){
+                                $template = $template . '<td>Зимен</td>';
+                            } else{
+                                $template = $template . '<td>Летен</td>';
+                            }
+                        } else {
+                            $template = $template . '<td>' . $value . '</td>';
+                        }
+                    }
+                    $template = $template . '</tr>';
+                }
+                $template = $template . '</table>';
+            } 
+
+            return $template;
         }
 
-        public function addLecturer($userName, $passwd, $email, $names, $department, $telephone, $visitingHours, $office, $personalPage) {
-            if(!Lecturer::insertLecturer($userName, $passwd, $email, $names, $department, $telephone, $visitingHours, $office, $personalPage)) {
-                //error message
-            }
+        public function showUsers($type){
+            $template = "<table id='electivesList'>\n". 
+                    "<tr id='firstRow'>\n" .
+                        "<th>Потребителско име</th>\n" .
+                        "<th>Три имена</th>\n" .
+                    "</tr>\n";
 
-            //return to insertion form
+            $classes = array("student", "lecturer", "admin");
+            foreach ($classes as $class) {
+                $users = $this->admin->getUsers($class, $type);
+                if($users){
+                    foreach($users as $key => $value){
+                        $user = $value;
+                        $template = $template . '<tr class="user">';
+                        foreach($user as $key => $value){
+                            $template = $template . '<td>' . $value . '</td>';
+                        }
+                        $template = $template . '</tr>';
+                    }
+                   
+                } 
+            }
+            $template = $template . '</table>';
+
+            return $template;
         }
         
     }

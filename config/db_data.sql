@@ -1,6 +1,9 @@
 USE uxProj;
 
 INSERT INTO `users` (userName, passwd, userType, active, email)
+VALUES ('admin', '37bd45d638c2d11c49c641d2e9c4f49f406caf3ee282743e0c800aa1ed68e2ee', 'admin', TRUE, 'kelanved@abv.bg');
+
+INSERT INTO `users` (userName, passwd, userType, active, email)
 VALUES ('nmgadzheva', 'a054c563253f561fd63003cf7af86d7aebbb5a603d346d859157fb518988a1ec', 'student', TRUE, 'v3n17oy@abv.bg');
 
 INSERT INTO `users` (userName, passwd, userType, active, email)
@@ -12,6 +15,8 @@ VALUES ('hrhristov', '2b32e24a7f0cd189017a5e1a73d30dc4d274c181caaf11d5026cbdc837
 INSERT INTO `users` (userName, passwd, userType, active, email)
 VALUES ('vgeorgiev', '738739418608df05d6f63c896f42e201ecf3c3f330ed442615d788e5775c96dc', 'lecturer', TRUE, 'v.georgiev@fmi.uni-sofia.bg');
 
+INSERT INTO `admin` (userName, names)
+VALUES ('admin', 'Wu');
 INSERT INTO `student` (fn, userName, names, year, bachelorProgram)
 VALUES (61938, 'nmgadzheva', 'Невена Михайлова Гаджева', 3, 'Софтуерно инженерство');
 

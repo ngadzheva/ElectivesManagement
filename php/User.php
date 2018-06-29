@@ -53,6 +53,13 @@
 		public function getEmail(){
 			return $this->email;
 		}
+
+		/**
+		 * Get DB
+		 */
+		public function getDatabase(){
+			return $this->database;
+		}
 		
 		/**
 		 * Set new email
@@ -108,6 +115,7 @@
 			$values = [$userName, $passwd, $userType, true, $email];
 
 			$database = new DataBase();
+			
 			$database->insertValues($query, $values);
 
 			return true;

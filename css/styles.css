@@ -1,5 +1,5 @@
 /* reset default browser styles */
-@import "resetCss.css";
+@import "resetCSS.css";
 
 /* general styles */
 body {
@@ -422,7 +422,7 @@ td[opened="0"]{
 
 
 
-#adminTab button, #lecturerTab a, #studentTab a{
+#adminTab a, #lecturerTab a, #studentTab a{
     color: #CCCCCC;
     background: inherit;
     display: block;
@@ -438,12 +438,12 @@ td[opened="0"]{
     transition: 0.3s;
 }
 
-#adminTab button:hover, #lecturerTab a:hover, #studentTab a:hover{
+#adminTab a:hover, #lecturerTab a:hover, #studentTab a:hover{
     background: #53687F;
     color: #FFFFFF;
 }
 
-#lecturerTab a, #studentTab a{
+#adminTab a, #lecturerTab a, #studentTab a{
     text-decoration: none;
     color: white;
 }
