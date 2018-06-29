@@ -1,5 +1,5 @@
 <?php
-    require_once "database.php";
+    require_once 'database.php';
 
     session_start();
 
@@ -44,6 +44,8 @@
                     $_SESSION['names'] = $admin['names'];
                 }
 
+                $database->closeConnection();
+                
                 header('Location: ../' . $exist['userType'] . '.html'); 
             } else {
                 $_SESSION['loginError'] = 'Грешна парола.';

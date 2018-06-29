@@ -3,7 +3,7 @@
  * @param {*} cookieName 
  */
 function getCookie(cookieName) {
-    let name = cookieName + "=";
+    let name = cookieName + '=';
     let decodedCookie = decodeURIComponent(document.cookie);
     let cookies = decodedCookie.split(';');
     for(let i = 0; i <cookies.length; i++) {
@@ -15,7 +15,7 @@ function getCookie(cookieName) {
             return currentCookie.substring(name.length, currentCookie.length);
         }
     }
-    return "";
+    return '';
 }
 
 /**
@@ -66,7 +66,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/description.php", true);
+        ajaxRequest.open('GET', 'php/description.php', true);
         ajaxRequest.send(null);
     },
 
@@ -85,7 +85,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/description.php?vote=dislike", true);
+        ajaxRequest.open('GET', 'php/description.php?vote=dislike', true);
         ajaxRequest.send(null);
     }, 
 
@@ -104,7 +104,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/description.php?vote=like", true);
+        ajaxRequest.open('GET', 'php/description.php?vote=like', true);
         ajaxRequest.send(null);
     },
 
@@ -119,7 +119,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/description.php?comments", true);
+        ajaxRequest.open('GET', 'php/description.php?comments', true);
         ajaxRequest.send(null);
     }, 
     
@@ -134,7 +134,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/description.php?postedComment=" + comment, true);
+        ajaxRequest.open('GET', 'php/description.php?postedComment=' + comment, true);
         ajaxRequest.send(null);
     }
 };

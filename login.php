@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8"/>
+        <meta charset='utf-8'/>
 
         <title>Система за управление на избираеми дисциплини</title>
 
-        <link rel="stylesheet" type="text/css" href="css/styles.css"/>
+        <link rel='stylesheet' type='text/css' href='css/styles.css'/>
     </head>
 
     <body>
         <header>
             <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
             <figure>
-                <img id="header" src="img/border.png"/>
+                <img id='header' src='img/border.png'/>
             </figure>
             
             <nav id='mainNav'>
-                <a href="index.html">Начало</a>
-                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
-                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
-                <a href="register.php">Регистрация</a>
-                <a href="login.php">Вход</a>
+                <a href='index.html'>Начало</a>
+                <a href='electives.html?id=winter'>Избираеми дисциплини Зимен семестър</a>
+                <a href='electives.html?id=summer'>Избираеми дисциплини Летен семестър</a>
+                <a href='register.php'>Регистрация</a>
+                <a href='login.php'>Вход</a>
             </nav>
         </header>
 

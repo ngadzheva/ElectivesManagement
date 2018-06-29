@@ -37,18 +37,18 @@
 
         if(!$to){
             setcookie('status', 'Моля, попълнете всички задължителни полета.', time() + 240, '/');
-            header("Location: ../student.html?id=newMessage");
+            header('Location: ../student.html?id=newMessage');
         } else {
 
             if(strlen($to) > 200){
                 setcookie('status', 'Email-ът на получателя трябва да е най-много 200 символа.', time() + 240, '/');
-                header("Location: ../student.html?id=newMessage");
+                header('Location: ../student.html?id=newMessage');
             } else if(mb_strlen($about) > 200){
                 setcookie('status', 'Полето относно трябва да съдържа най-много 200 символа.', time() + 240, '/');
-                header("Location: ../student.html?id=newMessage");
+                header('Location: ../student.html?id=newMessage');
             } else if(mb_strlen($content) > 2000){
                 setcookie('status', 'Съобщението трябва да съдържа най-много 2000 символа.', time() + 240, '/');
-                header("Location: ../student.html?id=newMessage");
+                header('Location: ../student.html?id=newMessage');
             } else {
                 $status = $student->sendMessage($to, $about, $content);
 
@@ -58,7 +58,7 @@
                     setcookie('status', 'success', time() + 240, '/');
                 }
 
-                header("Location: ../student.html?id=newMessage");
+                header('Location: ../student.html?id=newMessage');
             }         
         }
     } else if(isset($_POST['email']) && isset($_POST['password']) && isset($_POST['newPassword']) && isset($_POST['confirmPassword'])){
@@ -71,13 +71,13 @@
 
         if(!$email || !$password || !$newPassword || !$confirmPassword){
             setcookie('status', 'Моля, попълнете всички задължителни полета.', time() + 240, '/');
-            header("Location: ../student.html?id=editProfile");
+            header('Location: ../student.html?id=editProfile');
         } else if(strlen($email) > 200){
             setcookie('status', 'Email-ът трябва да е най-много 200 символа.', time() + 240, '/');
-            header("Location: ../student.html?id=editProfile");
+            header('Location: ../student.html?id=editProfile');
         } else if(mb_strlen($password) > 200 || mb_strlen($newPassword) > 200 || mb_strlen($confirmPassword) > 200){
             setcookie('status', 'Паролата трябва да е най-много 200 символа.', time() + 240, '/');
-            header("Location: ../student.html?id=editProfile");
+            header('Location: ../student.html?id=editProfile');
         } else{
             if($newPassword == $confirmPassword){
                 $pass = hash('sha256', $password);
@@ -88,14 +88,14 @@
                     $student->updateInfo($email, $newPass);
     
                     setcookie('status', 'success', time() + 240, '/');
-                    header("Location: ../student.html?id=editProfile");
+                    header('Location: ../student.html?id=editProfile');
                 } else {
                     setcookie('status', 'Невалидна парола.', time() + 240, '/');
-                    header("Location: ../student.html?id=editProfile");
+                    header('Location: ../student.html?id=editProfile');
                 }
             } else {
                 setcookie('status', 'Двете пароли не съвпадат.', time() + 240, '/');
-                header("Location: ../student.html?id=editProfile");
+                header('Location: ../student.html?id=editProfile');
             }
         }        
     } else if(isset($_POST['name']) && isset($_POST['description']) && isset($_POST['year']) && isset($_POST['bachelorPrograme']) && isset($_POST['term']) && isset($_POST['cathegory'])){
@@ -124,7 +124,7 @@
             $student->suggestNewElective($_POST['name'], $_POST['description'], $_POST['year'], $_POST['bachelorPrograme'], $_POST['term'], $_POST['cathegory']);
         }
 
-        header("Location: ../student.html?id=makeSuggestion");
+        header('Location: ../student.html?id=makeSuggestion');
     } else{
         $studentInfo = $student->viewInfo();
 

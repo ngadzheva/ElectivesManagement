@@ -1,13 +1,13 @@
 <?php
-    require_once "student.php";
-    require_once "lecturer.php";
+    require_once 'student.php';
+    require_once 'lecturer.php';
 
     session_start();
 
     $database = new DataBase();
 
-    $user = modifyInput($_POST["user"]);
-    $pass = modifyInput($_POST["password"]);
+    $user = modifyInput($_POST['user']);
+    $pass = modifyInput($_POST['password']);
     $confirmPass = modifyInput($_POST['confirmPassword']);
     $names = modifyInput($_POST['names']);
     $email = modifyInput($_POST['email']);
@@ -79,7 +79,13 @@
             
                     $student = new Student($user, $fn);
                     $student->insertStudent($user, hash('sha256', $pass), $email, $fn, $names, $year, $bachelorPrograme);
+
+                    $database->closeConnection();
             
+                    session_destroy();
+                    setcookie('userType', $userType, time() - 240, '/');
+                    setcookie('bachelorPrograme', $bachelorPrograme, time() - 240, '/');
+
                     header('Location: ../login.php');
                 } else {                    
                     if(!$department){
@@ -107,13 +113,17 @@
             
                     $lecturer = new Lecturer($user, '');
                     $lecturer->insertLecturer($user, hash('sha256', $pass), $email, $names, $department, $telephone, $visitingHours, $office, $personalPage);
+
+                    $database->closeConnection();
             
-                    header('Location: ../login.php');
                     session_destroy();
+                    setcookie('userType', $userType, time() - 240, '/');
+
+                    header('Location: ../login.php');
                 } 
             }
         }  
-    }   
+    }  
     
     function modifyInput($data){
         $data = trim($data);

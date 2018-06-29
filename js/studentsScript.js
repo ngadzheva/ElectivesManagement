@@ -41,7 +41,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php", true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php', true);
         ajaxRequest.send(null);
     },
 
@@ -56,7 +56,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=creditsReferences", true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=creditsReferences', true);
         ajaxRequest.send(null);
     },
 
@@ -71,7 +71,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=schedule", true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=schedule', true);
         ajaxRequest.send(null);
     },
 
@@ -86,7 +86,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=exams", true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=exams', true);
         ajaxRequest.send(null);
     },
     
@@ -103,7 +103,7 @@ const connectToServer =  {
             makeNewColumn('Запиши');
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=showCampaign&action=" + action + "&elective=" + elective + "&credits=" + credits, true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showCampaign&action=' + action + '&elective=' + elective + '&credits=' + credits, true);
         ajaxRequest.send(null);
     },
 
@@ -121,7 +121,7 @@ const connectToServer =  {
             makeNewRow();
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=showSuggestions", true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showSuggestions', true);
         ajaxRequest.send(null);
     },
 
@@ -138,7 +138,7 @@ const connectToServer =  {
             makeNewColumn('Преглед');
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?id=showMessages&type=" + type, true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showMessages&type=' + type, true);
         ajaxRequest.send(null);
     },
 
@@ -154,7 +154,7 @@ const connectToServer =  {
             }   
         }
 
-        ajaxRequest.open("GET", "php/studentsConnection.php?receiver=" + receiver + "&sender=" + sender + "&date=" + date, true);
+        ajaxRequest.open('GET', 'php/studentsConnection.php?receiver=' + receiver + '&sender=' + sender + '&date=' + date, true);
         ajaxRequest.send(null);
     }
 }
@@ -164,7 +164,7 @@ const connectToServer =  {
  * @param {*} cookieName 
  */
 function getCookie(cookieName) {
-    let name = cookieName + "=";
+    let name = cookieName + '=';
     let decodedCookie = decodeURIComponent(document.cookie);
     let cookies = decodedCookie.split(';');
     for(let i = 0; i <cookies.length; i++) {
@@ -176,7 +176,7 @@ function getCookie(cookieName) {
             return  decodeURIComponent(currentCookie.substring(name.length, currentCookie.length).replace(/\+/g, ' '));
         }
     }
-    return "";
+    return '';
 }
 
 const forms = {
@@ -408,7 +408,7 @@ function messagesHeader(){
  */
 function editProfile(){
     let email = getCookie('email');
-    document.getElementById('studentContent').innerHTML = forms.makeProfileEditForm("Редактиране на профил", email);   
+    document.getElementById('studentContent').innerHTML = forms.makeProfileEditForm('Редактиране на профил', email);   
 }
 
 /**
@@ -516,7 +516,7 @@ window.onload = () => {
                     document.getElementById('invalid').style.display = 'block';
                 }
 
-                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
+                document.cookie = 'status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;'; 
             } else {
                 editProfile();
             }
@@ -546,16 +546,16 @@ window.onload = () => {
                     document.getElementById('invalid').style.display = 'block';
                 }
 
-                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+                document.cookie = 'status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
             } else {
                 forms.makeSuggestionForm(name, year);
             }
             
-            document.cookie = "name=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "description=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "year=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "term=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "cathegory=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = 'name=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'description=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'year=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'term=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'cathegory=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
         } else if(id.toString() === 'schedule'){
             showSchedule();
         } else if(id.toString() === 'exams'){
@@ -589,15 +589,15 @@ window.onload = () => {
                     document.getElementById('invalid').style.display = 'block';
                 }
 
-                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
+                document.cookie = 'status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;'; 
             } else {
                 messagesHeader();
                 forms.makeNewMessageForm(to, about);
             }
 
-            document.cookie = "to=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "about=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
-            document.cookie = "content=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            document.cookie = 'to=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'about=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
+            document.cookie = 'content=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;';
         } else if(id.toString() === 'winter' || id.toString() === 'summer'){
             electives('studentContent', id.toString());
         }

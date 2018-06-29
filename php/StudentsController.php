@@ -99,7 +99,7 @@
         public function showElectivesCampaign(){
             $lastCampaign = $this->student->getLastElectivesCampaign();
 
-            $currentDate = date("Y-m-d");
+            $currentDate = date('Y-m-d');
 
             if($currentDate >= $lastCampaign['startDate'] && $currentDate <= $lastCampaign['endDate']){
                 $term = '';

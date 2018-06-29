@@ -3,7 +3,7 @@
  * @param {*} cookieName 
  */
 function getCookie(cookieName) {
-    let name = cookieName + "=";
+    let name = cookieName + '=';
     let decodedCookie = decodeURIComponent(document.cookie);
     let cookies = decodedCookie.split(';');
     for(let i = 0; i <cookies.length; i++) {
@@ -15,7 +15,7 @@ function getCookie(cookieName) {
             return decodeURIComponent(currentCookie.substring(name.length, currentCookie.length).replace(/\+/g, ' '));
         }
     }
-    return "";
+    return '';
 }
 
 /**
@@ -47,7 +47,7 @@ const display = {
  */
 const select = {
     value: () => {
-        let select = document.getElementById("userType");
+        let select = document.getElementById('userType');
         let userType = select.options[select.selectedIndex].value;
 
         display.none();
@@ -77,15 +77,15 @@ window.onload = () => {
     if(userType === 'student'){
         display.block('student');
         document.getElementsByName('userType')[0].value = userType;
-        document.cookie = "userType=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
+        document.cookie = 'userType=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;'; 
     } else if(userType === 'lecturer'){
         display.block('lecturer');
         document.getElementsByName('userType')[0].value = userType;
-        document.cookie = "userType=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
+        document.cookie = 'userType=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;'; 
     }
 
     if(bachelorPrograme !== ''){
         document.getElementsByName('bachelorPrograme')[0].value = bachelorPrograme;
-        document.cookie = "bachelorPrograme=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;"; 
+        document.cookie = 'bachelorPrograme=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;'; 
     }
 }

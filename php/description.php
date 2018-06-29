@@ -14,8 +14,7 @@
             echo $electives->postComment($_COOKIE['elective'], $_GET['postedComment'], $_SESSION['userName']);
         } else {
             echo json_encode($electives->getElectiveInfo($_COOKIE['elective']));
-        }
-        
+        }  
     } 
     
 ?>

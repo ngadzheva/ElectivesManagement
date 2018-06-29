@@ -1,6 +1,6 @@
 <?php
-    require_once "electivesModel.php";
-    require_once "database.php";
+    require_once 'electivesModel.php';
+    require_once 'database.php';
     
     class ElectivesController{
         private $elective;
@@ -82,9 +82,9 @@
 
             while($row = $query->fetch(PDO::FETCH_ASSOC)){
                 $template = $template . "<tr class='elective'>\n";
-                $name = "";
+                $name = '';
                 foreach($row as $key => $value){
-                    if($key === "NAME"){
+                    if($key === 'NAME'){
                         $name = $value;
                         $template = $template . "<td>" . $name . "</td>\n";
                     } else {
@@ -251,7 +251,7 @@
 
                 foreach($comment as $key => $value){
                     if($key == 'user'){
-                        $value = $value ? $value : "Гост";
+                        $value = $value ? $value : 'Гост';
 
                         $template = $template . '<h4>' . $value;
                     } else if($key == 'timePosted'){

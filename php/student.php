@@ -66,8 +66,11 @@
 		 */
 		public function setYear($year){
 			$this->year = $year;
+
+			$database = new DataBase();
 			$sql = "UPDATE `student` SET year='$year'  WHERE year='$year'";
-			$query = $this->database->executeQuery($sql, "Failed updating year!");
+			$query = $database->executeQuery($sql, "Failed updating year!");
+			$database->closeConnection();
 		}
 
 		/**
@@ -96,6 +99,7 @@
 			$sql = "SELECT * FROM `student` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$student = $query->fetch(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			$this->names = $student['names'];
 			$this->year = $student['year'];
@@ -114,6 +118,7 @@
 	
 				$database = new DataBase();
 				$database->insertValues($query, $values);
+				$database->closeConnection();
 	
 				return true;
 			}
@@ -130,6 +135,7 @@
 			$sql = "SELECT name, grade, credits, enrolledDate FROM `chElectives` WHERE fn='$this->fn'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$references = $query->fetchAll(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $references;
 		}
@@ -142,6 +148,7 @@
 			$sql = "SELECT * FROM `campaign` ORDER BY startDate DESC";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$lastCampaign = $query->fetch(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $lastCampaign;
 		}
@@ -154,6 +161,7 @@
 			$sql = "SELECT name, recommendedYear, recommendedBachelorProgram, term, cathegory, rating FROM `electives` WHERE type='suggestion'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $suggestions;
 		}
@@ -166,6 +174,7 @@
 			$sql = "SELECT elective, lecturesType, day, hours, hall FROM schedule, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $suggestions;
 		}
@@ -178,6 +187,7 @@
 			$sql = "SELECT elective, examType, date, hall FROM exams, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $suggestions;
 		}
@@ -193,10 +203,12 @@
 			}
 			
 			$database = new DataBase();
+
 			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, active, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
 			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, true, 'suggestion'];
 
 			$database->insertValues($query, $values);
+			$database->closeConnection();
 		}
 
 		/**
@@ -207,11 +219,14 @@
 		 */
 		public function getElectivesToChoose($term){
 			$database = new DataBase();
+
 			$term = (date('M') >= 9 && date('M') <= 12) ? 'winter' : 'summer';
 
 			$sql = "SELECT el.NAME, NAMES, el.credits, recommendedYear, recommendedBachelorProgram, cathegory, rating, grade FROM ( electives AS el JOIN lecturer AS l ON type='active' AND lecturer = l.id) LEFT JOIN chElectives AS ch ON el.NAME = ch.NAME WHERE term='$term' AND (grade = 0 OR grade IS NULL)";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$electivesToChoose = $query->fetchAll(PDO::FETCH_ASSOC);
+
+			$database->closeConnection();
 
 			return $electivesToChoose;
 		}
@@ -221,10 +236,12 @@
 		 */
 		public function insertNewChosenElective($elective, $credits){
 			$database = new DataBase();
+
 			$query = 'INSERT INTO `chElectives` (name, credits, fn) VALUES(?, ?, ?)';
 			$values = [$elective, $credits, $this->fn];
 
 			$database->insertValues($query, $values);
+			$database->closeConnection();
 		}
 
 		/**
@@ -234,6 +251,7 @@
 			$database = new DataBase();
 			$sql = "DELETE FROM `chElectives` WHERE name='$elective'";
 			$query = $database->executeQuery($sql, 'Failed find user');
+			$database->closeConnection();
 		}
 
 		/**
@@ -249,6 +267,7 @@
 			$sql = "SELECT opened, $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			return $messages;
 		}
@@ -263,6 +282,7 @@
 			$sql = "SELECT * FROM `messages` WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetch(PDO::FETCH_ASSOC);
+			$database->closeConnection();
 
 			$this->setMessageSeen($receiver, $sender, $date);
 
@@ -278,7 +298,7 @@
 			$database = new DataBase();
 			$sql = "UPDATE `messages` SET opened=TRUE WHERE receiver='$receiver' AND sender='$sender' AND sdate='$date'";
 			$query = $database->executeQuery($sql, 'Failed find user');
-
+			$database->closeConnection();
 		}
 
 		/**
@@ -295,6 +315,8 @@
 				$values = [date('Y-m-d G:i:s'), $about, $content, parent::getUserName(), $receiver['userName'], TRUE];
 
 				$database->insertValues($query, $values);
+
+				$database->closeConnection();
 
 				return 'success';
 			} else {

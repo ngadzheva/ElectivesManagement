@@ -2,7 +2,6 @@
     require_once "database.php";
 
     class ElectivesModel{
-        private $database;
         private $id;
         private $title;
         private $lecturer;
@@ -19,7 +18,6 @@
         private $type;
 
         public function __construct($title){
-            $this->database = new DataBase();
             $this->title = $title;
         }
 
@@ -43,8 +41,10 @@
         public function setTitle($title){
             $this->title = $title;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET NAME='$this->title' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating title!");
+            $query = $database->executeQuery($sql, "Failed updating title!");
+            $database->closeConnection();
         }
 
         /**
@@ -60,8 +60,10 @@
         public function setLecturer($lecturer){
             $this->lecturer = $lecturer;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET lecturer='$this->lecturer' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating lecturer!");
+            $query = $database->executeQuery($sql, "Failed updating lecturer!");
+            $database->closeConnection();
         }
 
         /**
@@ -77,8 +79,10 @@
         public function setCathegory($cathegory){
             $this->cathegory = $cathegory;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET cathegory='$this->cathegory' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating category!");
+            $query = $database->executeQuery($sql, "Failed updating category!");
+            $database->closeConnection();
         }
 
         /**
@@ -94,8 +98,10 @@
         public function setDescription($description){
             $this->description = $description;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET description='$this->description' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating description!");
+            $query = $database->executeQuery($sql, "Failed updating description!");
+            $database->closeConnection();
         }
 
         /**
@@ -111,8 +117,10 @@
         public function setCredits($credits){
             $this->credits = $credits;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET credits='$this->credits' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating credits!");
+            $query = $database->executeQuery($sql, "Failed updating credits!");
+            $database->closeConnection();
         }
 
         /**
@@ -128,8 +136,10 @@
         public function setYear($year){
             $this->year = $year;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET recommendedYear='$this->year' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating year!");
+            $query = $database->executeQuery($sql, "Failed updating year!");
+            $database->closeConnection();
         }
 
         /**
@@ -145,8 +155,10 @@
         public function setBachelorsProgram($bachelorsProgram){
             $this->bachelorsProgram = $bachelorsProgram;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET recommendedBachelorProgram='$this->bachelorsProgram' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating bachelors program!");
+            $query = $database->executeQuery($sql, "Failed updating bachelors program!");
+            $database->closeConnection();
         }
 
         /**
@@ -162,8 +174,10 @@
         public function setLiterature($literature){
             $this->literature = $literature;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET literature='$this->literature' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating literature!");
+            $query = $database->executeQuery($sql, "Failed updating literature!");
+            $database->closeConnection();
         }
 
         /**
@@ -179,8 +193,10 @@
         public function setSubjects($subjects){
             $this->subjects = $subjects;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET subjects='$this->subjects' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating themes!");
+            $query = $database->executeQuery($sql, "Failed updating themes!");
+            $database->closeConnection();
         }
 
         /**
@@ -196,8 +212,10 @@
         public function setTerm($term){
             $this->term = $term;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET term='$this->term' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating term!");
+            $query = $database->executeQuery($sql, "Failed updating term!");
+            $database->closeConnection();
         }
 
         /**
@@ -211,17 +229,20 @@
          * Set new rating of the elective
          */
         public function setRating($rating){
+            $database = new DataBase();
+
             if($rating == 'dislike'){
                 $sql = "UPDATE electives SET rating='$this->rating'-1 WHERE name='$this->title'";
             } else {
                 $sql = "UPDATE electives SET rating='$this->rating'+1 WHERE name='$this->title'";
             }
 
-            $query = $this->database->executeQuery($sql, "Failed updating rating!");
+            $query = $database->executeQuery($sql, "Failed updating rating!");
 
             $sql = "SELECT rating FROM `electives` WHERE name='$this->title'";
-			$query = $this->database->executeQuery($sql, 'Failed find user');
+			$query = $database->executeQuery($sql, 'Failed find user');
             $this->rating = $query->fetch(PDO::FETCH_ASSOC)['rating'];
+            $database->closeConnection();
         }
 
         /**
@@ -237,8 +258,10 @@
         public function setActive($active){
             $this->active = $active;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET active='$this->active' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating active!");
+            $query = $database->executeQuery($sql, "Failed updating active!");
+            $database->closeConnection();
         }
 
         /**
@@ -254,8 +277,10 @@
         public function setType($type){
             $this->type = $type;
 
+            $database = new DataBase();
             $sql = "UPDATE electives SET type='$this->type' WHERE id='$this->id'";
-            $query = $this->database->executeQuery($sql, "Failed updating active!");
+            $query = $database->executeQuery($sql, "Failed updating active!");
+            $database->closeConnection();
         }
 
         /**
@@ -264,9 +289,11 @@
         public function load(){
             $electives = [];
 
+            $database = new DataBase();
             $sql = "SELECT * FROM `electives` WHERE name='$this->title' AND active=1";
-			$query = $this->database->executeQuery($sql, 'Failed find user');
+			$query = $database->executeQuery($sql, 'Failed find user');
             $electives = $query->fetch(PDO::FETCH_ASSOC);
+            $database->closeConnection();
             
             $this->lecturer = $electives['lecturer'];
             $this->cathegory = $electives['cathegory'];
@@ -286,6 +313,7 @@
          * Retrieve all electives for winter or summer term from database
          */
         public function getElectives($queryString){
+            $database = new DataBase();
             $sql = "SELECT NAME, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE type='active' AND lecturer=id AND ";
 
            if($queryString === 'winter'){
@@ -294,7 +322,8 @@
                 $sql = $sql . "term = 'summer'";
             }
 
-            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+            $query = $database->executeQuery($sql, "Failed finding electives!");
+            $database->closeConnection();
 
             return $query;
         }
@@ -303,9 +332,10 @@
          * Retrieve filtered list of electives for winter or summer term from database
          **/
         public function getFilteredElectives($term, $filter, $value){
+            $database = new DataBase();
             $sql = "SELECT name, names, credits, recommendedYear, recommendedBachelorProgram, cathegory, rating FROM electives, lecturer WHERE lecturer=id AND ";
 
-            if ($filter == "lecturer") {
+            if ($filter === 'lecturer') {
                 
                 $sql = $sql . "term='$term'" . " AND " . "names LIKE '%$value%'";
             }
@@ -313,7 +343,8 @@
                 $sql = $sql . "term='$term'" . " AND " . "$filter LIKE '%$value%'";
             }
 
-            $query = $this->database->executeQuery($sql, "Failed finding electives!");
+            $query = $database->executeQuery($sql, "Failed finding electives!");
+            $database->closeConnection();
 
             return $query;
         }
@@ -322,22 +353,26 @@
          * Insert new elective to the database
          */
         public function insertNewElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $subjects, $term, $rating, $type){
+            $database = new DataBase();
             $sql = "SELECT id FROM lecturer WHERE NAMES='$this->lecturer'";
-            $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
+            $query = $database->executeQuery($sql, "Failed finding lecturer!");
             $lecturerID = $query->fetch(PDO::FETCH_ASSOC)['id'];
 
             $sql = "INSERT INTO electives VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
             $values = [$title, $lecturerID, $description, $credits, $recommendedYear, $recommendedBachelorProgram, $literature, $subjects, $term, $cathegory, $active, $rating, $type]; 
-            $this->database->insertValues($sql, $values);
+            $database->insertValues($sql, $values);
+            $database->closeConnection();
         }
 
         /**
          * Retrieve all comments for current elective from database
          */
         public function getComments(){
+            $database = new DataBase();
             $sql = "SELECT user, timePosted, content FROM comments WHERE elective='$this->title'";
-            $query = $this->database->executeQuery($sql, "Failed finding lecturer!");
+            $query = $database->executeQuery($sql, "Failed finding lecturer!");
             $comments = $query->fetchAll(PDO::FETCH_ASSOC);
+            $database->closeConnection();
 
             return $comments;
         }
@@ -346,9 +381,11 @@
          * Insert new comment for current elective to database
          */
         public function insertNewComment($comment, $user){
+            $database = new DataBase();
             $sql = "INSERT INTO comments(content, elective, user, timePosted) VALUES(?, ?, ?, ?)"; 
             $values = [$comment, $this->title, $user, date('Y-m-d G:i:s')]; 
-            $this->database->insertValues($sql, $values);
+            $database->insertValues($sql, $values);
+            $database->closeConnection();
         }
     }
 ?>

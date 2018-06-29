@@ -35,18 +35,18 @@ function filterElectives(element) {
             let ajaxDisplay = document.getElementById(element);
             ajaxDisplay.innerHTML = makeFilterForm(element) + ajax.responseText;
 
-            makeColumn("Преглед"); 
+            makeColumn('Преглед'); 
         }
     }
 
     let form = new FormData(document.querySelector('form'));
-    let filter = form.get("filter");
+    let filter = form.get('filter');
     
     let params = new URLSearchParams(window.location.search);
     let id = params.get('id').toString();
-    let value = form.get("value");
+    let value = form.get('value');
 
-    ajax.open("GET", "electives.php?id=" + id + "&filter=" + filter + "&value=" + value, true);
+    ajax.open('GET', 'electives.php?id=' + id + '&filter=' + filter + '&value=' + value, true);
     ajax.send(null);
 }
 
@@ -83,7 +83,7 @@ function listElectives(element, term){
             ajaxDisplay.innerHTML = makeFilterForm(element)  + /*makeSortForm(element) +*/ ajax.responseText;
         }
 
-        makeColumn("Преглед");
+        makeColumn('Преглед');
     }
 
     let id;
@@ -95,7 +95,7 @@ function listElectives(element, term){
         id = params.get('id').toString();
     }
 
-    ajax.open("GET", "electives.php?id=" + id, true);
+    ajax.open('GET', 'electives.php?id=' + id, true);
     ajax.send(null);
 }
 
@@ -110,7 +110,7 @@ function makeColumn(name, isSuggestion){
 
     let tr = document.getElementsByClassName('elective');
     
-    if(name == "Преглед"){
+    if(name == 'Преглед'){
         for(let i = 0; i < tr.length; i++){
             let td = document.createElement('td');
             let img = document.createElement('img');
@@ -123,7 +123,7 @@ function makeColumn(name, isSuggestion){
             td.appendChild(img);
             tr[i].appendChild(td);
         }
-    } else if(name == "Редактиране"){
+    } else if(name == 'Редактиране'){
         for(let i = 0; i < tr.length; i++){
             let title, lecturer, credits, cathegory;
             let cols = tr[i].getElementsByTagName('td');

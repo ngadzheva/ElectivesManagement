@@ -22,7 +22,11 @@
 
         public function executeQuery($query, $errorMessage){
             try{
-                return $this->connection->query($query);
+                $this->connection->beginTransaction();
+                $result =  $this->connection->query($query);
+                $this->connection->commit();
+
+                return $result;
             } catch(PDOException $e){
                 echo $errorMessage . $e->getMessage();
                 $this->connection->rollBack();
@@ -31,7 +35,9 @@
 
         public function insertValues($query, $values){
             try{
+                $this->connection->beginTransaction();
                 $this->connection->prepare($query)->execute($values);
+                $this->connection->commit();
             } catch(PDOException $e){
                 echo "Inserting values into table failed: " . $e->getMessage();
                 $this->connection->rollBack();
