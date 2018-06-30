@@ -10,13 +10,13 @@
 
     if(!$user && !$pass){
         $_SESSION['loginError'] = 'Въведете потребителско име и парола.';
-        header('Location: ../login.php');
+        header('Location: ./login.php');
     } else if(!$user){
        $_SESSION['loginError'] = 'Въведете потребителско име.';
-       header('Location: ../login.php');
+       header('Location: ./login.php');
     } else if(!$pass){
         $_SESSION['loginError'] = 'Въведете парола.';
-        header('Location: ../login.php');
+        header('Location: ./login.php');
     } else {
         $sql = "SELECT * FROM users WHERE userName='$user'";
         $query = $database->executeQuery($sql, "Failed finding $user!");
@@ -46,14 +46,14 @@
 
                 $database->closeConnection();
                 
-                header('Location: ../' . $exist['userType'] . '.html'); 
+                header('Location: ../html/' . $exist['userType'] . '.html'); 
             } else {
                 $_SESSION['loginError'] = 'Грешна парола.';
-                header('Location: ../login.php');
+                header('Location: ./login.php');
             }
         } else {
             $_SESSION['loginError'] = 'Грешно потребителско име.';
-            header('Location: ../login.php');
+            header('Location: ./login.php');
         }
     }
 

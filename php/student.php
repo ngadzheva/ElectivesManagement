@@ -175,7 +175,7 @@
 		 */
 		public function getSchedule(){
 			$database = new DataBase();
-			$sql = "SELECT elective, lecturesType, day, hours, hall FROM schedule, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
+			$sql = "SELECT elective, lecturesType, day, hours, hall FROM schedule, chElectives WHERE elective=name AND fn='$this->fn' AND grade=0";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
 			$database->closeConnection();
@@ -188,7 +188,7 @@
 		 */
 		public function getExams(){
 			$database = new DataBase();
-			$sql = "SELECT elective, examType, date, hall FROM exams, chelectives WHERE elective=name AND fn='$this->fn' AND grade=0";
+			$sql = "SELECT elective, examType, date, hall FROM exams, chElectives WHERE elective=name AND fn='$this->fn' AND grade=0";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$suggestions = $query->fetchAll(PDO::FETCH_ASSOC);
 			$database->closeConnection();

@@ -36,7 +36,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/adminConnection.php", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php", true);
         ajaxRequest.send(null);
     }, 
     
@@ -52,7 +52,7 @@ const connectToServer =  {
 			makeNewColumn('Премахване на избираема');
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?id=activeElectives", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?id=activeElectives", true);
         ajaxRequest.send(null);
      },
 
@@ -67,7 +67,7 @@ const connectToServer =  {
 			makeNewColumn('Добавяне на предложена');
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?id=suggestedElectives", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?id=suggestedElectives", true);
         ajaxRequest.send(null);
     },
 
@@ -83,7 +83,7 @@ const connectToServer =  {
             makeNewColumn('Активиране на избираема');
         }
         
-        ajaxRequest.open("GET", "php/adminConnection.php?id=disabledElectives", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?id=disabledElectives", true);
         ajaxRequest.send(null);
     },
 
@@ -100,7 +100,7 @@ const connectToServer =  {
 			makeNewColumn('Премахване на потребител');
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?id=activeUsers", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?id=activeUsers", true);
         ajaxRequest.send(null);
     },
     
@@ -117,7 +117,7 @@ const connectToServer =  {
 			 makeNewColumn('Активиране на потребител');
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?id=disableUsers", true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?id=disableUsers", true);
         ajaxRequest.send(null);
     },
 
@@ -130,7 +130,7 @@ const connectToServer =  {
             }   
         }   
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?addSuggested=" + name, true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?addSuggested=" + name, true);
         ajaxRequest.send(null);
     },
     
@@ -143,7 +143,7 @@ const connectToServer =  {
             }   
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?deactivateElective=" + name, true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?deactivateElective=" + name, true);
         ajaxRequest.send(null);
     },
 
@@ -156,7 +156,7 @@ const connectToServer =  {
             }   
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?activateElective=" + name, true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?activateElective=" + name, true);
         ajaxRequest.send(null);
     },
 
@@ -169,7 +169,7 @@ const connectToServer =  {
             }   
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?activateUser=" + name, true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?activateUser=" + name, true);
         ajaxRequest.send(null);
     },
 
@@ -182,7 +182,7 @@ const connectToServer =  {
             }   
         }
 		
-        ajaxRequest.open("GET", "php/adminConnection.php?deactivateUser=" + name, true);
+        ajaxRequest.open("GET", "../php/adminConnection.php?deactivateUser=" + name, true);
         ajaxRequest.send(null);
     }
 
@@ -194,7 +194,7 @@ function makeProfileEditForm(type, email){
 
     var editForm = "<fieldset id='editForm'>\n" +
 	"<legend class='editProfile'>" + type + "</legend>\n" +
-    "<form name='editProf' method='post' action='php/adminConnection.php'>\n" +
+    "<form name='editProf' method='post' action='../php/adminConnection.php'>\n" +
         "<label class='error' id='invalid' style='display: none;'></label>\n" +
         "<label class='editProfile'>E-mail:</label>\n" +
         "<input class='editProfile' type='text' name='email' value='" + email + "'></input>\n" +
@@ -213,7 +213,7 @@ function makeProfileEditForm(type, email){
 
 function addAdminForm(){
     var editForm = "<fieldset id='editForm'>\n" +
-    "<form name='addAdmin' method='post' action='php/adminConnection.php'>\n" +
+    "<form name='addAdmin' method='post' action='../php/adminConnection.php'>\n" +
         "<legend class='editProfile'>Добавяне на администратор</legend>\n" + 
         "<label class='error' id='status' style='display: none;'></label>\n" +
         "<label class='editProfile'>Три имена:</label>\n" + 
@@ -236,7 +236,7 @@ function addAdminForm(){
 function addUserForm() {
     var editForm =  "<fieldset id='registerForm'>\n" +
     "<legend class='register'>Регистрация</legend>\n" +
-    "<form name='register' method='post' action='php/adminConnection.php'>\n" +
+    "<form name='register' method='post' action='../php/adminConnection.php'>\n" +
         "<label class='error' id='status' style='display: none;'></label>\n" +
         "<label class='register'>Три имена<mark id='star'>*</mark></label>\n" +
         "<input class='register' type='text' name='names' id='names'></input>\n" +
@@ -311,7 +311,7 @@ function makeNewColumn(columnType){
             var currentElement = tr[i].firstChild.innerHTML;
             
             img.setAttribute('onclick', 'connectToServer.addSuggested("' + currentElement + '")');       
-            img.setAttribute('src', 'img/add.png');
+            img.setAttribute('src', '../img/add.png');
             td.appendChild(img);
             tr[i].appendChild(td); 
 		}
@@ -325,7 +325,7 @@ function makeNewColumn(columnType){
             var currentElement = tr[i].firstChild.innerHTML;
             
             img.setAttribute('onclick', 'connectToServer.deactivateElective("' + currentElement + '")');       
-            img.setAttribute('src', 'img/delete.png');
+            img.setAttribute('src', '../img/delete.png');
             td.appendChild(img);
             tr[i].appendChild(td); 
 		}
@@ -339,7 +339,7 @@ function makeNewColumn(columnType){
             var currentElement = tr[i].firstChild.innerHTML;
             
             img.setAttribute('onclick', 'connectToServer.activаteElective("' + currentElement + '")');       
-            img.setAttribute('src', 'img/add.png');
+            img.setAttribute('src', '../img/add.png');
             td.appendChild(img);
             tr[i].appendChild(td); 
 		}
@@ -353,7 +353,7 @@ function makeNewColumn(columnType){
             var currentElement = tr[i].firstChild.innerHTML;
             
             img.setAttribute('onclick', 'connectToServer.deactivateUser("' + currentElement + '")');       
-            img.setAttribute('src', 'img/delete.png');
+            img.setAttribute('src', '../img/delete.png');
             td.appendChild(img);
             tr[i].appendChild(td); 
 		}
@@ -367,7 +367,7 @@ function makeNewColumn(columnType){
             var currentElement = tr[i].firstChild.innerHTML;
             
             img.setAttribute('onclick', 'connectToServer.activateUser("' + currentElement + '")');       
-            img.setAttribute('src', 'img/add.png');
+            img.setAttribute('src', '../img/add.png');
             td.appendChild(img);
             tr[i].appendChild(td); 
 		}
@@ -389,11 +389,7 @@ function getCookie(cookieName) {
         while (currentCookie.charAt(0) == ' ') {
             currentCookie = currentCookie.substring(1);
         }
-    console.log(currentCookie);
-
         if (currentCookie.indexOf(name) == 0) {
-            console.log(decodeURIComponent(currentCookie.substring(name.length, currentCookie.length).replace(/\+/g, ' ')));
-            
             return  decodeURIComponent(currentCookie.substring(name.length, currentCookie.length).replace(/\+/g, ' '));
         }
     }

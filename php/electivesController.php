@@ -33,16 +33,6 @@
         }
 
         /**
-         * Add new elective to database
-         **/
-        public function addNewElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $subjects, $term, $rating, $type){
-            $newElective  = new ElectivesModel($title);
-            $newElective->insertNewElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $subjects, $term, $rating, $type);
-
-            header( 'Location: http://' . $_SERVER['HTTP_HOST'] . '/admin.html' );
-        }
-
-        /**
          * Delete an elective from database
          **/
         public function deleteElective($name){
@@ -55,15 +45,6 @@
             $this->viewElectives($term);
         }
 
-        /**
-         * update the information for an elective to database
-         **/
-        public function updateElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $subjects, $term, $rating, $type){
-            $elective = new ElectiveModel($name);
-            $elective->load();
-
-            // TODO
-        }
 
         /**
          * Make a table with the electives

@@ -41,7 +41,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php', true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php', true);
         ajaxRequest.send(null);
     },
 
@@ -56,7 +56,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=creditsReferences', true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=creditsReferences', true);
         ajaxRequest.send(null);
     },
 
@@ -71,7 +71,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=schedule', true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=schedule', true);
         ajaxRequest.send(null);
     },
 
@@ -86,7 +86,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=exams', true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=exams', true);
         ajaxRequest.send(null);
     },
     
@@ -103,7 +103,7 @@ const connectToServer =  {
             makeNewColumn('Запиши');
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showCampaign&action=' + action + '&elective=' + elective + '&credits=' + credits, true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=showCampaign&action=' + action + '&elective=' + elective + '&credits=' + credits, true);
         ajaxRequest.send(null);
     },
 
@@ -121,7 +121,7 @@ const connectToServer =  {
             makeNewRow();
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showSuggestions', true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=showSuggestions', true);
         ajaxRequest.send(null);
     },
 
@@ -138,7 +138,7 @@ const connectToServer =  {
             makeNewColumn('Преглед');
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?id=showMessages&type=' + type, true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?id=showMessages&type=' + type, true);
         ajaxRequest.send(null);
     },
 
@@ -154,7 +154,7 @@ const connectToServer =  {
             }   
         }
 
-        ajaxRequest.open('GET', 'php/studentsConnection.php?receiver=' + receiver + '&sender=' + sender + '&date=' + date, true);
+        ajaxRequest.open('GET', '../php/studentsConnection.php?receiver=' + receiver + '&sender=' + sender + '&date=' + date, true);
         ajaxRequest.send(null);
     }
 }
@@ -188,7 +188,7 @@ const forms = {
     makeProfileEditForm: (type, email) =>{
         let editForm = "<fieldset id='editForm'>\n" +
         "<legend class='editProfile'>" + type + "</legend>\n" + 
-        "<form name='edit' method='post' action='php/studentsConnection.php'>\n" +
+        "<form name='edit' method='post' action='../php/studentsConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='editProfile'>E-mail:<mark id='star'>*</mark></label>\n" +
             "<input class='editProfile' type='email' name='email' value='" + email + "'></input>\n" +
@@ -211,7 +211,7 @@ const forms = {
     makeSuggestionForm: (name, year) =>{
         let suggestForm = "<fieldset id='suggestionForm'>\n" +
         "<legend class='makeSuggestion'>Предлагане на избираема дисциплина</legend>\n" + 
-        "<form name='suggestion' method='post' action='php/studentsConnection.php'>\n" +
+        "<form name='suggestion' method='post' action='../php/studentsConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='makeSuggestion'>Име на дисциплината:<mark id='star'>*</mark></label>\n" +
             "<input class='makeSuggestion' type='text' name='name' value='" + name + "'></input>\n" +
@@ -270,7 +270,7 @@ const forms = {
     makeNewMessageForm: (to, about) => {
         let messageForm = "<fieldset id='messageForm'>\n" +
         "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
-        "<form name='message' method='post' action='php/studentsConnection.php'>\n" +
+        "<form name='message' method='post' action='../php/studentsConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='sendMessage'>До:<mark id='star'>*</mark></label>\n" +
             "<input class='sendMessage' type='email' name='to' placeholder='lecturer@email.bg' value='" + to + "'></input>\n" +
@@ -304,7 +304,7 @@ function makeNewRow(){
     img.setAttribute('class', 'addIcon');
     img.setAttribute('title', 'Добави предложение');
     img.setAttribute('onclick','makeSuggestion()');
-    img.setAttribute('src', 'img/add.png');
+    img.setAttribute('src', '../img/add.png');
     td.appendChild(img);
     row.appendChild(td);
 
@@ -341,7 +341,7 @@ function makeNewColumn(columnType){
             } 
 
             img.setAttribute('onclick', 'connectToServer.viewMessage("' + receiver + '", "' + sender + '", "' + date + '")');            
-            img.setAttribute('src', 'img/view.png');
+            img.setAttribute('src', '../img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
         }
@@ -359,7 +359,7 @@ function makeNewColumn(columnType){
             img.setAttribute('class', 'enrolIcon');
             img.setAttribute('title', action);
             img.setAttribute('onclick', 'connectToServer.showCampaign("' + action + '","' + elective + '","' + credits + '")');            
-            img.setAttribute('src', 'img/' + icon);
+            img.setAttribute('src', '../img/' + icon);
             td.appendChild(img);
             tr[i].appendChild(td);
         }

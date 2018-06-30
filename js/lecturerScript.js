@@ -47,7 +47,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php", true);
         ajaxRequest.send(null);
     },
 	
@@ -64,7 +64,7 @@ const connectToServer =  {
             makeNewColumn('Преглед');
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=showMessages&type=" + type, true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=showMessages&type=" + type, true);
         ajaxRequest.send(null);
     },
 
@@ -80,7 +80,7 @@ const connectToServer =  {
             }   
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?receiver=" + receiver + "&sender=" + sender + "&date=" + date, true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?receiver=" + receiver + "&sender=" + sender + "&date=" + date, true);
         ajaxRequest.send(null);
 	},	
 	 
@@ -97,7 +97,7 @@ const connectToServer =  {
 			makeNewColumn('Отпиши');
         }
 		
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=writeOff", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=writeOff", true);
         ajaxRequest.send(null);
 	 },
 	 
@@ -114,7 +114,7 @@ const connectToServer =  {
 
         }
 		
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=writeOn", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=writeOn", true);
         ajaxRequest.send(null);
 	 },
 	 	 	 
@@ -131,7 +131,7 @@ const connectToServer =  {
             makeNewColumn('Оценка');
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=mark", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=mark", true);
         ajaxRequest.send(null);
     },
 	
@@ -149,7 +149,7 @@ const connectToServer =  {
 			makeNewColumn('Справки');
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=lecturerReferences", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=lecturerReferences", true);
         ajaxRequest.send(null);
     },
 		
@@ -164,7 +164,7 @@ const connectToServer =  {
             }   
         }
 		
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=infoElectiveReference&name=" + name, true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=infoElectiveReference&name=" + name, true);
         ajaxRequest.send(null);
 	 },
 	 
@@ -182,7 +182,7 @@ const connectToServer =  {
             makeNewRow();
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=showSuggestions", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=showSuggestions", true);
         ajaxRequest.send(null);
     },
 	
@@ -197,7 +197,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=schedule", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=schedule", true);
         ajaxRequest.send(null);
     },
 	
@@ -212,7 +212,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=exams", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=exams", true);
         ajaxRequest.send(null);
     },
 	
@@ -229,7 +229,7 @@ const connectToServer =  {
 			 makeNewColumn('Редактиране');
         }
 		
-        ajaxRequest.open("GET", "php/lecturerConnection.php?id=update", true);
+        ajaxRequest.open("GET", "../php/lecturerConnection.php?id=update", true);
         ajaxRequest.send(null);
 	 }	
 }
@@ -249,7 +249,7 @@ function makeNewRow(){
     img.setAttribute('class', 'addIcon');
     img.setAttribute('title', 'Добави предложение');
     img.setAttribute('onclick','makeSuggestion()');
-    img.setAttribute('src', 'img/add.png');
+    img.setAttribute('src', '../img/add.png');
     td.appendChild(img);
     row.appendChild(td);
 
@@ -288,7 +288,7 @@ function makeNewColumn(columnType){
             } 
 
             img.setAttribute('onclick', 'connectToServer.viewMessage("' + receiver + '", "' + sender + '", "' + date + '")');            
-            img.setAttribute('src', 'img/view.png');
+            img.setAttribute('src', '../img/view.png');
             td.appendChild(img);
             tr[i].appendChild(td);
         }
@@ -309,7 +309,7 @@ function makeNewColumn(columnType){
 				forms.writeOnStudent(currentElective);
 			}}(currentElective));
 				
-			 img.setAttribute('src', 'img/add.png');
+			 img.setAttribute('src', '../img/add.png');
 			 td.appendChild(img);
 			 tr[i].appendChild(td);	
 			
@@ -330,7 +330,7 @@ function makeNewColumn(columnType){
 				return function(){ document.getElementById('electivesList').style.display = 'none';
 				forms.writeOffStudent(currentElective);
 			}}(currentElective));
-			 img.setAttribute('src', 'img/delete.png');
+			 img.setAttribute('src', '../img/delete.png');
 			 td.appendChild(img);
 			 tr[i].appendChild(td);
 		 
@@ -350,7 +350,7 @@ function makeNewColumn(columnType){
 				return function(){ document.getElementById('electivesList').style.display = 'none';
 				forms.writeMarkStudent(currentElective);
 			}}(currentElective));
-			 img.setAttribute('src', 'img/edit.png');
+			 img.setAttribute('src', '../img/edit.png');
 			 td.appendChild(img);
 			 tr[i].appendChild(td);
 		 
@@ -369,7 +369,7 @@ function makeNewColumn(columnType){
 			return function(){ document.getElementById('electivesList').style.display = 'none';
 			forms.makeElectivesEditForm(currentElective);
 			}}(currentElective));
-			 img.setAttribute('src', 'img/edit.png');
+			 img.setAttribute('src', '../img/edit.png');
 			 td.appendChild(img);
 			 tr[i].appendChild(td);
 		 
@@ -386,7 +386,7 @@ function makeNewColumn(columnType){
 			 
 			 var currentElective = tr[i].firstChild.innerHTML;
 			 img.setAttribute('onclick', 'connectToServer.infoElectiveReference("' + currentElective + '")');            
-			 img.setAttribute('src', 'img/edit.png');
+			 img.setAttribute('src', '../img/edit.png');
 			 td.appendChild(img);
 			 tr[i].appendChild(td);
 		 
@@ -424,7 +424,7 @@ const forms = {
     makeProfileEditForm: (type, email, telephone, visitingHours, office, personalPage) =>{
         let editForm = "<fieldset id='editForm'>\n" +
         "<legend class='editProfile'>" + type + "</legend>\n" + 
-        "<form name='edit' method='post' action='php/lecturerConnection.php'>\n" +
+        "<form name='edit' method='post' action='../php/lecturerConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='editProfile'>E-mail:<mark id='star'>*</mark></label>\n" +
             "<input class='editProfile' type='email' name='email' value='" + email + "'></input>\n" +
@@ -457,7 +457,7 @@ const forms = {
     makeSuggestionForm: (name, year) =>{
         let suggestForm = "<fieldset id='suggestionForm'>\n" +
         "<legend class='makeSuggestion'>Предлагане на избираема дисциплина</legend>\n" + 
-        "<form name='suggestion' method='post' action='php/lecturerConnection.php'>\n" +
+        "<form name='suggestion' method='post' action='../php/lecturerConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='makeSuggestion'>Име на дисциплината:<mark id='star'>*</mark></label>\n" +
             "<input class='makeSuggestion' type='text' name='name' value='" + name + "'></input>\n" +
@@ -516,7 +516,7 @@ const forms = {
     makeNewMessageForm: (to, about) => {
         let messageForm = "<fieldset id='messageForm'>\n" +
         "<legend class='sendMessage'>Ново съобщение</legend>\n" + 
-        "<form name='message' method='post' action='php/lecturerConnection.php'>\n" +
+        "<form name='message' method='post' action='../php/lecturerConnection.php'>\n" +
             "<label class='error' id='invalid' style='display: none;'></label>\n" +
             "<label class='sendMessage'>До:<mark id='star'>*</mark></label>\n" +
             "<input class='sendMessage' type='email' name='to' placeholder='student@email.bg' value='" + to + "'></input>\n" +
@@ -539,7 +539,7 @@ const forms = {
 	
 		var writeForm = "<fieldset id='writeForm'>\n" +
 		"<legend class='writeOff'>Отпиши студент от избираема дисциплина</legend>\n" + 
-		"<form name='message' method='post' action='php/lecturerConnection.php'>\n" +
+		"<form name='message' method='post' action='../php/lecturerConnection.php'>\n" +
 			"<label class='error' id='invalid' style='display: none;'></label>\n" +
 			"<label class='writeOn'>Име на дисциплината:</label>\n" +
 			"<input class='writeOn' type='text' name='name' value='" + name + "'></input>\n" +
@@ -562,7 +562,7 @@ const forms = {
 	writeOnStudent: (name) => {
 		var writeForm = "<fieldset id='writeForm'>\n" +
 		"<legend class='writeOn'>Запиши студент за избираема дисциплина</legend>\n" + 
-		"<form name='message' method='post' action='php/lecturerConnection.php'>\n" +
+		"<form name='message' method='post' action='../php/lecturerConnection.php'>\n" +
 		"<label class='writeOn'>Име на дисциплината:</label>\n" +
 		"<input class='writeOn' type='text' name='nameElective' value='" + name + "'></input>\n" +
 		"<label class='writeOn'>Студент:</label>\n" +
@@ -585,7 +585,7 @@ const forms = {
 		
 		var writeForm = "<fieldset id='writeForm'>\n" +
 		"<legend class='writeMark'>Нанасяне на оценка на студент</legend>\n" +
-		"<form name='message' method='post' action='php/lecturerConnection.php'>\n" +
+		"<form name='message' method='post' action='../php/lecturerConnection.php'>\n" +
         "<label class='writeOn'>Име на дисциплината:</label>\n" +
         "<input class='writeOn' type='text' name='nameElectives' value='" + name + "'></input>\n" +
         "<label class='writeMark'>Студент:</label>\n" +
@@ -610,7 +610,7 @@ const forms = {
 	  
 	
 		var editForm = "<fieldset id='editForm'>\n" +
-		"<form name='editElectives' method='post' action='php/lecturerConnection.php'>\n" +
+		"<form name='editElectives' method='post' action='../php/lecturerConnection.php'>\n" +
         "<legend class='editProfile'>Редактиране на избираема дисциплина</legend>\n" + 
 		"<label class='editElective'>Избираема дисциплина</label>\n" +
         "<input class='editElective' type='text' name='name' value='" + name + "'></input>\n" +

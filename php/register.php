@@ -5,21 +5,21 @@
 
         <title>Система за управление на избираеми дисциплини</title>
 
-        <link rel='stylesheet' type='text/css' href='css/styles.css'/>
-        <script type='text/javascript' src='js/register.js'></script>
+        <link rel='stylesheet' type='text/css' href='../css/styles.css'/>
+        <script type='text/javascript' src='../js/register.js'></script>
     </head>
 
     <body>
         <header>
             <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
             <figure>
-                <img id='header' src='img/border.png'/>
+                <img id='header' src='../img/border.png'/>
             </figure>
             
             <nav id='mainNav'>
-                <a href='index.html'>Начало</a>
-                <a href='electives.html?id=winter'>Избираеми дисциплини Зимен семестър</a>
-                <a href='electives.html?id=summer'>Избираеми дисциплини Летен семестър</a>
+                <a href='../index.html'>Начало</a>
+                <a href='../html/electives.html?id=winter'>Избираеми дисциплини Зимен семестър</a>
+                <a href='../html/electives.html?id=summer'>Избираеми дисциплини Летен семестър</a>
                 <a href='register.php'>Регистрация</a>
                 <a href='login.php'>Вход</a>
             </nav>
@@ -29,7 +29,7 @@
             <section id='registerBackground'>
                 <fieldset id='registerForm'>
                     <legend class='register'>Регистрация</legend>
-                    <form name='register' method='post' action='php/registerValidation.php'>
+                    <form name='register' method='post' action='registerValidation.php'>
 
                         <?php 
                             session_start();

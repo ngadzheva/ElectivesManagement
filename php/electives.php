@@ -1,5 +1,5 @@
 <?php
-    require "php/electivesController.php";
+    require "electivesController.php";
 
     $electives = new electivesController();
 
