@@ -53,7 +53,6 @@ CREATE TABLE electives(
     subjects VARCHAR(2000),
     term VARCHAR(200),
     cathegory VARCHAR(200),
-    active BOOLEAN,
     rating INT DEFAULT 0,
     type VARCHAR(10),
     PRIMARY KEY (name),
