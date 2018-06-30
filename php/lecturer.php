@@ -220,16 +220,7 @@ class Lecturer extends User{
 				return 'notfound';
 			}
 		}
-		/**
-		 * Updating information for an elective
-		 */
-		/*public function updateElectivesLecturer($name)
-		{
-			$database = new DataBase();
-			$sql = "SELECT description, literature, subjects FROM `electives` WHERE name='$name'";
-			$query = $database->executeQuery($sql, 'Failed find user');
-			return $query->fetch(PDO::FETCH_ASSOC);
-		}*/
+	
 		
 	/**
 	 * Updating information for an elective
@@ -343,8 +334,8 @@ class Lecturer extends User{
 			}
 			
 			$database = new DataBase();
-			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, active, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, true, 'suggestion'];
+			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, type) VALUES(?, ?, ?, ?, ?, ?, ?)';
+			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, 'suggestion'];
 			$database->insertValues($query, $values);
 		}
 		
