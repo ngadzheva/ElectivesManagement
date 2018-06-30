@@ -36,12 +36,15 @@
         public function insertValues($query, $values){
             try{
                 $this->connection->beginTransaction();
-                $this->connection->prepare($query)->execute($values);
+                $result = $this->connection->prepare($query)->execute($values);
                 $this->connection->commit();
             } catch(PDOException $e){
                 echo "Inserting values into table failed: " . $e->getMessage();
                 $this->connection->rollBack();
+                return $result;
             }
+
+            return $result;
         }
 
         public function closeConnection(){

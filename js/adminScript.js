@@ -223,13 +223,66 @@ function addAdminForm(){
         "<label class='editProfile'>Потребителско име:</label>\n" +
         "<input class='editProfile' type='text' name='userName'></input>\n" +
         "<label class='editProfile'>Парола:</label>\n" +
-        "<input class='editProfile' type='text' name='password'></input>\n" +
+        "<input class='editProfile' type='password' name='password'></input>\n" +
         "<label class='editProfile'>Повтори парола:</label>\n" +
-        "<input class='editProfile' type='text' name='confirmPassword'></input>\n" +
+        "<input class='editProfile' type='password' name='confirmPassword'></input>\n" +
         "<input class='editProfile' type='submit' value='Запази'></input>\n" +
     "</form>\n" +
     "</fildset>\n";
 
+    return editForm;
+}
+
+function addUserForm() {
+    var editForm =  "<fieldset id='registerForm'>\n" +
+    "<legend class='register'>Регистрация</legend>\n" +
+    "<form name='register' method='post' action='php/adminConnection.php'>\n" +
+        "<label class='error' id='status' style='display: none;'></label>\n" +
+        "<label class='register'>Три имена<mark id='star'>*</mark></label>\n" +
+        "<input class='register' type='text' name='names' id='names'></input>\n" +
+        "<label class='register'>Потребителско име<mark id='star'>*</mark></label>\n" +
+        "<input class='register' type='text' name='user' id='userName'></input>\n" +
+        "<label class='register'>Email<mark id='star'>*</mark></label>\n" +
+        "<input class='register' type='email' name='email' id='email'></input>\n" +
+        "<label class='register'>Парола<mark id='star'>*</mark></label>\n" +
+        "<input class='register' type='password' name='password' id='pass'></input>\n" +
+        "<label class='register'>Повтори парола<mark id='star'>*</mark></label>\n" +
+        "<input class='register' type='password' name='confirmPassword' id='confirmPass'></input>\n" +
+        "<label class='register'>Тип потребител<mark id='star'>*</mark></label>\n" +
+        "<select class='register' name='userType' id='userType' onchange='changeUserType()'>\n" +
+            "<option value='-' selected='selected'>-</option>\n" +
+            "<option value='student'>студент</option>\n" +
+            "<option value='lecturer'>лектор</option>\n" +
+        "</select>\n" +
+        "<label class='student'>Факултетен номер<mark id='star'>*</mark></label>\n" +
+        "<input class='student' type='number' name='fn' id='fn' min='10000' max='99999'></input>\n" +
+        "<label class='student'>Курс<mark id='star'>*</mark></label>\n" +
+        "<input class='student' type='number' min='1' max='4' name='year' id='year'></input>\n" +
+        "<label class='student'>Специалност<mark id='star'>*</mark></label>\n" +
+        "<select class='student' name='bachelorPrograme'>\n" +
+            "<option value='-' select='selected'>-</option>\n" +
+            "<option value='Информатика'>Информатика</option>\n" +
+            "<option value='Информационни системи'>Информационни системи</option>\n" +
+            "<option value='Компютърни науки'>Компютърни науки</option>\n" +
+            "<option value='Математика'>Математика</option>\n" +
+            "<option value='Математика и информатика'>Математика и информатика</option>\n" +
+            "<option value='Приложна математика'>Приложна математика</option>\n" +
+            "<option value='Софтуерно инженерство'>Софтуерно инженерство</option>\n" +
+            "<option value='Статистика'>Статистика</option>\n" +
+        "</select>\n" +
+        "<label class='lecturer'>Катедра<mark id='star'>*</mark></label>\n" +
+        "<input class='lecturer' type='text' name='department' id='department'></input>\n" +
+        "<label class='lecturer'>Телефон</label>\n" +
+        "<input class='lecturer' type='tel' pattern='+359 [0-9]{1,4} [0-9]{2} [0-9]{2} [0-9]{2,3}' placeholder='+359 2 9999 999' name='telephone' id='telephone'></input>\n" +
+        "<label class='lecturer'>Приемно време</label>\n" +
+        "<input class='lecturer' type='text' name='visitingHours' id='visitingHours'></input>\n" +
+        "<label class='lecturer'>Кабинет</label>\n" +
+        "<input class='lecturer' type='text' name='office' id='office'></input>\n" +
+        "<label class='lecturer'>Персонална страница</label>\n" +
+        "<input class='lecturer' type='text' name='personalPage' id='personalPage'></input>\n" +
+        "<input class='register' type='submit' id='regButton' value='Регистрация'></input>\n" +
+    "</form>\n" +
+    "</fieldset>\n"
     return editForm;
 }
 
@@ -347,6 +400,42 @@ function getCookie(cookieName) {
     return "";
 }
 
+const display = {
+    none: () => {
+        let student = document.getElementsByClassName('student');
+        for(let i = 0; i < student.length; i++){
+            student[i].style.display = 'none';
+        }
+
+        let lecturer = document.getElementsByClassName('lecturer');
+        for(let i = 0; i < lecturer.length; i++){
+            lecturer[i].style.display = 'none';
+        }
+
+        document.getElementById('regButton').style.display = 'none';
+    },
+
+    block: (classType) => {
+        let userType = document.getElementsByClassName(classType);
+        for(let i = 0; i < userType.length; i++){
+            userType[i].style.display = 'block';
+        }
+
+        document.getElementById('regButton').style.display = 'block';
+    }
+};
+
+function changeUserType() {
+    let select = document.getElementById('userType');
+    let userType = select.options[select.selectedIndex].value;
+
+    display.none();
+
+    if(userType !== '-') {
+        display.block(userType);
+    }
+}
+
 function editProfileInfo(){
     email = getCookie('email');
     document.getElementById('adminContent').innerHTML = makeProfileEditForm("Редактиране на профил", email);    
@@ -354,6 +443,11 @@ function editProfileInfo(){
 
 function addAdmin(){
     document.getElementById('adminContent').innerHTML = addAdminForm();    
+}
+
+function addUser(){
+    document.getElementById('adminContent').innerHTML = addUserForm();
+    display.none();  
 }
 
 function showActiveElectives() {
@@ -407,7 +501,6 @@ window.onload = () => {
             status = params.get('status');
 
             if(status === 'success'){
-                editProfileInfo();
                 document.getElementById('adminContent').innerHTML =  "<p id='success'>Успешно обновена информация.</p>";
             } else if(status === 'wrongPassword'){
                 editProfileInfo();
@@ -426,6 +519,19 @@ window.onload = () => {
             showActiveElectives();
         } else if(id.toString() === 'activateElectives'){
             showDisabledElectives();
+        } else if(id.toString() === 'addUser') {
+            let status = getCookie('status');
+            let userType = getCookie('userType');
+
+            if(status != '') {
+                addUser();
+                display.block(userType);
+                document.getElementById('status').innerHTML =  status;                
+                document.getElementById('status').style.display = 'block';
+                document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
+            } else {
+                addUser();
+            }
         } else if(id.toString() === 'addAdmin'){
             let status = getCookie('status');
 

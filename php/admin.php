@@ -10,6 +10,10 @@ class Admin extends User{
 		parent::__construct($userName, '');
 		$this->names=$names;
 	}
+
+	public function __destruct(){
+		parent::__destruct();
+	}
 	
 	public function getNames(){
 		return $this->names;

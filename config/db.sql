@@ -7,7 +7,7 @@ CREATE TABLE users(
     passwd VARCHAR(200) NOT NULL,
     userType VARCHAR(200) NOT NULL,
     active BOOLEAN,
-    email VARCHAR(200) NOT NULL,
+    email VARCHAR(200) NOT NULL UNIQUE,
     PRIMARY KEY(userName)
 ); 
 

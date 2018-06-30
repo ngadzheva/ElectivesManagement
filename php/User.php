@@ -18,6 +18,10 @@
 
 			$this->database = new DataBase();
 		}
+
+		public function __destruct(){
+			$this->database->closeConnection();
+		}
 		
 		/**
 		 * Get user name
@@ -103,6 +107,7 @@
 			$this->userType = $user['userType'];
 			$this->active = $user['active'];
 			$this->email = $user['email'];
+			$database->closeConnection();
 
 			return !!$user;
 		}
@@ -116,9 +121,7 @@
 
 			$database = new DataBase();
 			
-			$database->insertValues($query, $values);
-
-			return true;
+			return $database->insertValues($query, $values);
 		}
 	}	
 ?>

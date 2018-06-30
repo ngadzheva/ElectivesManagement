@@ -11,6 +11,10 @@
 			parent::__construct($userName, '');
 			$this->fn= $fn;
 		}
+
+		public function __destruct(){
+			parent::__destruct();
+		}
 		
 		/**
 		 * Get faculty number

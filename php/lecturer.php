@@ -14,6 +14,10 @@ class Lecturer extends User{
 			parent::__construct($userName, '');
 			$this->id = $id ;
 		}
+
+	public function __destruct(){
+		parent::__destruct();
+	}
 		
 	/**
 	 * Get id
@@ -310,6 +314,7 @@ class Lecturer extends User{
 	
 				$database = new DataBase();
 				$database->insertValues($query, $values);
+				$database->closeConnection();
 	
 				return true;
 			}
