@@ -45,7 +45,7 @@ VALUES ('Мобилно Интернет съдържание', 3, 'Курсът
 5, 2, 'И, ИС, КН, ПМ, СИ', '{"Мобилни технологии, Интернет и HTML": 5, "XHTML спецификации": 4, "CSS спецификации": 4, "Адаптиране на съдаржението": 5, "Мобилни браузъри (микробраузъри)": 4, "Оптимизиране и тестване на съдържанието": 4, "Архитектура и разгръщане на мобилна Интернет старница": 4}',
  'summer', 'ЯКН', 7, 'active');
 
-INSERT INTO `electives` (name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, active, type)
+INSERT INTO `electives` (name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, type)
 VALUES ('VR', 'Основи в разработването на VR приложения.', 4, 'И, КН, СИ', 'winter', 'ЯКН', 'suggestion');
 
 INSERT INTO `chElectives` (name, credits, fn, grade, enrolledDate)
