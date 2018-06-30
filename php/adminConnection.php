@@ -30,7 +30,7 @@
         $userType = modifyInput($_POST['userType']);
 
         if(!$names || !$user || !$email || !$pass || !$confirmPass) {
-            setcookie('status', 'Моля, попълнете всички полета.', time() + 240, '/');
+            setcookie('status', 'Моля, попълнете всички задължителни(*) полета.', time() + 240, '/');
             setcookie('userType', $userType, time() + 240, '/');
             header('Location: ../admin.html?id=addUser');
         } else if(mb_strlen($names) > 200){

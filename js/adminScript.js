@@ -526,6 +526,7 @@ window.onload = () => {
             if(status != '') {
                 addUser();
                 display.block(userType);
+                document.getElementById('userType').value = userType;
                 document.getElementById('status').innerHTML =  status;                
                 document.getElementById('status').style.display = 'block';
                 document.cookie = "status=; expires=Thu, 01 Jan 1996 00:00:00 UTC; path=/;";
