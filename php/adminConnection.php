@@ -202,7 +202,7 @@
         }
 
         if (Lecturer::insertLecturer($user, hash('sha256', $pass), $email, $names, $department, $telephone, $visitingHours, $office, $personalPage)){
-            setcookie('status', 'Успешно създаване на лекторски потребител.', time() + 240, '/');
+            setcookie('status', 'Успешно създаване на лекторски профил.', time() + 240, '/');
             setcookie('userType', $userType, time() + 240, '/');
             header('Location: ../admin.html?id=addUser');
         } else {
