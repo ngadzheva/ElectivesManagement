@@ -171,7 +171,7 @@
                         "<th>Рейтинг</th>\n" .
                     "</tr>\n";
 
-            if($suggestions){
+   
                 foreach($suggestions as $key => $value){
                     $elective = $value;
 
@@ -194,9 +194,7 @@
                 }
 
                 $template = $template . '</table>';
-            } else {
-                $template = '<p id="notActive">В момента няма нови предложения.</p>';
-            }
+        
             
 
             return $template;
