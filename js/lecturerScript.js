@@ -448,6 +448,8 @@ const forms = {
     
         return editForm;
     },
+	
+	/**/
 
     /**
      * Make template for form for suggesting new elective
@@ -684,7 +686,12 @@ function editProfile(){
 	let visitingHours = getCookie('visitingHours');
 	let office = getCookie('office');
 	let personalPage = getCookie('personalPage');
-    document.getElementById('lecturerContent').innerHTML = forms.makeProfileEditForm("Редактиране на профил", email, telephone, visitingHours, office, personalPage);       
+	if(personalPage === 'null'){
+		personalPage = '';
+		document.getElementById('lecturerContent').innerHTML = forms.makeProfileEditForm("Редактиране на профил", email, telephone, visitingHours, office, personalPage);  
+	} else {
+		document.getElementById('lecturerContent').innerHTML = forms.makeProfileEditForm("Редактиране на профил", email, telephone, visitingHours, office, personalPage);
+	}		
 }
 
 function showElectivesCampaign (){
@@ -752,7 +759,7 @@ function showExams(){
 }
 
 function editElective(name, description, literature, subjects){
-    document.getElementById('lecturerContent').innerHTML = makeEditForm("Редактиране на избираема дисциплина", name, description, literature, subjects);
+	document.getElementById('lecturerContent').innerHTML = makeEditForm("Редактиране на избираема дисциплина", name, description, literature, subjects);
 }
 
 /**
@@ -761,7 +768,6 @@ function editElective(name, description, literature, subjects){
 var lecturerPage = () => {
     connectToServer.lecturerInfo();
 
-    let profile = document.getElementById('profile');
     let electivesCampaignOff = document.getElementById('electivesCampaignOff');
 	let electivesCampaignOn = document.getElementById('electivesCampaignOn');
     let writingEvaluation = document.getElementById('writingEvaluation');
@@ -773,7 +779,6 @@ var lecturerPage = () => {
     let updateElective = document.getElementById('updateElective');
    
 	
-    profile.addEventListener('click', editProfile);
     electivesCampaignOff.addEventListener('click', showElectivesCampaign);
 	electivesCampaignOn.addEventListener('click', showElectivesCampaignOn);
     writingEvaluation.addEventListener('click', writingEvaluation);
@@ -814,7 +819,7 @@ window.onload = () => {
                 editProfile();
             }
             
-            
+           
 		} else if(id.toString() === 'makeSuggestion'){
             let status = getCookie('status');
             let name = getCookie('name');
