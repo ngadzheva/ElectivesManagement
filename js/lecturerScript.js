@@ -607,7 +607,7 @@ const forms = {
      * Make template for form for updating an elective
      */
 	makeElectivesEditForm(name){
-	  //var info = JSON.parse(is);
+	  
 	
 		var editForm = "<fieldset id='editForm'>\n" +
 		"<form name='editElectives' method='post' action='php/lecturerConnection.php'>\n" +
@@ -758,9 +758,7 @@ function showExams(){
     connectToServer.exams();
 }
 
-function editElective(name, description, literature, subjects){
-	document.getElementById('lecturerContent').innerHTML = makeEditForm("Редактиране на избираема дисциплина", name, description, literature, subjects);
-}
+
 
 /**
  * Load lecturer's page
