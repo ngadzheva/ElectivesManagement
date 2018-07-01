@@ -112,11 +112,11 @@
             $this->elective['lecturer'] = $this->lecturerInfo($electives->getLecturer());
             $this->elective['rating'] = $electives->getRating() ? $electives->getRating() : 0;
             $this->elective['term'] = $electives->getTerm() == 'winter' ? 'Зимен' : 'Летен';
-            $this->elective['year'] = $electives->getYear();
-            $this->elective['bachelorPrograme'] = $electives->getBachelorsProgram();
-            $this->elective['credits'] = $electives->getCredits();
-            $this->elective['cathegory'] = $electives->getCathegory();
-            $this->elective['description'] = $electives->getDescription();
+            $this->elective['year'] = $electives->getYear() ? $electives->getYear() : '-';
+            $this->elective['bachelorPrograme'] = $electives->getBachelorsProgram() ? $electives->getBachelorsProgram() : '-';
+            $this->elective['credits'] = $electives->getCredits() ? $electives->getCredits() : '-';
+            $this->elective['cathegory'] = $electives->getCathegory() ? $electives->getCathegory() : '-';
+            $this->elective['description'] = $electives->getDescription() ? $electives->getDescription() : '-';
             $this->elective['subjects'] = $this->subjectsList($electives->getSubjects());
             $this->elective['literature'] = $this->literatureList($electives->getLiterature());
 
