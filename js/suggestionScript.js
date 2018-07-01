@@ -45,7 +45,7 @@ const connectToServer =  {
         return ajaxRequest;
     },
 
-    load: () => {
+    load: (elective) => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -62,12 +62,13 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php', true);
+        ajaxRequest.open('GET', '../php/description.php?elective=' + elective, true);
         ajaxRequest.send(null);
     },
 
     dislike: () => {
         let ajaxRequest = connectToServer.serverRequest();
+        let elective = getCookie('elective');
 
         ajaxRequest.onreadystatechange = function(){
             if(ajaxRequest.readyState == 4){
@@ -81,12 +82,13 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?vote=dislike', true);
+        ajaxRequest.open('GET', '../php/description.php?vote=dislike&elective=' + elective, true);
         ajaxRequest.send(null);
     }, 
 
     like: () => {
         let ajaxRequest = connectToServer.serverRequest();
+        let elective = getCookie('elective');
 
         ajaxRequest.onreadystatechange = function(){
             if(ajaxRequest.readyState == 4){
@@ -100,11 +102,11 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?vote=like', true);
+        ajaxRequest.open('GET', '../php/description.php?vote=like&elective=' + elective, true);
         ajaxRequest.send(null);
     },
 
-    getComments: () => {
+    getComments: (elective) => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -115,11 +117,11 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?comments', true);
+        ajaxRequest.open('GET', '../php/description.php?comments&elective=' + elective, true);
         ajaxRequest.send(null);
     }, 
     
-    postComment: (comment) => {
+    postComment: (elective, comment) => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -130,7 +132,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?postedComment=' + comment, true);
+        ajaxRequest.open('GET', '../php/description.php?elective=' + elective + '&postedComment=' + comment, true);
         ajaxRequest.send(null);
     }
 };
@@ -146,7 +148,9 @@ function closeComments(){
  * Open the comments section
  */
 function openComments(){
-    connectToServer.getComments();
+    let elective = getCookie('elective'); 
+
+    connectToServer.getComments(elective);
     document.getElementById('commentsOverlay').style.display = 'block';
 }
 
@@ -154,9 +158,11 @@ function openComments(){
  * Post new comment
  */
 function postComment(){
+    let elective = getCookie('elective');
+
     let textarea = document.getElementById('writeComment');
     let comment = textarea.value;
-    connectToServer.postComment(comment);
+    connectToServer.postComment(elective, comment);
 
     textarea.value = '';
 }
@@ -190,7 +196,7 @@ const descriptionPage = () => {
 
     document.getElementById('title').innerHTML = elective;
 
-    connectToServer.load();
+    connectToServer.load(elective);
 
     listeners.setClick();
 };
