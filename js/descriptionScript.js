@@ -66,7 +66,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?elective=' + elective, true);
+        ajaxRequest.open('GET', '../php/description.php?type=active&elective=' + elective, true);
         ajaxRequest.send(null);
     },
 
@@ -86,7 +86,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?vote=dislike&elective=' + elective, true);
+        ajaxRequest.open('GET', '../php/description.php?type=active&vote=dislike&elective=' + elective, true);
         ajaxRequest.send(null);
     }, 
 
@@ -106,7 +106,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?vote=like&elective=' + elective, true);
+        ajaxRequest.open('GET', '../php/description.php?type=active&vote=like&elective=' + elective, true);
         ajaxRequest.send(null);
     },
 
@@ -121,7 +121,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?comments&elective=' + elective, true);
+        ajaxRequest.open('GET', '../php/description.php?type=active&comments&elective=' + elective, true);
         ajaxRequest.send(null);
     }, 
     
@@ -136,7 +136,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?elective=' + elective +  '&postedComment=' + comment, true);
+        ajaxRequest.open('GET', '../php/description.php?type=active&elective=' + elective +  '&postedComment=' + comment, true);
         ajaxRequest.send(null);
     }
 };

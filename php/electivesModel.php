@@ -266,11 +266,11 @@
         /**
          * Load elective's information from database
          */
-        public function load(){
+        public function load($type){
             $electives = [];
 
             $database = new DataBase();
-            $sql = "SELECT * FROM `electives` WHERE name='$this->title' AND type='active'";
+            $sql = "SELECT * FROM `electives` WHERE name='$this->title' AND type='$type'";
 			$query = $database->executeQuery($sql, 'Failed find user');
             $electives = $query->fetch(PDO::FETCH_ASSOC);
             $database->closeConnection();

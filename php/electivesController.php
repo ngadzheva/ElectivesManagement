@@ -47,7 +47,7 @@
          **/
         public function deleteElective($name){
             $elective = new ElectiveModel($name);
-            $elective->load();
+            $elective->load('active');
             
             $elective->setType('notactive');
             $elective->setActive(false);
@@ -60,9 +60,7 @@
          **/
         public function updateElective($title, $lecturer, $category, $description, $credits, $year, $bachelorsProgram, $literature, $subjects, $term, $rating, $type){
             $elective = new ElectiveModel($name);
-            $elective->load();
-
-            // TODO
+            $elective->load($type);
         }
 
         /**
@@ -102,12 +100,12 @@
          /**
          * Get elective's description
          */
-        public function getElectiveInfo($elective){
+        public function getElectiveInfo($elective, $type){
             $this->elective = [];
 
             $electives = new ElectivesModel($elective);
 
-            $electives->load();
+            $electives->load($type);
 
             $this->elective['lecturer'] = $this->lecturerInfo($electives->getLecturer());
             $this->elective['rating'] = $electives->getRating() ? $electives->getRating() : 0;
@@ -224,10 +222,10 @@
         /**
          * Change current elective rating
          */
-        public function vote($voteType, $elective){
+        public function vote($voteType, $elective, $type){
             $electives = new ElectivesModel($elective);
 
-            $electives->load();
+            $electives->load($type);
 
             $electives->setRating($voteType);
 
@@ -237,10 +235,10 @@
         /**
          * Show all comments for current elective
          */
-        public function getComments($elective){
+        public function getComments($elective, $type){
             $electives = new ElectivesModel($elective);
 
-            $electives->load();
+            $electives->load($type);
 
             $comments = $electives->getComments();
             $template = '';
@@ -270,14 +268,14 @@
         /**
          * Post new comment for current elective
          */
-        public function postComment($elective, $comment, $user){
+        public function postComment($elective, $comment, $user, $type){
             $electives = new ElectivesModel($elective);
 
-            $electives->load();
+            $electives->load($type);
 
             $electives->insertNewComment($comment, $user);
 
-            return $this->getComments($elective);
+            return $this->getComments($elective, $type);
         }
     }
 ?>
