@@ -220,7 +220,7 @@ const forms = {
             "<label class='makeSuggestion'>Курс:</label>\n" +
             "<input class='makeSuggestion' type='number' name='year' min='1' max='4' value='" + year + "'></input>\n" +
             "<label class='makeSuggestion'>Специалност:</label>\n" +
-            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='Всички' checked></input>" +
+            "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='-' checked></input>" +
             "<label class='makeSuggestion' for='-'>-</label>\n" +
             "<input class='makeSuggestion' type='checkbox' name='bachelorPrograme[]' value='И'></input>" +
             "<label class='makeSuggestion' for='И'>И</label>\n" +

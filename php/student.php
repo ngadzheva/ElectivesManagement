@@ -208,8 +208,8 @@
 			
 			$database = new DataBase();
 
-			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, active, type) VALUES(?, ?, ?, ?, ?, ?, ?, ?)';
-			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, true, 'suggestion'];
+			$query = 'INSERT INTO electives(name, description, recommendedYear, recommendedBachelorProgram, term, cathegory, type) VALUES(?, ?, ?, ?, ?, ?, ?)';
+			$values = [$name, $description, $year, $recommendedBachelorPrograme, $term, $cathegory, 'suggestion'];
 
 			$database->insertValues($query, $values);
 			$database->closeConnection();
@@ -268,7 +268,7 @@
 			$userToShow = ($type == 'income' ? 'sender' : 'receiver');
 
 			$database = new DataBase();
-			$sql = "SELECT opened, $userToShow, about, sdate FROM `messages` WHERE $userType='$userName'";
+			$sql = "SELECT opened, $userToShow, about, sdate FROM `messages` WHERE $userType='$userName' ORDER BY sdate DESC";
 			$query = $database->executeQuery($sql, 'Failed find user');
 			$messages = $query->fetchAll(PDO::FETCH_ASSOC);
 			$database->closeConnection();
