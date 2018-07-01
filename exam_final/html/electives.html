@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+
+        <title>Система за управление на избираеми дисциплини</title>
+
+        <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
+        <script type="text/javascript" src="../js/electivesScript.js"></script>
+    </head>
+
+    <body onload="listElectives('electives')">
+        <header>
+            <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
+            <figure>
+                <img id="header" src="../img/border.png"/>
+            </figure>
+            
+            <nav id='mainNav'>
+                <a href="../index.html">Начало</a>
+                <a href="electives.html?id=winter">Избираеми дисциплини Зимен семестър</a>
+                <a href="electives.html?id=summer">Избираеми дисциплини Летен семестър</a>
+                <a href="../php/register.php">Регистрация</a>
+                <a href="../php/login.php">Вход</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="electives"></section>
+        </main>
+
+        <footer>
+            <p>&copy; 2018 KNRR</p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+Students:
+	User name	Password
+	nmgadzheva	nmg96
+
+Lecturers:
+	User name	Password
+	pboychev	pbFractals
+	hrhristov	hristov@yaht
+	vgeorgiev	georgievcunizhev
+
+Admin:
+	Username	Password
+	admin		nimda

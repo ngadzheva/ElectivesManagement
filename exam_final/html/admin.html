@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+
+        <title>Система за управление на избираеми дисциплини</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="../css/styles.css"/>
+        <script type="text/javascript" src="../js/electivesScript.js"></script>
+        <script type="text/javascript" src="../js/adminScript.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>СИСТЕМА ЗА УПРАВЛЕНИЕ НА ИЗБИРАЕМИ ДИСЦИПЛИНИ</h1>
+            <figure>
+                <img id="header" src="../img/border.png"/>
+            </figure>
+            
+            <nav id='mainNav'>
+                <a href="admin.html">Начало</a>
+                <a href="admin.html?id=winter" onclick='listElectives("adminContent", "winter")'>Избираеми дисциплини Зимен семестър</a>
+                <a href="admin.html?id=summer" onclick='listElectives("adminContent", "summer")'>Избираеми дисциплини Летен семестър</a>
+                <a href="../php/logout.php">Изход</a>
+            </nav>
+        </header>
+
+        <main id='admin'>
+            <aside id='adminTab'>
+                <a href='admin.html?id=editProfile' class='tabLinks' id='editProfile'>Редактиране на профил</a>
+                <a href='admin.html?id=suggestedElectives' class='tabLinks' id='suggestedElectives'>Предложени избираеми дисциплини</a>
+                <a href='admin.html?id=removeElectives' class='tabLinks' id='removeElectives'>Премахване на избираеми дисциплини</a>
+                <a href='admin.html?id=activateElectives' class='tabLinks' id='activateElectives'>Активиране на избираеми дисциплини</a>
+                <a href='admin.html?id=addAdmin' class='tabLinks' id='addAdmin'>Добавяне на админ</a>
+                <a href='admin.html?id=addUser' class='tabLinks' id='addUser'>Създаване на потребител</a>
+                <a href='admin.html?id=deleteUsers' class='tabLinks' id='deleteUsers'>Деактивиране на потребител</a>
+                <a href='admin.html?id=activateUsers' class='tabLinks' id='activateUsers'>Активиране на потребител</a>
+            </aside>
+
+            <section id='profile'>
+                <h1>Администратор</h1>
+                <ul>
+                    <li class='name'>Име: <p class='value' id='adminName'></p></li>
+                    <li class='name'>E-mail: <p class='value' id='email'></p></li>
+                </ul>
+            </section>
+
+            <section id='adminContent' class='tabContent'></section>
+        </main>
+        
+    </body>
+</html>
