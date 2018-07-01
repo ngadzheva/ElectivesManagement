@@ -63,7 +63,15 @@ class Admin extends User{
 
 	public function getElectives($type){
 		$database = parent::getDatabase();
-		$sql = "SELECT name, recommendedYear, recommendedBachelorProgram, term, cathegory, lecturer FROM `electives` WHERE type='$type' ";
+		$sql = "SELECT name, recommendedYear, recommendedBachelorProgram, term, cathegory, lecturer.names FROM `electives` RIGHT JOIN `lecturer` ON lecturer.id = electives.lecturer WHERE type='$type' ";
+		$query = $database->executeQuery($sql, 'Failed find user');
+		$electives = $query->fetchAll(PDO::FETCH_ASSOC);
+		return $electives;
+	}
+
+	public function getSuggestedElectives() {
+		$database = parent::getDatabase();
+		$sql = "SELECT name, recommendedYear, recommendedBachelorProgram, term, cathegory FROM `electives` WHERE type='suggestion'";
 		$query = $database->executeQuery($sql, 'Failed find user');
 		$electives = $query->fetchAll(PDO::FETCH_ASSOC);
 		return $electives;

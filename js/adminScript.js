@@ -49,6 +49,7 @@ const connectToServer =  {
                 document.getElementById('adminContent').innerHTML =  show;
             }   
 			
+            makeColumn('Преглед', false, "active");
 			makeNewColumn('Премахване на избираема');
         }
 		
@@ -64,6 +65,7 @@ const connectToServer =  {
                 let show = ajaxRequest.responseText;
                 document.getElementById('adminContent').innerHTML =  show;
             }
+            makeColumn('Преглед', true, "suggestion");
 			makeNewColumn('Добавяне на предложена');
         }
 		
@@ -80,6 +82,7 @@ const connectToServer =  {
                 document.getElementById('adminContent').innerHTML =  show;
             }   
             
+            makeColumn('Преглед', false, "disabled");
             makeNewColumn('Активиране на избираема');
         }
         
@@ -284,6 +287,30 @@ function addUserForm() {
     "</form>\n" +
     "</fieldset>\n"
     return editForm;
+}
+
+function makeColumn(name, isSuggestion, type){
+    let th = document.createElement('th');
+    let value = document.createTextNode(name);
+    th.appendChild(value);
+    document.getElementById('firstRow').appendChild(th);
+
+    let tr = document.getElementsByClassName('elective');
+    
+    if(name == 'Преглед'){
+        for(let i = 0; i < tr.length; i++){
+            let td = document.createElement('td');
+            let img = document.createElement('img');
+            img.setAttribute('class', 'viewIcon');
+            img.setAttribute('title', 'Преглед');
+
+            let elective = tr[i].childNodes[0].innerHTML;
+            img.setAttribute('onclick', 'viewDescription("' + elective + '", ' + isSuggestion + ', "' + type + '")');            
+            img.setAttribute('src', '../img/view.png');
+            td.appendChild(img);
+            tr[i].appendChild(td);
+        }
+    }
 }
 
 /**

@@ -66,16 +66,23 @@
 
 
         public function showElectives($type){
-            $electives = $this->admin->getElectives($type);
             $template =  "<table id='electivesList'>\n". 
                     "<tr id='firstRow'>\n" .
                         "<th>Избираема дисциплина</th>\n" .
                         "<th>Курс</th>\n" .
                         "<th>Специалност</th>\n" .
                         "<th>Семестър</th>\n" .
-                        "<th>Категория</th>\n" .
-                        "<th>Преподавател</th>\n" .
-                    "</tr>\n";
+                        "<th>Категория</th>\n"; 
+                        
+
+            if ($type == 'suggestion') {
+                $electives = $this->admin->getSuggestedElectives();
+            } else {
+                $electives = $this->admin->getElectives($type); 
+                $template = $template . "<th>Преподавател</th>\n" .
+                "</tr>\n";               
+            }
+            
             if($electives){
                 foreach($electives as $key => $value){
                     $elective = $value;

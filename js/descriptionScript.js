@@ -45,7 +45,7 @@ const connectToServer =  {
         return ajaxRequest;
     },
 
-    load: (elective) => {
+    load: (elective, active = 'active') => {
         let ajaxRequest = connectToServer.serverRequest();
 
         ajaxRequest.onreadystatechange = function(){
@@ -66,7 +66,7 @@ const connectToServer =  {
             }    
         }
 
-        ajaxRequest.open('GET', '../php/description.php?type=active&elective=' + elective, true);
+        ajaxRequest.open('GET', '../php/description.php?type=' + active + '&' +'elective=' + elective, true);
         ajaxRequest.send(null);
     },
 
@@ -192,12 +192,12 @@ const listeners = {
 /**
  * Load description page
  */
-const descriptionPage = () => {
+const descriptionPage = (active = 'active') => {
     let elective = getCookie('elective');
 
     document.getElementById('title').innerHTML = elective;
 
-    connectToServer.load(elective);
+    connectToServer.load(elective, active);
 
     listeners.setClick();
 };
@@ -206,5 +206,7 @@ const descriptionPage = () => {
  * Load window
  */
 window.onload = () => {
-    descriptionPage();
+    let params = new URLSearchParams(window.location.search);
+    let type = params.get('type');
+    descriptionPage(type);
 };

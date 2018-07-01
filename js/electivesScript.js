@@ -155,10 +155,10 @@ function makeColumn(name, isSuggestion){
 /*
  * Opem the page with the description of the elective
  */
-function viewDescription(elective, isSuggestion){
+function viewDescription(elective, isSuggestion, type = 'active'){
     document.cookie = 'elective=' + elective;
     document.cookie = 'lastLocation=' + window.location.href;
 
-    let page = isSuggestion ? 'suggestion.html' : 'description.html';
+    let page = isSuggestion ? 'suggestion.html' : 'description.html?type=' + type;
     window.location.replace(page);
 }
