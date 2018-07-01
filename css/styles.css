@@ -420,7 +420,11 @@ td[opened="0"]{
     border: 1px solid #53687F;
 }
 
-
+#lecturerTab{
+    padding: 0px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
 
 #adminTab a, #lecturerTab a, #studentTab a{
     color: #CCCCCC;
@@ -448,6 +452,11 @@ td[opened="0"]{
     color: white;
 }
 
+#lecturerTab a{
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
 .tabcontent, #profile {
     color: #1D224C;
     float: left;
@@ -463,10 +472,6 @@ td[opened="0"]{
     margin-left: 360px;
     width: 80%;
 } 
-
-#lecturerContent, #adminContent{
-    position:  relative;
-}
 
 #profile {
     position: absolute;
